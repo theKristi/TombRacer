@@ -22,7 +22,7 @@
 		
 		public function Main()
 		{
-			super(100, 100, MenuState,1,60,60,true);
+			super(1280,768, MenuState,1,60,30,true);
 			FlxG.width = 1280;
 			FlxG.height = 768;
 		}

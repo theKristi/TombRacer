@@ -8,7 +8,7 @@ package com.trdevt.gameState
 	import org.flixel.FlxState;
 	import org.flixel.FlxText;
 	import org.flixel.FlxTilemap;
-	
+	import org.flixel.FlxButton;
 	/**
 	 * ...
 	 * @author Jake
@@ -56,7 +56,7 @@ package com.trdevt.gameState
 			
 		}
 		
-		function onResultClick():void 
+		protected function onResultClick():void 
 		{
 			FlxG.switchState(new ResultsState());
 		}
