@@ -8,7 +8,7 @@
 	 * 
 	 * @author Kristi Marks
 	 */
-	[SWF(backgroundColor="#FFFFFF", width="1280", height="768", frameRate="30")]
+	[SWF(backgroundColor = "#FFFFFF", width = "1280", height = "768", frameRate = "30")]
 	public class Main extends FlxGame
 	{
 		

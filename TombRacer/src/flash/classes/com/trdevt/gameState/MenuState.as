@@ -26,16 +26,16 @@ package com.trdevt.gameState
 		override public function create():void
 		{
 			var fsMenuBackground:FlxSprite = new FlxSprite(0, 0, bgPNG);
-			_ftTitle = new FlxText(0, 25, FlxG.width, "Menu Screen", false);
+			_ftTitle = new FlxText(0, 25, FlxG.width, "Menu Screen", true);
 			//_ftTitle.loadGraphic(textPNG);
 			_ftTitle.alignment = "center"; 
 			
-			_fbLevelSelect = new FlxButton(FlxG.width * .5, _ftTitle.y + 25, "Level Select", onLevelSelect);
-			_fbLevelSelect.loadGraphic(levelSelectPNG);
+			_fbLevelSelect = new FlxButton(FlxG.width * .5, _ftTitle.y + 25, "Level Select", _onLevelSelect);
+			_fbLevelSelect.loadGraphic(levelSelectPNG,true,false, 218, 60);
 			
-			_fbCredits = new FlxButton(FlxG.width * .5, _ftTitle.y + 125, "Credits", onCredits);
-			_fbCredits.loadGraphic(creditsPNG);
-			
+			_fbCredits = new FlxButton(FlxG.width * .5, _ftTitle.y + 125, "Credits", _onCredits);
+			//_fbCredits.loadGraphic(creditsPNG);
+			//_fbLevelSelect.
 			add(fsMenuBackground);
 			add(_ftTitle);
 			add(_fbLevelSelect);
@@ -44,7 +44,7 @@ package com.trdevt.gameState
 		
 		/*=====================================================================*/
 		
-		private function onLevelSelect():void
+		private function _onLevelSelect():void
 		{
 			// Switch to level select state
 			trace("Level Select pressed/n");
@@ -53,10 +53,10 @@ package com.trdevt.gameState
 		
 		/*=====================================================================*/
 		
-		private function onCredits():void 
+		private function _onCredits():void 
 		{
 			trace("Credits pressed");
-			//FlxG.switchState(new CreditsState());
+			FlxG.switchState(new CreditsState());
 		}
 		
 	}
