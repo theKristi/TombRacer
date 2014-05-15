@@ -44,6 +44,6 @@ package com.trdevt.gameState
 		{
 			FlxG.switchState(new MenuState());
 		}
-	}
+	}//end class
 
 }
