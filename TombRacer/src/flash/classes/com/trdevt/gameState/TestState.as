@@ -1,6 +1,7 @@
 package com.trdevt.gameState 
 {
 	import com.trdevt.sprites.Hero;
+	import flash.ui.Mouse;
 	import org.flixel.FlxG;
 	import org.flixel.FlxObject;
 	import org.flixel.FlxSprite;
@@ -32,6 +33,8 @@ package com.trdevt.gameState
 			
 			FlxG.bgColor = FlxG.BLUE;
 			FlxG.mouse.show();
+			Mouse.hide();
+			
 			
 			_collisionMap = new FlxTilemap();
 			
@@ -49,6 +52,7 @@ package com.trdevt.gameState
 		{
 			super.update();
 			
+			FlxG.collide(_player, _collisionMap);
 			
 		}
 
