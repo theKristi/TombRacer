@@ -19,9 +19,9 @@ package com.trdevt.gameState
 		private var _ftTitle:FlxSprite;
 		[Embed(source = '/MenuScreen/title.png')] private var titlePNG:Class;
 		private var _fbLevelSelect:FlxButton;
-		[Embed(source = '/MenuScreen/LevelSelectButton.png')] private var levelSelectPNG:Class;
+		[Embed(source = '/MenuScreen/LevelSelectButton_sheet3.png')] private var levelSelectPNG:Class;
 		private var _fbCredits:FlxButton;
-		[Embed(source = '/MenuScreen/CreditsButton.png')] private var creditsPNG:Class;
+		[Embed(source = '/MenuScreen/CreditsButton_sheet.png')] private var creditsPNG:Class;
 		
 		override public function create():void
 		{
@@ -30,11 +30,11 @@ package com.trdevt.gameState
 			_ftTitle.loadGraphic(titlePNG);
 			//_ftTitle.alignment = "center"; 
 			
-			_fbLevelSelect = new FlxButton(304, 235, "Level Select", _onLevelSelect);
-			_fbLevelSelect.loadGraphic(levelSelectPNG);
+			_fbLevelSelect = new FlxButton(304, 235, "", _onLevelSelect);
+			_fbLevelSelect.loadGraphic(levelSelectPNG,true,false,662, 173);
 			
 			_fbCredits = new FlxButton(304,416, "Credits", _onCredits);
-			_fbCredits.loadGraphic(creditsPNG);
+			_fbCredits.loadGraphic(creditsPNG,true,false,662,173);
 			//_fbLevelSelect.
 			add(fsMenuBackground);
 			add(_ftTitle);
