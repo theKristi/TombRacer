@@ -16,25 +16,25 @@ package com.trdevt.gameState
 	{
 		[Embed(source = '/background.png')] private var bgPNG:Class;
 		
-		private var _ftTitle:FlxText;
-		[Embed(source = '/buttonGraphicPH.png')] private var textPNG:Class;
+		private var _ftTitle:FlxSprite;
+		[Embed(source = '/MenuScreen/title.png')] private var titlePNG:Class;
 		private var _fbLevelSelect:FlxButton;
-		[Embed(source = '/buttonGraphicPH.png')] private var levelSelectPNG:Class;
+		[Embed(source = '/MenuScreen/LevelSelectButton.png')] private var levelSelectPNG:Class;
 		private var _fbCredits:FlxButton;
-		[Embed(source = '/buttonGraphicPH.png')] private var creditsPNG:Class;
+		[Embed(source = '/MenuScreen/CreditsButton.png')] private var creditsPNG:Class;
 		
 		override public function create():void
 		{
 			var fsMenuBackground:FlxSprite = new FlxSprite(0, 0, bgPNG);
-			_ftTitle = new FlxText(0, 25, FlxG.width, "Menu Screen", true);
-			//_ftTitle.loadGraphic(textPNG);
-			_ftTitle.alignment = "center"; 
+			_ftTitle = new FlxSprite(324, 96);
+			_ftTitle.loadGraphic(titlePNG);
+			//_ftTitle.alignment = "center"; 
 			
-			_fbLevelSelect = new FlxButton(FlxG.width * .5, _ftTitle.y + 25, "Level Select", _onLevelSelect);
-			_fbLevelSelect.loadGraphic(levelSelectPNG,true,false, 218, 60);
+			_fbLevelSelect = new FlxButton(304, 235, "Level Select", _onLevelSelect);
+			_fbLevelSelect.loadGraphic(levelSelectPNG);
 			
-			_fbCredits = new FlxButton(FlxG.width * .5, _ftTitle.y + 125, "Credits", _onCredits);
-			//_fbCredits.loadGraphic(creditsPNG);
+			_fbCredits = new FlxButton(304,416, "Credits", _onCredits);
+			_fbCredits.loadGraphic(creditsPNG);
 			//_fbLevelSelect.
 			add(fsMenuBackground);
 			add(_ftTitle);
