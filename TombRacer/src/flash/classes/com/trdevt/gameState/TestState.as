@@ -32,8 +32,8 @@ package com.trdevt.gameState
 			var text:FlxText = new FlxText(10, 10, 100, "Testing!");
 			
 			FlxG.bgColor = FlxG.BLUE;
-			FlxG.mouse.show();
-			Mouse.hide();
+			//FlxG.mouse.show();
+			//Mouse.hide();
 			
 			
 			_collisionMap = new FlxTilemap();
