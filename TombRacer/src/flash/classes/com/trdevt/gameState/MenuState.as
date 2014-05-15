@@ -14,6 +14,7 @@ package com.trdevt.gameState
 	 */
 	public class MenuState extends FlxState 
 	{
+		private var _fsMenuBackground:FlxSprite;
 		[Embed(source = '/background.png')] private var bgPNG:Class;
 		
 		private var _ftTitle:FlxSprite;
@@ -25,7 +26,7 @@ package com.trdevt.gameState
 		
 		override public function create():void
 		{
-			var fsMenuBackground:FlxSprite = new FlxSprite(0, 0, bgPNG);
+			_fsMenuBackground = new FlxSprite(0, 0, bgPNG);
 			_ftTitle = new FlxSprite(324, 96);
 			_ftTitle.loadGraphic(titlePNG);
 			//_ftTitle.alignment = "center"; 
@@ -36,7 +37,7 @@ package com.trdevt.gameState
 			_fbCredits = new FlxButton(304,416, "Credits", _onCredits);
 			_fbCredits.loadGraphic(creditsPNG,true,false,662,173);
 			//_fbLevelSelect.
-			add(fsMenuBackground);
+			add(_fsMenuBackground);
 			add(_ftTitle);
 			add(_fbLevelSelect);
 			add(_fbCredits);
