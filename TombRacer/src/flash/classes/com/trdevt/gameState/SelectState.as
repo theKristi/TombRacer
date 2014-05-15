@@ -16,8 +16,8 @@ package com.trdevt.gameState
 	{
 		[Embed(source = '/background.png')] private var bgPNG:Class;
 		
-		private var _ftTitle:FlxText;
-		[Embed(source = '/buttonGraphicPH.png')] private var textPNG:Class;
+		private var _ftHeader:FlxSprite;
+		[Embed(source = '/LevelSelectScreen/LevelSelectHeader.png')] private var headerPNG:Class;
 		private var _fbBack:FlxButton;
 		[Embed(source = '/buttonGraphicPH.png')] private var backPNG:Class;
 		private var _fsDev1:FlxSprite;
@@ -31,12 +31,14 @@ package com.trdevt.gameState
 		
 		override public function create():void 
 		{
-			_ftTitle = new FlxText(0, 0, FlxG.width, "Level Select", true);
-			_ftTitle.alignment = "center";
+			var fsMenuBackground:FlxSprite = new FlxSprite(0, 0, bgPNG);
+			_ftHeader = new FlxSprite(288,3);
+			_ftHeader.loadGraphic(headerPNG);
 			
 			_fbBack = new FlxButton(.9 * FlxG.width, .9 * FlxG.height, "Back", _onBack);
 			
-			add(_ftTitle);
+			add(fsMenuBackground);
+			add(_ftHeader);
 			add(_fbBack);
 		}
 		
