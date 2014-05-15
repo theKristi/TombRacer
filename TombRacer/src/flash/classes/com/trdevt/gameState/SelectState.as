@@ -18,6 +18,9 @@ package com.trdevt.gameState
 		
 		private var _ftHeader:FlxSprite;
 		[Embed(source = '/LevelSelectScreen/LevelSelectHeader.png')] private var headerPNG:Class;
+		
+		private var _fbLevel:FlxButton;
+		[Embed(source = '/LevelSelectScreen/LevelUnlocked_notplayed_sheet.png')] private var levelPNG:Class;
 		private var _fbBack:FlxButton;
 		[Embed(source = '/buttonGraphicPH.png')] private var backPNG:Class;
 		private var _fsDev1:FlxSprite;
@@ -37,9 +40,13 @@ package com.trdevt.gameState
 			
 			_fbBack = new FlxButton(.9 * FlxG.width, .9 * FlxG.height, "Back", _onBack);
 			
+			_fbLevel = new FlxButton(186, 166,"" ,goToLevel);
+			_fbLevel.loadGraphic(levelPNG, true, false, 163,195);
+			
 			add(fsMenuBackground);
 			add(_ftHeader);
 			add(_fbBack);
+			add(_fbLevel)
 		}
 		
 		/*=====================================================================*/
@@ -48,7 +55,10 @@ package com.trdevt.gameState
 		{
 			FlxG.switchState(new MenuState());
 		}
-		
+		private function goToLevel(eLevelnum:uint)
+		{
+			FlxG.switchState(new TestState())
+		}
 	}//end class
 
 }
