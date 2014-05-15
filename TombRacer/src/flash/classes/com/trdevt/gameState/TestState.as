@@ -17,7 +17,7 @@ package com.trdevt.gameState
 	{
 		[Embed(source = '../../../../../images/Levels/TileSets/TileSet_Main.png')]private static var _testTiles:Class;
 		
-		[Embed(source = '../../../../../images/Levels/TileMaps/TileMap_Test.csv', mimeType = 'application/octet-stream')]private static var _testMap:Class;
+		[Embed(source = '../../../../../images/Levels/TileMaps/Level4.csv', mimeType = 'application/octet-stream')]private static var _testMap:Class;
 		
 		protected var _player:Hero;
 		
@@ -41,7 +41,7 @@ package com.trdevt.gameState
 			_collisionMap.loadMap(new _testMap(), _testTiles, 32, 32);
 			add(_collisionMap);
 			
-			_player = new Hero(32, 64+32);
+			_player = new Hero(32*(14), 32*(4));
 			
 			add(_player);
 			

@@ -29,7 +29,7 @@ package com.trdevt.gameState
 		
 		override public function create():void 
 		{
-			_ftTitle = new FlxText(0, 0, FlxG.width, "Credits", true);
+			_ftTitle = new FlxText(0, 0, FlxG.width, "Test Result Page", true);
 			_ftTitle.alignment = "center";
 			
 			_fbBack = new FlxButton(.9 * FlxG.width, .9 * FlxG.height, "LevelSelect", _onBack);
