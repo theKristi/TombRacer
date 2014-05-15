@@ -29,7 +29,7 @@ package com.trdevt.gameState
 			
 			trace("test");
 			
-			var text = new FlxText(10, 10, 100, "Testing!");
+			var text:FlxText = new FlxText(10, 10, 100, "Testing!");
 			
 			FlxG.bgColor = FlxG.BLUE;
 			FlxG.mouse.show();
@@ -45,7 +45,7 @@ package com.trdevt.gameState
 			
 			add(_player);
 			
-			//add(text);
+			add(new FlxButton(.9 * FlxG.width, .9 * FlxG.height, "Result Test", onResultClick));
 		}
 		
 		override public function update():void 
@@ -55,7 +55,11 @@ package com.trdevt.gameState
 			FlxG.collide(_player, _collisionMap);
 			
 		}
-
+		
+		function onResultClick():void 
+		{
+			FlxG.switchState(new ResultsState());
+		}
 		
 	}
 

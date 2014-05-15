@@ -33,9 +33,9 @@ package com.trdevt.sprites
 			
 			
 			this.drag.x = 640;
-			this.acceleration.y = 420;
-			this.maxVelocity.x = 160;
-			this.maxVelocity.y = 200;
+			this.acceleration.y = 500;
+			this.maxVelocity.x = 150;
+			this.maxVelocity.y = 600;
 			
 			
 		}
