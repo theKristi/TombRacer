@@ -33,11 +33,10 @@ package com.trdevt.sprites
 			
 			
 			this.drag.x = 640;
-			this.acceleration.y = 500;
-			this.maxVelocity.x = 150;
-			this.maxVelocity.y = 600;
-			
-			
+			this.acceleration.y = 800;//Got it just about how fast real gravity is, seems good. -Sawyer
+			this.maxVelocity.x = 150;//A value of 64 seems to be synched with the distance traveled. -Sawyer
+			this.maxVelocity.y = 10000000;//A low max velocity makes things floaty i.e. terminal velocity. Considering the
+											//size of our maps terminal velocity should never be reached. -Sawyer
 		}
 		
 		override public function update():void 
@@ -58,9 +57,10 @@ package com.trdevt.sprites
 			if(FlxG.keys.justPressed("UP") && velocity.y == 0)
 			{
 				y -= 1;
-				velocity.y = -200;
-			}
-			
+				velocity.y = -400;//Through testing I have determined that velocity increases by 12.8 every frame
+			}					//Coincidentally, this is the vertical resolution divided by framerate. -Sawyer
+								//Jump height is determined by a relationship between this value and acceleration.
+								//Currenly the height is slightly over three blocks. -Sawyer
 			if(velocity.x == 0)
 			{
 				play("idle");

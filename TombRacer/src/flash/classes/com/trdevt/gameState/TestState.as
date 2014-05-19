@@ -17,8 +17,11 @@ package com.trdevt.gameState
 	{
 		[Embed(source = '../../../../../images/Levels/TileSets/TileSet_Main.png')]private static var _testTiles:Class;
 		
-		[Embed(source = '../../../../../images/Levels/TileMaps/Level4.csv', mimeType = 'application/octet-stream')]private static var _testMap:Class;
-		
+		[Embed(source = '../../../../../images/Levels/TileMaps/MovementMap.csv', mimeType = 'application/octet-stream')]private static var _testMap:Class;
+		//Current TileMaps:  -Sawyer
+		//Level2		Needs to be fixed, wrong resolution
+		//Level4		Fixed, end inaccessible until collision with transparency is disabled
+		//MovementMap	Use this to test player movement, will update with a whip section upon addition
 		protected var _player:Hero;
 		
 		private var _collisionMap:FlxTilemap;
