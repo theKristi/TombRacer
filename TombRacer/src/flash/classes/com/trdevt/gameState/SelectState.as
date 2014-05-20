@@ -1,5 +1,9 @@
 package com.trdevt.gameState 
 {
+	import flash.events.Event;
+	import flash.events.IOErrorEvent;
+	import flash.net.URLLoader;
+	import flash.net.URLRequest;
 	import mx.core.FlexSprite;
 	import mx.events.FlexEvent;
 	import org.flixel.FlxButton;
@@ -14,6 +18,11 @@ package com.trdevt.gameState
 	 */
 	public class SelectState extends FlxState 
 	{
+		/**
+		 * This global var is just for testing purposes. remove it later on
+		 */
+		public var loader:URLLoader;
+		
 		[Embed(source = '/background.png')] private var bgPNG:Class;
 		
 		private var _ftHeader:FlxSprite;
@@ -57,7 +66,37 @@ package com.trdevt.gameState
 		}
 		private function goToLevel(eLevelnum:uint=0):void
 		{
-			FlxG.switchState(new TestState())
+			//FlxG.switchState(new TestState())
+			//Following code is just for testing the test state. Load up xml and pass it in
+			loader = new URLLoader();
+			//loader.addEventListener(Event.COMPLETE, urlLoadComplete(loader));
+			loader.addEventListener(Event.COMPLETE, urlLoadComplete);
+			loader.addEventListener(IOErrorEvent.IO_ERROR, urlLoadError);
+			loader.load(new URLRequest("config.xml"));
+		}
+		
+		/**
+		 * this function is for testing and can be removed later on
+		 * @param	event
+		 */
+		private function urlLoadError(event:Event):void 
+		{
+			trace("Oh no!" + event.toString());
+		}
+		
+		/**
+		 * this function is for testing and can be removed later on
+		 * @param	loader
+		 * @param	event
+		 */
+		private function urlLoadComplete(event:Event):void 
+		{
+			var xmlTree:XML = new XML(loader.data);
+			
+			FlxG.switchState(new TestState(xmlTree));
+			
+			loader.removeEventListener(Event.COMPLETE, urlLoadComplete);
+			loader.removeEventListener(IOErrorEvent.IO_ERROR, urlLoadError);
 		}
 	}//end class
 
