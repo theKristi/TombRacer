@@ -18,9 +18,12 @@ package com.trdevt.gameState
 		//Level2		Needs to be fixed, wrong resolution
 		//Level4		Fixed, end inaccessible until collision with transparency is disabled
 		//MovementMap	Use this to test player movement, will update with a whip section upon addition
+		[Embed(source = '../../../../../images/Levels/TileMaps/ParallaxMap.csv', mimeType = 'application/octet-stream')]private static var _testPara:Class;
+
 		protected var _player:Hero;
 		
 		private var _collisionMap:FlxTilemap;
+		private var _paraMap:FlxTilemap;
 		
 		public function TestState(xmlTree:XML):void 
 		{
@@ -31,7 +34,7 @@ package com.trdevt.gameState
 		{
 			super.create();
 			
-			trace("test");
+			//trace("test");
 			
 			var text:FlxText = new FlxText(10, 10, 100, "Testing!");
 			
@@ -41,17 +44,20 @@ package com.trdevt.gameState
 			
 			
 			_collisionMap = new FlxTilemap();
-			
+			_paraMap = new FlxTilemap();
 			_collisionMap.loadMap(new _testMap(), _testTiles, 32, 32);
+			_paraMap.loadMap(new _testPara(), _testTiles, 32, 32, 0, 0, 0, 0);
+			add(_paraMap);
 			add(_collisionMap);
 			
 			
-			
+			_paraMap.scrollFactor.x = 0.5;
+			_paraMap.scrollFactor.y = 0.5;
 			
 			//_player = new Hero(32*(14), 32*(4));
 			
 			add(_player);
-			
+			//FlxG.camera.follow(_player); //This makes the camera follow the player. -Sawyer
 			add(new FlxButton(.9 * FlxG.width, .9 * FlxG.height, "Result Test", onResultClick));
 		}
 		
@@ -89,7 +95,6 @@ package com.trdevt.gameState
 			//trace("parsing xml for TestState. x: " + xTile+", y:" + yTile+", hero xml tree:#" +heroXmlTree+"#");
 			
 			_player = new Hero(heroXmlTree, 32 * xTile, 32 * yTile);
-			
 			//_player = new Hero(32*(14), 32*(4));
 		}
 		
