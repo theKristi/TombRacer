@@ -1,19 +1,15 @@
 package com.trdevt.gameState 
 {
 	import com.trdevt.sprites.Hero;
-	import flash.ui.Mouse;
+	import org.flixel.FlxButton;
 	import org.flixel.FlxG;
-	import org.flixel.FlxObject;
-	import org.flixel.FlxSprite;
-	import org.flixel.FlxState;
 	import org.flixel.FlxText;
 	import org.flixel.FlxTilemap;
-	import org.flixel.FlxButton;
 	/**
 	 * ...
 	 * @author Jake
 	 */
-	public class TestState extends FlxState
+	public class TestState extends AbstractState
 	{
 		[Embed(source = '../../../../../images/Levels/TileSets/TileSet_Main.png')]private static var _testTiles:Class;
 		
@@ -25,6 +21,11 @@ package com.trdevt.gameState
 		protected var _player:Hero;
 		
 		private var _collisionMap:FlxTilemap;
+		
+		public function TestState(xmlTree:XML):void 
+		{
+			super(xmlTree);
+		}
 		
 		override public function create():void 
 		{
@@ -44,7 +45,10 @@ package com.trdevt.gameState
 			_collisionMap.loadMap(new _testMap(), _testTiles, 32, 32);
 			add(_collisionMap);
 			
-			_player = new Hero(32*(14), 32*(4));
+			
+			
+			
+			//_player = new Hero(32*(14), 32*(4));
 			
 			add(_player);
 			
@@ -63,6 +67,33 @@ package com.trdevt.gameState
 		{
 			FlxG.switchState(new ResultsState());
 		}
+		
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		/**
+		 * builds test state from data in the xml tree
+		 * @param	xmlTree
+		 */
+		override protected function parseXML(xmlTree:XML):void 
+		{
+			var xTile:Number;
+			var yTile:Number;
+			var heroXmlTree:XML;
+			
+			xTile = xmlTree.levels.levelTest.heroPosition.@["x"];
+			yTile = xmlTree.levels.levelTest.heroPosition.@["y"];
+			
+			heroXmlTree = new XML(xmlTree.hero.toXMLString());
+			
+			//trace("TestState->parseXML test: " + xmlTree);
+			//trace("parsing xml for TestState. x: " + xTile+", y:" + yTile+", hero xml tree:#" +heroXmlTree+"#");
+			
+			_player = new Hero(heroXmlTree, 32 * xTile, 32 * yTile);
+			
+			//_player = new Hero(32*(14), 32*(4));
+		}
+		
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 	}
 

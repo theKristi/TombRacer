@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<game>
+	<levels>
+		<levelTest>
+			<heroPosition x="14" y="4" />
+		</levelTest>
+	</levels>
+	<hero	drag.x = 			"640"
+			acceleration.y = 	"800"
+			maxVelocity.x =		"150"
+			maxVelocity.y = 	"1000000"
+			_jumpPower = 		"400"
+			_constAccel = 		"640"
+			/>
+			
+</game>

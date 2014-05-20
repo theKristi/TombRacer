@@ -18,11 +18,13 @@ package com.trdevt.sprites
 		 * @param	Y
 		 * @param	SimpleGraphic
 		 */
-		public function AbstractSprite(X:Number=0,Y:Number=0,SimpleGraphic:Class=null) 
+		public function AbstractSprite(xmlTree:XML, X:Number=0,Y:Number=0,SimpleGraphic:Class=null) 
 		{
 			super(X, Y, SimpleGraphic);
 			
 			_spriteSheet = SimpleGraphic;
+			
+			parseXML(xmlTree);
 			
 		}
 		
@@ -62,9 +64,9 @@ package com.trdevt.sprites
 		 * instructs this object to build itself using values stored in the xml. The xml should have attribute names that match the attributes of this object
 		 * @param	xmlTree
 		 */
-		public function buildFromXML(xmlTree:XML):void 
+		protected function parseXML(xmlTree:XML):void 
 		{
-			trace("Warning! calling a stubbed function buildFromXML(xmlTree:XML) in AbstractSprite!");
+			trace("Warning! calling a stubbed function parseXML(xmlTree:XML) in AbstractSprite!");
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
