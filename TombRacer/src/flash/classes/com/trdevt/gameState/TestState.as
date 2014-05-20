@@ -15,6 +15,7 @@ package com.trdevt.gameState
 		
 		[Embed(source = '../../../../../images/Levels/TileMaps/MovementMap.csv', mimeType = 'application/octet-stream')]private static var _testMap:Class;
 		//Current TileMaps:  -Sawyer
+		//Level1		Only needs win condition
 		//Level2		Needs to be fixed, wrong resolution
 		//Level4		Fixed, end inaccessible until collision with transparency is disabled
 		//MovementMap	Use this to test player movement, will update with a whip section upon addition
