@@ -14,7 +14,8 @@ package com.trdevt.gameState
 	{
 		private var _fsBackground:FlxSprite;
 		[Embed(source="../../../../../images/background.png")] private var bgPNG:Class;
-		
+		private var _fsBackdrop:FlxSprite;
+		[Embed(source = '/CreditsScreen/CreditsBackbrop.png')] private var backdropPNG:Class;
 		private var _fsHeader:FlxSprite;
 		[Embed(source = '/CreditsScreen/CreditsHeader.png')] private var headerPNG:Class;
 		private var _fbBack:FlxButton;
@@ -40,6 +41,10 @@ package com.trdevt.gameState
 			_fsHeader = new FlxSprite(304, 21);
 			_fsHeader.loadGraphic(headerPNG);
 			
+			// Create Backdrop
+			_fsBackdrop = new FlxSprite(36,184);
+			_fsBackdrop.loadGraphic(backdropPNG);
+			
 			// Create Back Button
 			_fbBack = new FlxButton(1018, 635, "", _onBack);
 			_fbBack.loadGraphic(backPNG, true, false, 176, 108);
@@ -58,6 +63,7 @@ package com.trdevt.gameState
 			
 			// Add All Objects To State
 			add(_fsBackground);
+			add(_fsBackdrop);
 			add(_fsHeader);
 			add(_fbBack);
 			add(_fsDev1);
