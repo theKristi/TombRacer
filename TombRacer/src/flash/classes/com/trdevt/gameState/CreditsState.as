@@ -12,12 +12,13 @@ package com.trdevt.gameState
 	 */
 	public class CreditsState extends FlxState 
 	{
+		private var _fsMenuBackground:FlxSprite;
 		[Embed(source = '/background.png')] private var bgPNG:Class;
 		
-		private var _ftTitle:FlxText;
-		[Embed(source = '/buttonGraphicPH.png')] private var textPNG:Class;
+		private var _fsHeader:FlxSprite;
+		[Embed(source = '/CreditsScreen/CreditsHeader.png')] private var headerPNG:Class;
 		private var _fbBack:FlxButton;
-		[Embed(source = '/buttonGraphicPH.png')] private var backPNG:Class;
+		[Embed(source = '/CreditsScreen/backButton.png')] private var backPNG:Class;
 		private var _fsDev1:FlxSprite;
 		//[Embed(source = '/dev1.png')] private var dev1PNG:Class;
 		private var _fsDev2:FlxSprite;
@@ -29,12 +30,18 @@ package com.trdevt.gameState
 		
 		override public function create():void 
 		{
-			_ftTitle = new FlxText(0, 0, FlxG.width, "Credits", true);
-			_ftTitle.alignment = "center";
+			_fsMenuBackground = new FlxSprite(0, 0, bgPNG);
 			
-			_fbBack = new FlxButton(.9 * FlxG.width, .9 * FlxG.height, "Back", _onBack);
+			_fsHeader = new FlxSprite(304, 21);
+			_fsHeader.loadGraphic(headerPNG);
 			
-			add(_ftTitle);
+			
+			
+			_fbBack = new FlxButton(1018, 635, "", _onBack);
+			_fbBack.loadGraphic(backPNG, true, false, 176, 108);
+			
+			add(_fsMenuBackground);
+			add(_fsHeader);
 			add(_fbBack);
 		}
 		
