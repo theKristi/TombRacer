@@ -8,7 +8,7 @@ package com.trdevt.sprites.obstacles
 	public class LavaObstacle extends Obstacle 
 	{
 		[Embed(source = "../../../../../../images/SpriteSheets/LavaSheet.png")] private var _lavaSpriteSheet:Class;
-		public function LavaObstacle(X:Number=0, Y:Number=0, SimpleGraphic:Class=null) 
+		public function LavaObstacle(X:Number=0, Y:Number=0) 
 		{
 			super(X, Y, _lavaSpriteSheet);
 			this.loadGraphic(this._spriteSheet, true, false, 32, 32);

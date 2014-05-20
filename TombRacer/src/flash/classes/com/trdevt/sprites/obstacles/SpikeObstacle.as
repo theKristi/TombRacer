@@ -9,7 +9,7 @@ package com.trdevt.sprites.obstacles
 	public class SpikeObstacle extends Obstacle 
 	{
 		[Embed(source = "../../../../../../images/SpriteSheets/SpikesSheet.png")] private var _spikeSpriteSheet:Class;
-		public function SpikeObstacle(X:Number=0, Y:Number=0, SimpleGraphic:Class=null) 
+		public function SpikeObstacle(X:Number=0, Y:Number=0, TileSet:Number) 
 		{
 			super(X, Y, _spikeSpriteSheet);
 			this.loadGraphic(this._spriteSheet, true, false, 32, 32);

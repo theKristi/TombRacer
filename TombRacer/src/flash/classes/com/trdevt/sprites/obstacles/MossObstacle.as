@@ -9,7 +9,7 @@ package com.trdevt.sprites.obstacles
 	public class MossObstacle extends Obstacle 
 	{
 		[Embed(source = "../../../../../../images/SpriteSheets/MossSheet.png")] private var _mossSpriteSheet:Class;
-		public function MossObstacle(X:Number=0, Y:Number=0, SimpleGraphic:Class=null) 
+		public function MossObstacle(X:Number=0, Y:Number=0, TileSet:Number) 
 		{
 			super(X, Y, _mossSpriteSheet);
 			this.loadGraphic(this._spriteSheet, true, false, 32, 32);
