@@ -15,10 +15,10 @@ package com.trdevt.gameState
 		private var _fsBackground:FlxSprite;
 		[Embed(source="../../../../../images/background.png")] private var bgPNG:Class;
 		
-		private var _ftTitle:FlxText;
-		//[Embed(source = '/buttonGraphicPH.png')] private var textPNG:Class;
+		private var _fsHeader:FlxSprite;
+		[Embed(source = '/CreditsScreen/CreditsHeader.png')] private var headerPNG:Class;
 		private var _fbBack:FlxButton;
-		//[Embed(source = '/buttonGraphicPH.png')] private var backPNG:Class;
+		[Embed(source = '/CreditsScreen/backButton.png')] private var backPNG:Class;
 		private var _fsDev1:FlxSprite;
 		[Embed(source="../../../../../images/CreditsScreen/AnthonyDella.png")]private var dev1PNG:Class;
 		private var _fsDev2:FlxSprite;
@@ -37,12 +37,12 @@ package com.trdevt.gameState
 			// Create Background
 			_fsBackground = new FlxSprite(0, 0, bgPNG);
 			
-			// Create Title
-			_ftTitle = new FlxText(0, 0, FlxG.width, "Credits", true);
-			_ftTitle.alignment = "center";
+			_fsHeader = new FlxSprite(304, 21);
+			_fsHeader.loadGraphic(headerPNG);
 			
 			// Create Back Button
-			_fbBack = new FlxButton(.9 * FlxG.width, .9 * FlxG.height, "Back", _onBack);
+			_fbBack = new FlxButton(1018, 635, "", _onBack);
+			_fbBack.loadGraphic(backPNG, true, false, 176, 108);
 			
 			// Create Dev Portraits
 			_fsDev1 = new FlxSprite(25, 200);
@@ -58,7 +58,7 @@ package com.trdevt.gameState
 			
 			// Add All Objects To State
 			add(_fsBackground);
-			add(_ftTitle);
+			add(_fsHeader);
 			add(_fbBack);
 			add(_fsDev1);
 			add(_fsDev2);
