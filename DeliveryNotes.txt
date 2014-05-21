@@ -1,0 +1,27 @@
+To Play
+- Click "Level Select" Button
+- Click on level
+- Arrow keys to walk and Jump
+- Click "test results" button to get to temporary Results Screen
+- from results screen click "level select" to go back to level select
+
+Screen Flow 
+-Back Buttons are in the lower right
+
+Controls and Collisions
+-Controls are not finalized, [space] to jump needs added
+-Collisions need fine tuning.
+
+Map
+-bottom of map is cut off.
+
+Milestones
+-All Milestones have been met for prototype.
+
+Upcoming Milestones
+-Add all art for screens
+-All buttons blitted
+-XML implemented
+-level screen gotoLevel buttons.
+-sounds for buttons, and background music. 
+

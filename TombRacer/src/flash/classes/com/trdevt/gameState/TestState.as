@@ -12,6 +12,7 @@ package com.trdevt.gameState
 	public class TestState extends AbstractState
 	{
 		[Embed(source = '../../../../../images/Levels/TileSets/TileSet_Main.png')]private static var _testTiles:Class;
+		[Embed(source = '../../../../../images/Levels/TileSets/Background.png')]private static var _testBackground:Class;
 		
 		[Embed(source = '../../../../../images/Levels/TileMaps/MovementMap.csv', mimeType = 'application/octet-stream')]private static var _testMap:Class;
 		//Current TileMaps:  -Sawyer
@@ -19,7 +20,7 @@ package com.trdevt.gameState
 		//Level2		Needs to be fixed, wrong resolution
 		//Level4		Fixed, end inaccessible until collision with transparency is disabled
 		//MovementMap	Use this to test player movement, will update with a whip section upon addition
-		[Embed(source = '../../../../../images/Levels/TileMaps/ParallaxMap.csv', mimeType = 'application/octet-stream')]private static var _testPara:Class;
+		[Embed(source = '../../../../../images/Levels/TileMaps/Background.csv', mimeType = 'application/octet-stream')]private static var _testPara:Class;
 
 		protected var _player:Hero;
 		
@@ -47,7 +48,7 @@ package com.trdevt.gameState
 			_collisionMap = new FlxTilemap();
 			_paraMap = new FlxTilemap();
 			_collisionMap.loadMap(new _testMap(), _testTiles, 32, 32);
-			_paraMap.loadMap(new _testPara(), _testTiles, 32, 32, 0, 0, 0, 0);
+			_paraMap.loadMap(new _testPara(), _testBackground, 1280, 768, 0,0,0,0);
 			add(_paraMap);
 			add(_collisionMap);
 			

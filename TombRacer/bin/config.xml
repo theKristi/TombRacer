@@ -2,7 +2,7 @@
 <game>
 	<levels>
 		<levelTest>
-			<heroPosition x="14" y="4" />
+			<heroPosition x="4" y="1" />
 		</levelTest>
 	</levels>
 	<hero	drag.x = 			"640"
