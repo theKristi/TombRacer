@@ -9,9 +9,12 @@ package com.trdevt.sprites.obstacles
 	public class SpikeObstacle extends Obstacle 
 	{
 		[Embed(source = "../../../../../../images/SpriteSheets/SpikesSheet.png")] private var _spikeSpriteSheet:Class;
-		public function SpikeObstacle(X:Number=0, Y:Number=0, TileSet:Number) 
+		public function SpikeObstacle(X:Number=0, Y:Number=0) 
 		{
 			super(X, Y, _spikeSpriteSheet);
+			
+			this.immovable = true;
+			
 			this.loadGraphic(this._spriteSheet, true, false, 32, 32);
 			this.addAnimation("idle", [1]);
 			this.play("idle");
@@ -20,8 +23,8 @@ package com.trdevt.sprites.obstacles
 		
 		override public function onPlayerCollision(player:Hero):void
 		{
-			if (player.isTouching(FlxObject.CEILING);
-				player.alive = false;
+			if (player.isTouching(FlxObject.FLOOR))
+				player.kill();
 		}
 	}
 

@@ -11,6 +11,8 @@ package com.trdevt.sprites.obstacles
 		{
 			super(X, Y, SimpleGraphic);
 			
+			this.immovable = true;
+			
 		}
 		
 	}

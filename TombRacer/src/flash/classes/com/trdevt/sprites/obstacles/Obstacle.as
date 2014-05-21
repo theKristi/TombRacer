@@ -1,6 +1,7 @@
 package com.trdevt.sprites.obstacles 
 {
 	import com.trdevt.sprites.AbstractSprite;
+	import com.trdevt.sprites.Hero;
 	/**
 	 * ...
 	 * @author Anthony Della Maggiora

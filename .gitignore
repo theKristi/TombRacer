@@ -2,3 +2,6 @@ TombRacer/obj/TombRacerConfig.old
 TombRacer/obj/TombRacerConfig.xml
 TombRacer/obj/TombRacerConfig.old
 TombRacer/obj/TombRacerConfig.xml
+TombRacer/bin/TombRacer.swf
+TombRacer/obj/TombRacerConfig.old
+TombRacer/src/flash/classes/com/trdevt/gameState/TestState.as
