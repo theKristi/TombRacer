@@ -1,5 +1,6 @@
 package com.trdevt.sprites.obstacles 
 {
+	import com.trdevt.sprites.Hero;
 	/**
 	 * ...
 	 * @author Anthony Della Maggiora
@@ -13,6 +14,14 @@ package com.trdevt.sprites.obstacles
 			
 			this.immovable = true;
 			
+			//this.loadGraphic(this._spriteSheet, true, false, 32, 32);
+			//this.addAnimation("idle", [1]);
+			//this.play("idle");
+		}
+		
+		override public function onPlayerCollision(player:Hero):void
+		{
+			player.y -= 2;
 		}
 		
 	}
