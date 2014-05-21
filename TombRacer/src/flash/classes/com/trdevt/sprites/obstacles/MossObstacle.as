@@ -12,6 +12,9 @@ package com.trdevt.sprites.obstacles
 		public function MossObstacle(X:Number=0, Y:Number=0, TileSet:Number) 
 		{
 			super(X, Y, _mossSpriteSheet);
+			
+			this.immovable = true;
+			
 			this.loadGraphic(this._spriteSheet, true, false, 32, 32);
 			this.addAnimation("idle", [1]);
 			this.play("idle");
@@ -20,7 +23,7 @@ package com.trdevt.sprites.obstacles
 		
 		override public function onPlayerCollision(player:Hero):void
 		{
-			if (player.isTouching(FlxObject.CEILING);
+			if (player.isTouching(FlxObject.FLOOR);
 			{
 				this.acceleration.y = 400;
 				this.maxVelocity.x = 75;

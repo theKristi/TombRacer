@@ -11,6 +11,9 @@ package com.trdevt.sprites.obstacles
 		public function LavaObstacle(X:Number=0, Y:Number=0) 
 		{
 			super(X, Y, _lavaSpriteSheet);
+			
+			this.immovable = true;
+			
 			this.loadGraphic(this._spriteSheet, true, false, 32, 32);
 			this.addAnimation("idle", [1]);
 			this.play("idle");
@@ -19,7 +22,7 @@ package com.trdevt.sprites.obstacles
 		
 		override public function onPlayerCollision(player:Hero):void
 		{
-			player.alive = false;
+			player.kill();
 		}
 	}
 
