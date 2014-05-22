@@ -2,7 +2,7 @@
 {
 	import org.flixel.FlxGame;
 	import org.flixel.FlxG;
-	import com.trdevt.gameState.MenuState;
+	import com.trdevt.gameState.TitleState;
 	/**
 	 * Drives the TombRacer project.
 	 * 
@@ -22,7 +22,7 @@
 		
 		public function Main()
 		{
-			super(1280,768, MenuState,1,60,30,true);
+			super(1280,768, TitleState,1,60,30,true);
 			FlxG.width = 1280;
 			FlxG.height = 768;
 		}
