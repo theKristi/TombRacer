@@ -1,7 +1,10 @@
 package com.trdevt.gameState 
 {
 	import com.trdevt.sprites.Hero;
+	import com.trdevt.sprites.HeroStates;
 	import org.flixel.FlxG;
+	import org.flixel.FlxPoint;
+	import org.flixel.FlxSprite;
 	import org.flixel.FlxTilemap;
 	/**
 	 * ...
@@ -34,6 +37,8 @@ package com.trdevt.gameState
 		
 		protected var _finalScore:Number;
 		
+		protected var _whipCanvas:FlxSprite;
+		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		public function PlayState(xmlTree:XML, levelNum:Number) 
@@ -55,11 +60,14 @@ package com.trdevt.gameState
 			
 			
 			
+			
 			add(_tileMapCollision);
 			//add(_tileMapBackground);
 			
+			createWhipCanvas();
 			
 			add(_player);
+			_player.signalHeroWhipped.add(drawWhip);
 			
 			
 			
@@ -121,6 +129,33 @@ package com.trdevt.gameState
 			//do the loadMaps here to keep from using copious amounts of attributes (tile width and height, etc)
 			//_tileMapCollision.loadMap(new _tileMapCollisionFile(), _tileSetCollsionFile, _collisionTileWidth, _collisionTileHeight);
 			//_tileMapBackground.loadMap(new _tileMapBackgroundFile(), _tileSetBackgroundFile, _backgroundTileWidth, _backgroundTileHeight);
+			
+		}
+		
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		private function createWhipCanvas():void 
+		{
+			_whipCanvas = new FlxSprite(0, 0);
+			_whipCanvas.makeGraphic(FlxG.width, FlxG.height, 0x00000000);
+			
+			add(_whipCanvas);
+			
+		}
+		
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		private function drawWhip(whipDest:FlxPoint):void 
+		{
+			trace("in PlayState, got signal to draw whip ending at: " + whipDest.x + ", " + whipDest.y);			
+			if (_player.isHeroOnGround())
+			{
+				return;
+			}
+			//hero is in the air at this point
+			
+			_whipCanvas.drawLine(_player.x, _player.y, whipDest.x, whipDest.y, FlxG.RED);
+			
 			
 		}
 		
