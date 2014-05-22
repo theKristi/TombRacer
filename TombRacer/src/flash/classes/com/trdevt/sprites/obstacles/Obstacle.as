@@ -11,6 +11,8 @@ package com.trdevt.sprites.obstacles
 		
 		public function Obstacle(X:Number=0, Y:Number=0, SimpleGraphic:Class=null) 
 		{
+			X *= 32;
+			Y *= 32;
 			super(X, Y, SimpleGraphic);
 			
 		}
