@@ -1,10 +1,12 @@
 package com.trdevt.gameState 
 {
+	import flash.geom.Rectangle;
 	import org.flixel.FlxButton;
 	import org.flixel.FlxSprite;
 	import org.flixel.FlxState;
 	import org.flixel.FlxText;
 	import org.flixel.FlxG;
+	import org.flixel.plugin.photonstorm.FlxScrollingText;
 	
 	
 	/**
@@ -15,8 +17,7 @@ package com.trdevt.gameState
 	{
 		[Embed(source="../../../../../fonts/sf_fedora/SF Fedora.ttf",
                     fontFamily="sffedora",
-                    mimeType="application/x-font",
-                    embedAsCFF = "true")] private var font:Class;
+                    embedAsCFF = "false")] private var font:Class;
 		private var _fsBackground:FlxSprite;
 		[Embed(source="../../../../../images/background.png")] private var bgPNG:Class;
 		private var _fsBackdrop:FlxSprite;
@@ -32,11 +33,17 @@ package com.trdevt.gameState
 		private var _fsDev3:FlxSprite;
 		[Embed(source='/CreditsScreen/JakeLongworthCredit.png')] private var dev3PNG:Class;
 		private var _fsDev4:FlxSprite;
-		[Embed(source ='/CreditsScreen/SawyerZockCredit.png')] private var dev4PNG:Class;
+		[Embed(source = '/CreditsScreen/SawyerZockCredit.png')] private var dev4PNG:Class;
+		private var _fsScroll:FlxSprite;
+		[Embed(source ='/CreditsScreen/CreditsScrollRect.png')] private var scrollerOutlinePNG:Class;
 		
+		private var credits:Array;
 		
+		private var creditSpeed:int = 2;
+		private var maxy:int = 525;
 		override public function create():void 
 		{
+			credits = new Array();
 			// Create Background
 			_fsBackground = new FlxSprite(0, 0, bgPNG);
 			
@@ -49,6 +56,12 @@ package com.trdevt.gameState
 			// Create Back Button
 			_fbBack = new FlxButton(1018, 635, "", _onBack);
 			_fbBack.loadGraphic(backPNG, true, false, 176, 108);
+			
+			_fsScroll = new FlxSprite(853, 203, scrollerOutlinePNG);
+			
+			var credit1:FlxText = new FlxText(855, maxy, 379, "hellooo\nworld",true);
+			credit1.setFormat( "sffedora", 28, 0xffffff, "center");
+			credits.push(credit1);
 			
 			// Create Dev Portraits
 			_fsDev1 = new FlxSprite(52, 241,dev1PNG);
@@ -71,7 +84,28 @@ package com.trdevt.gameState
 			add(_fsDev2);
 			add(_fsDev3);
 			add(_fsDev4);
+			add(_fsScroll);
+			add(credit1);
 			
+		}
+		/*=====================================================================*/
+		
+		//animate scrolling credits
+		override public function update():void
+		{
+			for (var i:int = 0; i < credits.length; i++ )
+			{
+				var credit:FlxText = FlxText(credits[i]);
+				if (credit.y<=maxy&&credit.y>=203)
+				{
+					credit.y -= creditSpeed;
+				}
+				else
+				{
+					//credit.visible = false;
+					credit.y = maxy;
+				}
+			}
 		}
 		
 		/*=====================================================================*/
