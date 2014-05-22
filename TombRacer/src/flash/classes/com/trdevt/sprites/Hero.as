@@ -120,7 +120,7 @@ package com.trdevt.sprites
 		{
 			if (FlxG.mouse.justPressed())
 			{
-				var angle = findAngleDegree(new FlxPoint(this.x, this.y), new FlxPoint(FlxG.mouse.x, FlxG.mouse.y));
+				//var angle = findAngleDegree(new FlxPoint(this.x, this.y), new FlxPoint(FlxG.mouse.x, FlxG.mouse.y));
 				//the x direction doesn't work because of the max velocity
 				velocity.x = - _jumpPower* 5 * Math.cos(angle * Math.PI / 180);
 				velocity.y = _jumpPower * Math.sin(angle * Math.PI / 180);
