@@ -323,12 +323,12 @@ package com.trdevt.sprites
 			//this line keeps the hero from continuously accelerating the last direction pressed
 			this.acceleration.x = 0;
 				
-			if(FlxG.keys.A)
+			if(FlxG.keys.A || FlxG.keys.LEFT)
 			{
 				facing = FlxObject.LEFT;
 				acceleration.x -= _constAccel;
 			}
-			else if(FlxG.keys.D)
+			else if(FlxG.keys.D || FlxG.keys.RIGHT)
 			{
 				facing = FlxObject.RIGHT;
 				acceleration.x += _constAccel;
