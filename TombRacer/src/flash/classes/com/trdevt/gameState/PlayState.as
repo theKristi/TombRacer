@@ -67,9 +67,14 @@ package com.trdevt.gameState
 			add(_player);
 			_player.signalHeroWhipped.add(drawWhip);
 			_player.signalHeroHasDied.add(toCheckpoint);
+			_player.signalHeroCJump.add(removeLimit);
 			
 			
 			
+		}
+		public function removeLimit():void
+		{
+			_player.maxVelocity.x = 100000;
 		}
 		
 		public function toCheckpoint():void

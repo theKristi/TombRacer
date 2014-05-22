@@ -31,9 +31,9 @@ package com.trdevt.sprites
 		protected var _thetaVelocity:Number = 0;
 		protected var _thetaAcceleration:Number = 0;
 		
-		public var checkpointX = 4;
-		public var checkpointY = 1;
-		
+		public var checkpointX:int = 4;
+		public var checkpointY:int = 1;
+		public var cooldown:int = 0;
 		/**
 		 * public signal for when the hero has died
 		 */
@@ -43,6 +43,9 @@ package com.trdevt.sprites
 		 * signal for the playstate that the player wants to whip
 		 */
 		public var signalHeroWhipped:Signal;
+		
+		public var signalHeroCJump:Signal;
+
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
@@ -70,6 +73,7 @@ package com.trdevt.sprites
 			
 			signalHeroHasDied = new Signal();
 			signalHeroWhipped = new Signal(FlxPoint);
+			signalHeroCJump = new Signal();
 			
 			_heroState = HeroStates.HERO_NOT_SWING;
 			
@@ -109,7 +113,7 @@ package com.trdevt.sprites
 			
 			//fireGrapple();
 
-			//canonJump();
+			canonJump();
 			thisIsBullshit();
 			selectAnimation();
 			
@@ -121,11 +125,14 @@ package com.trdevt.sprites
 		
 		private function canonJump():void 
 		{
+			if (cooldown < 60)
+				this.maxVelocity.x = 120;
 			if (FlxG.mouse.justPressed())
 			{
-				//var angle = findAngleDegree(new FlxPoint(this.x, this.y), new FlxPoint(FlxG.mouse.x, FlxG.mouse.y));
+				signalHeroCJump.dispatch();
+				var angle = findAngleDegree(new FlxPoint(this.x, this.y), new FlxPoint(FlxG.mouse.x, FlxG.mouse.y));
 				//the x direction doesn't work because of the max velocity
-				velocity.x = - _jumpPower* 5 * Math.cos(angle * Math.PI / 180);
+				velocity.x = - _jumpPower * Math.cos(angle * Math.PI / 180);
 				velocity.y = _jumpPower * Math.sin(angle * Math.PI / 180);
 				//if (this.facing == FlxObject.LEFT)
 				//{
@@ -137,7 +144,10 @@ package com.trdevt.sprites
 					//velocity.x += _jumpPower;
 					//velocity.y -= _jumpPower;
 				//}
+				cooldown = 75;
 			}
+			if (cooldown != 0)
+				cooldown--;
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
