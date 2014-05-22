@@ -7,6 +7,7 @@ package  com.trdevt.gameState
 	import org.flixel.FlxText;
 	import org.flixel.FlxG;
 	import org.flixel.plugin.photonstorm.FlxScrollingText;
+	import com.treefortress.sound.SoundAS;
 
 	
 	/**
@@ -35,6 +36,8 @@ package  com.trdevt.gameState
 			add(_fsBackground);
 			add(_fsTitle);
 			add(_fsPressMsg);
+			SoundAS.loadSound("./Audio/Music.mp3", "music");
+			SoundAS.playLoop("music");
 			
 		}
 		override public function update():void
