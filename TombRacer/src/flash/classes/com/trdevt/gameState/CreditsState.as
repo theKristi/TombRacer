@@ -1,5 +1,6 @@
 package com.trdevt.gameState 
 {
+	import com.trdevt.Assets;
 	import flash.geom.Rectangle;
 	import org.flixel.FlxButton;
 	import org.flixel.FlxSprite;
@@ -15,27 +16,15 @@ package com.trdevt.gameState
 	 */
 	public class CreditsState extends FlxState 
 	{
-		[Embed(source="../../../../../fonts/sf_fedora/SF Fedora.ttf",
-                    fontFamily="sffedora",
-                    embedAsCFF = "false")] private var font:Class;
-		private var _fsBackground:FlxSprite;
-		[Embed(source="../../../../../images/background.png")] private var bgPNG:Class;
-		private var _fsBackdrop:FlxSprite;
-		[Embed(source ='/CreditsScreen/CreditsBackbrop.png')] private var backdropPNG:Class;
 		private var _fsHeader:FlxSprite;
-		[Embed(source ='/CreditsScreen/CreditsHeader.png')] private var headerPNG:Class;
-		private var _fbBack:FlxButton;
-		[Embed(source = '/CreditsScreen/backButton.png')] private var backPNG:Class;
-		private var _fsDev1:FlxSprite;
-		[Embed(source='/CreditsScreen/AnthonyDellaCredit.png')]private var dev1PNG:Class;
-		private var _fsDev2:FlxSprite;
-		[Embed(source='/CreditsScreen/KristiMarksCredit.png')] private var dev2PNG:Class;
-		private var _fsDev3:FlxSprite;
-		[Embed(source='/CreditsScreen/JakeLongworthCredit.png')] private var dev3PNG:Class;
-		private var _fsDev4:FlxSprite;
-		[Embed(source = '/CreditsScreen/SawyerZockCredit.png')] private var dev4PNG:Class;
-		private var _fsScroll:FlxSprite;
-		[Embed(source ='/CreditsScreen/CreditsScrollRect.png')] private var scrollerOutlinePNG:Class;
+		private var _fsBackground:FlxSprite;
+		public var _fsBackdrop:FlxSprite;
+		public var _fbBack:FlxButton;
+		public var _fsDev1:FlxSprite;
+		public var _fsDev2:FlxSprite;
+		public var _fsDev3:FlxSprite;
+		public var _fsDev4:FlxSprite;
+		public var _fsScroll:FlxSprite;
 		
 		private var credits:Array;
 		
@@ -45,32 +34,32 @@ package com.trdevt.gameState
 		{
 			credits = new Array();
 			// Create Background
-			_fsBackground = new FlxSprite(0, 0, bgPNG);
+			_fsBackground = new FlxSprite(0, 0, Assets.bgPNG);
 			
-			_fsHeader = new FlxSprite(304, 21,headerPNG);
+			_fsHeader = new FlxSprite(304, 21,Assets.creditsheaderPNG);
 			
 			
 			// Create Backdrop
-			_fsBackdrop = new FlxSprite(36,184,backdropPNG);
+			_fsBackdrop = new FlxSprite(36,184,Assets.backdropPNG);
 			
 			// Create Back Button
 			_fbBack = new FlxButton(1018, 635, "", _onBack);
-			_fbBack.loadGraphic(backPNG, true, false, 176, 108);
+			_fbBack.loadGraphic(Assets.backPNG, true, false, 176, 108);
 			
-			_fsScroll = new FlxSprite(853, 203, scrollerOutlinePNG);
+			_fsScroll = new FlxSprite(853, 203, Assets.scrollerOutlinePNG);
 			
 			var credit1:FlxText = new FlxText(855, maxy, 379, "hellooo\nworld",true);
 			credit1.setFormat( "sffedora", 28, 0xffffff, "center");
 			credits.push(credit1);
 			
 			// Create Dev Portraits
-			_fsDev1 = new FlxSprite(52, 241,dev1PNG);
+			_fsDev1 = new FlxSprite(52, 241,Assets.dev1PNG);
 			
-			_fsDev2 = new FlxSprite(256, 241,dev2PNG);
+			_fsDev2 = new FlxSprite(256, 241,Assets.dev2PNG);
 			
-			_fsDev3 = new FlxSprite(430, 241, dev3PNG);
+			_fsDev3 = new FlxSprite(430, 241, Assets.dev3PNG);
 			
-			_fsDev4 = new FlxSprite(630, 241,dev4PNG);
+			_fsDev4 = new FlxSprite(630, 241,Assets.dev4PNG);
 			
 			
 			

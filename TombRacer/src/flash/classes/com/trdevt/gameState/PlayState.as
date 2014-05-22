@@ -6,6 +6,7 @@ package com.trdevt.gameState
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxSprite;
 	import org.flixel.FlxTilemap;
+	import org.flixel.FlxTimer;
 	/**
 	 * ...
 	 * @author Jake
@@ -13,7 +14,7 @@ package com.trdevt.gameState
 	public class PlayState extends AbstractState
 	{
 		
-		
+		protected var _timer:FlxTimer;
 		protected var _currentLevelNum:Number;
 		
 		//class files will be loaded from the parse function
