@@ -12,8 +12,6 @@ package com.trdevt.gameState
 	 */
 	public class PlayState extends AbstractState
 	{
-		//test code below
-		[Embed(source = '../../../../../images/Levels/TileMaps/Level0.csv', mimeType = 'application/octet-stream')]private static var j:Class;
 		
 		
 		protected var _currentLevelNum:Number;
