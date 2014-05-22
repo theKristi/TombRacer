@@ -24,15 +24,21 @@ package com.trdevt.gameState
 
 		[Embed(source = '../../../../../images/Levels/TileMaps/Background.csv', mimeType = 'application/octet-stream')]private static var listPara:Class;
 
-		[Embed(source = '../../../../../images/Levels/TileMaps/Level0.csv', mimeType = 'application/octet-stream')]private static var j:Class;
-		[Embed(source = '../../../../../images/Levels/TileMaps/Level1.csv', mimeType = 'application/octet-stream')]private static var k:Class;
-		[Embed(source = '../../../../../images/Levels/TileMaps/Level2.csv', mimeType = 'application/octet-stream')]private static var l:Class;
-		[Embed(source = '../../../../../images/Levels/TileMaps/Level3.csv', mimeType = 'application/octet-stream')]private static var m:Class;
-		[Embed(source = '../../../../../images/Levels/TileMaps/Level4.csv', mimeType = 'application/octet-stream')]private static var n:Class;
-		[Embed(source = '../../../../../images/Levels/TileMaps/Level5.csv', mimeType = 'application/octet-stream')]private static var o:Class;
-		[Embed(source = '../../../../../images/Levels/TileMaps/Level6.csv', mimeType = 'application/octet-stream')]private static var p:Class;
-		[Embed(source = '../../../../../images/Levels/TileMaps/Level7.csv', mimeType = 'application/octet-stream')]private static var q:Class;
-		[Embed(source = '../../../../../images/Levels/TileMaps/Level8.csv', mimeType = 'application/octet-stream')]private static var r:Class;
+		[Embed(source = '../../../../../images/Levels/TileMaps/Level0/Platforms.csv', mimeType = 'application/octet-stream')]private static var j:Class;
+/*		[Embed(source = '../../../../../images/Levels/TileMaps/Level0/Spikes.csv', mimeType = 'application/octet-stream')]private static var j:Class;
+		[Embed(source = '../../../../../images/Levels/TileMaps/Level0/Lava.csv', mimeType = 'application/octet-stream')]private static var j:Class;
+		[Embed(source = '../../../../../images/Levels/TileMaps/Level0/Sand.csv', mimeType = 'application/octet-stream')]private static var j:Class;
+		[Embed(source = '../../../../../images/Levels/TileMaps/Level0/Moss.csv', mimeType = 'application/octet-stream')]private static var j:Class;
+		[Embed(source = '../../../../../images/Levels/TileMaps/Level0/Plates.csv', mimeType = 'application/octet-stream')]private static var j:Class;*/
+		
+		[Embed(source = '../../../../../images/Levels/TileMaps/Level1/Platforms.csv', mimeType = 'application/octet-stream')]private static var k:Class;
+		[Embed(source = '../../../../../images/Levels/TileMaps/Level2/Platforms.csv', mimeType = 'application/octet-stream')]private static var l:Class;
+		[Embed(source = '../../../../../images/Levels/TileMaps/Level3/Platforms.csv', mimeType = 'application/octet-stream')]private static var m:Class;
+		[Embed(source = '../../../../../images/Levels/TileMaps/Level4/Platforms.csv', mimeType = 'application/octet-stream')]private static var n:Class;
+		[Embed(source = '../../../../../images/Levels/TileMaps/Level5/Platforms.csv', mimeType = 'application/octet-stream')]private static var o:Class;
+		[Embed(source = '../../../../../images/Levels/TileMaps/Level6/Platforms.csv', mimeType = 'application/octet-stream')]private static var p:Class;
+		[Embed(source = '../../../../../images/Levels/TileMaps/Level7/Platforms.csv', mimeType = 'application/octet-stream')]private static var q:Class;
+		[Embed(source = '../../../../../images/Levels/TileMaps/Level8/Platforms.csv', mimeType = 'application/octet-stream')]private static var r:Class;
 
 
 
