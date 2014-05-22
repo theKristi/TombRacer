@@ -74,8 +74,8 @@ package com.trdevt.gameState
 		
 		public function toCheckpoint():void
 		{
-			_player.x = _player.checkpointX ;
-			_player.y = _player.checkpointY ;
+			_player.x = 32 * _player.checkpointX;
+			_player.y = 32 * _player.checkpointY;
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -85,6 +85,8 @@ package com.trdevt.gameState
 			super.update();
 			
 			FlxG.collide(_player, _tileMapCollision);
+			if (_player.x > FlxG.width || _player.x < 0 || _player.y > FlxG.height || _player.y < 0)
+				_player.signalHeroHasDied.dispatch();
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
