@@ -31,7 +31,7 @@ package com.trdevt.gameState
 			_ftHeader.loadGraphic(headerPNG);
 			
 			_fbBack = new FlxButton(1029, 620, "Back", _onBack);
-			_fbBack.loadGraphic(backPNG);
+			_fbBack.loadGraphic(backPNG, true, false, 176, 108);
 			_fbLevel = new FlxButton(186, 166,"" ,goToLevel);
 			_fbLevel.loadGraphic(levelPNG, true, false, 163,195);
 			
