@@ -42,7 +42,7 @@ package com.trdevt.gameState
 		
 		private function _onBack():void
 		{
-			FlxG.switchState(new SelectState());
+			//FlxG.switchState(new SelectState());
 		}
 	}//end class
 

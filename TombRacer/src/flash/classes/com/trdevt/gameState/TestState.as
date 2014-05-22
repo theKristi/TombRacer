@@ -1,33 +1,42 @@
 package com.trdevt.gameState 
 {
 	import com.trdevt.sprites.Hero;
-	import flash.ui.Mouse;
+	import org.flixel.FlxButton;
 	import org.flixel.FlxG;
-	import org.flixel.FlxObject;
-	import org.flixel.FlxSprite;
-	import org.flixel.FlxState;
 	import org.flixel.FlxText;
 	import org.flixel.FlxTilemap;
-	import org.flixel.FlxButton;
 	/**
 	 * ...
 	 * @author Jake
 	 */
-	public class TestState extends FlxState
+	public class TestState extends AbstractState
 	{
 		[Embed(source = '../../../../../images/Levels/TileSets/TileSet_Main.png')]private static var _testTiles:Class;
+		[Embed(source = '../../../../../images/Levels/TileSets/Background.png')]private static var _testBackground:Class;
 		
-		[Embed(source = '../../../../../images/Levels/TileMaps/Level4.csv', mimeType = 'application/octet-stream')]private static var _testMap:Class;
-		
+		[Embed(source = '../../../../../images/Levels/TileMaps/MovementMap.csv', mimeType = 'application/octet-stream')]private static var _testMap:Class;
+		//Current TileMaps:  -Sawyer
+		//Level1		Only needs win condition
+		//Level2		Needs to be fixed, wrong resolution
+		//Level4		Fixed, end inaccessible until collision with transparency is disabled
+		//MovementMap	Use this to test player movement, will update with a whip section upon addition
+		[Embed(source = '../../../../../images/Levels/TileMaps/Background.csv', mimeType = 'application/octet-stream')]private static var _testPara:Class;
+
 		protected var _player:Hero;
 		
 		private var _collisionMap:FlxTilemap;
+		private var _paraMap:FlxTilemap;
+		
+		public function TestState(xmlTree:XML):void 
+		{
+			super(xmlTree);
+		}
 		
 		override public function create():void 
 		{
 			super.create();
 			
-			trace("test");
+			//trace("test");
 			
 			var text:FlxText = new FlxText(10, 10, 100, "Testing!");
 			
@@ -37,14 +46,20 @@ package com.trdevt.gameState
 			
 			
 			_collisionMap = new FlxTilemap();
-			
+			_paraMap = new FlxTilemap();
 			_collisionMap.loadMap(new _testMap(), _testTiles, 32, 32);
+			_paraMap.loadMap(new _testPara(), _testBackground, 1280, 768, 0,0,0,0);
+			add(_paraMap);
 			add(_collisionMap);
 			
-			_player = new Hero(32*(14), 32*(4));
+			
+			_paraMap.scrollFactor.x = 0.5;
+			_paraMap.scrollFactor.y = 0.5;
+			
+			//_player = new Hero(32*(14), 32*(4));
 			
 			add(_player);
-			
+			//FlxG.camera.follow(_player); //This makes the camera follow the player. -Sawyer
 			add(new FlxButton(.9 * FlxG.width, .9 * FlxG.height, "Result Test", onResultClick));
 		}
 		
@@ -60,6 +75,32 @@ package com.trdevt.gameState
 		{
 			FlxG.switchState(new ResultsState());
 		}
+		
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		/**
+		 * builds test state from data in the xml tree
+		 * @param	xmlTree
+		 */
+		override protected function parseXML(xmlTree:XML):void 
+		{
+			var xTile:Number;
+			var yTile:Number;
+			var heroXmlTree:XML;
+			
+			xTile = xmlTree.levels.levelTest.heroPosition.@["x"];
+			yTile = xmlTree.levels.levelTest.heroPosition.@["y"];
+			
+			heroXmlTree = new XML(xmlTree.hero.toXMLString());
+			
+			//trace("TestState->parseXML test: " + xmlTree);
+			//trace("parsing xml for TestState. x: " + xTile+", y:" + yTile+", hero xml tree:#" +heroXmlTree+"#");
+			
+			_player = new Hero(heroXmlTree, 32 * xTile, 32 * yTile);
+			//_player = new Hero(32*(14), 32*(4));
+		}
+		
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 	}
 
