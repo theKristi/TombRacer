@@ -127,7 +127,7 @@ package com.trdevt.sprites
 		{
 			if (cooldown < 60)
 				this.maxVelocity.x = 120;
-			if (FlxG.mouse.justPressed())
+			if (FlxG.keys.S)
 			{
 				signalHeroCJump.dispatch();
 				var angle = findAngleDegree(new FlxPoint(this.x, this.y), new FlxPoint(FlxG.mouse.x, FlxG.mouse.y));
