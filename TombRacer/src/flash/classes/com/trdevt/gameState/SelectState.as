@@ -16,7 +16,7 @@ package com.trdevt.gameState
 	 * ...
 	 * @author Kristi Marks
 	 */
-	public class SelectState extends AbstractState 
+	public class SelectState extends FlxState 
 	{
 		/**
 		 * This global var is just for testing purposes. remove it later on
@@ -31,26 +31,9 @@ package com.trdevt.gameState
 		private var _fbLevel:FlxButton;
 		[Embed(source = '/LevelSelectScreen/LevelUnlocked_notplayed_sheet.png')] private var levelPNG:Class;
 		private var _fbBack:FlxButton;
-<<<<<<< HEAD
-		[Embed(source = '/buttonGraphicPH.png')] private var backPNG:Class;
-		private var _fsDev1:FlxSprite;
-		//[Embed(source = '/dev1.png')] private var dev1PNG:Class;
-		private var _fsDev2:FlxSprite;
-		//[Embed(source = '/dev2.png')] private var dev2PNG:Class;
-		private var _fsDev3:FlxSprite;
-		//[Embed(source = '/dev3.png')] private var dev3PNG:Class;
-		private var _fsDev4:FlxSprite;
-		//[Embed(source = '/dev4.png')] private var dev4PNG:Class;
-		
-		public function SelectState(xmlTree:XML):void 
-		{
-			super(xmlTree);
-		}
-		
-=======
+
 		[Embed(source = '/LevelSelectScreen/backButton.png')] private var backPNG:Class;
 				
->>>>>>> origin/SelectState
 		override public function create():void 
 		{
 			var fsMenuBackground:FlxSprite = new FlxSprite(0, 0, bgPNG);
@@ -110,10 +93,10 @@ package com.trdevt.gameState
 			loader.removeEventListener(IOErrorEvent.IO_ERROR, urlLoadError);
 		}
 		
-		override protected function parseXML(xmlTree:XML):void 
-		{
+		//override protected function parseXML(xmlTree:XML):void 
+		//{
 			//do nothing
-		}
+		//}
 	}//end class
 
 }
