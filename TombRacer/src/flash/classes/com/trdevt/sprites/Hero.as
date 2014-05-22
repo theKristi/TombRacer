@@ -31,6 +31,9 @@ package com.trdevt.sprites
 		protected var _thetaVelocity:Number = 0;
 		protected var _thetaAcceleration:Number = 0;
 		
+		public var checkpointX = 0;
+		public var checkpointY = 0;
+		
 		/**
 		 * public signal for when the hero has died
 		 */

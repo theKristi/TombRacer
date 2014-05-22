@@ -66,9 +66,16 @@ package com.trdevt.gameState
 			
 			add(_player);
 			_player.signalHeroWhipped.add(drawWhip);
+			_player.signalHeroHasDied.add(toCheckpoint);
 			
 			
 			
+		}
+		
+		public function toCheckpoint():void
+		{
+			_player.x = _player.checkpointX ;
+			_player.y = _player.checkpointY ;
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
