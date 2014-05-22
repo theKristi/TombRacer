@@ -3,6 +3,7 @@ package com.trdevt.sprites
 	import org.flixel.FlxObject;
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxSprite;
+	import org.flixel.FlxTilemap;
 	import org.flixel.FlxG;
 	import org.flixel.FlxU;
 	import org.osflash.signals.Signal;
@@ -106,7 +107,7 @@ package com.trdevt.sprites
 			//fireGrapple();
 
 			//canonJump();
-			
+			thisIsBullshit();
 			selectAnimation();
 			
 			selectState();
@@ -243,6 +244,19 @@ package com.trdevt.sprites
 			}
 		}
 		
+		
+		
+		
+		private function thisIsBullshit():void
+		{
+			if ( FlxG.mouse.justPressed() )
+			{
+				var targetPoint:FlxPoint = FlxG.mouse.getWorldPosition();
+				//var playerPos:FlxPoint = new FlxPoint(x, y);
+				signalHeroWhipped.dispatch(targetPoint);
+				
+			}
+		}
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		private function fireGrapple():void 
