@@ -146,13 +146,13 @@ package com.trdevt.gameState
 		private function drawWhip(whipDest:FlxPoint):void 
 		{
 			trace("in PlayState, got signal to draw whip ending at: " + whipDest.x + ", " + whipDest.y);			
-			if (_player.isHeroOnGround())
-			{
-				return;
-			}
+			//if (_player.isHeroOnGround())
+			//{
+				//return;
+			//}
 			//hero is in the air at this point
-			
-			_whipCanvas.drawLine(_player.x, _player.y, whipDest.x, whipDest.y, FlxG.RED);
+			_whipCanvas.fill(0x00000000);
+			_whipCanvas.drawLine(_player.x + (_player.width * 0.5), _player.y + (_player.height * 0.5), whipDest.x, whipDest.y, FlxG.RED);
 			
 			
 		}
