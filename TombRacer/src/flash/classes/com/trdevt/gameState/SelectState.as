@@ -22,24 +22,16 @@ package com.trdevt.gameState
 		private var _fbLevel:FlxButton;
 		[Embed(source = '/LevelSelectScreen/LevelUnlocked_notplayed_sheet.png')] private var levelPNG:Class;
 		private var _fbBack:FlxButton;
-		[Embed(source = '/buttonGraphicPH.png')] private var backPNG:Class;
-		private var _fsDev1:FlxSprite;
-		//[Embed(source = '/dev1.png')] private var dev1PNG:Class;
-		private var _fsDev2:FlxSprite;
-		//[Embed(source = '/dev2.png')] private var dev2PNG:Class;
-		private var _fsDev3:FlxSprite;
-		//[Embed(source = '/dev3.png')] private var dev3PNG:Class;
-		private var _fsDev4:FlxSprite;
-		//[Embed(source = '/dev4.png')] private var dev4PNG:Class;
-		
+		[Embed(source = '/LevelSelectScreen/backButton.png')] private var backPNG:Class;
+				
 		override public function create():void 
 		{
 			var fsMenuBackground:FlxSprite = new FlxSprite(0, 0, bgPNG);
 			_ftHeader = new FlxSprite(288,3);
 			_ftHeader.loadGraphic(headerPNG);
 			
-			_fbBack = new FlxButton(.9 * FlxG.width, .9 * FlxG.height, "Back", _onBack);
-			
+			_fbBack = new FlxButton(1029, 620, "Back", _onBack);
+			_fbBack.loadGraphic(backPNG);
 			_fbLevel = new FlxButton(186, 166,"" ,goToLevel);
 			_fbLevel.loadGraphic(levelPNG, true, false, 163,195);
 			
