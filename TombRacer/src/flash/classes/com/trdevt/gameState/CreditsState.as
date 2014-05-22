@@ -102,10 +102,11 @@ package com.trdevt.gameState
 				}
 				else
 				{
-					//credit.visible = false;
+					credit.visible = false;
 					credit.y = maxy;
 				}
 			}
+			super.update();
 		}
 		
 		/*=====================================================================*/
