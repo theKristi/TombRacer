@@ -49,7 +49,7 @@ package com.trdevt.gameState
 		{
 			// Switch to level select state
 			trace("Level Select pressed/n");
-			FlxG.switchState(new SelectState());
+			FlxG.switchState(new SelectState(new XML("")));
 		}
 		
 		/*=====================================================================*/

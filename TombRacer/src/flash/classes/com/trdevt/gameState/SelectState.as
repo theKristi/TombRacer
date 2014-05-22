@@ -16,7 +16,7 @@ package com.trdevt.gameState
 	 * ...
 	 * @author Kristi Marks
 	 */
-	public class SelectState extends FlxState 
+	public class SelectState extends AbstractState 
 	{
 		/**
 		 * This global var is just for testing purposes. remove it later on
@@ -40,6 +40,11 @@ package com.trdevt.gameState
 		//[Embed(source = '/dev3.png')] private var dev3PNG:Class;
 		private var _fsDev4:FlxSprite;
 		//[Embed(source = '/dev4.png')] private var dev4PNG:Class;
+		
+		public function SelectState(xmlTree:XML):void 
+		{
+			super(xmlTree);
+		}
 		
 		override public function create():void 
 		{
@@ -93,10 +98,16 @@ package com.trdevt.gameState
 		{
 			var xmlTree:XML = new XML(loader.data);
 			
-			FlxG.switchState(new TestState(xmlTree));
+			//FlxG.switchState(new TestState(xmlTree));
+			FlxG.switchState(new PlayState(xmlTree, 1));
 			
 			loader.removeEventListener(Event.COMPLETE, urlLoadComplete);
 			loader.removeEventListener(IOErrorEvent.IO_ERROR, urlLoadError);
+		}
+		
+		override protected function parseXML(xmlTree:XML):void 
+		{
+			//do nothing
 		}
 	}//end class
 
