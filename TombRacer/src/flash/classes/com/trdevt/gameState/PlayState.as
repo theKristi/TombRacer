@@ -6,16 +6,15 @@ package com.trdevt.gameState
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxSprite;
 	import org.flixel.FlxTilemap;
+	import org.flixel.FlxTimer;
 	/**
 	 * ...
 	 * @author Jake
 	 */
 	public class PlayState extends AbstractState
 	{
-		//test code below
-		[Embed(source = '../../../../../images/Levels/TileMaps/Level0.csv', mimeType = 'application/octet-stream')]private static var j:Class;
 		
-		
+		protected var _timer:FlxTimer;
 		protected var _currentLevelNum:Number;
 		
 		//class files will be loaded from the parse function
@@ -68,9 +67,21 @@ package com.trdevt.gameState
 			
 			add(_player);
 			_player.signalHeroWhipped.add(drawWhip);
+			_player.signalHeroHasDied.add(toCheckpoint);
+			_player.signalHeroCJump.add(removeLimit);
 			
 			
 			
+		}
+		public function removeLimit():void
+		{
+			_player.maxVelocity.x = 100000;
+		}
+		
+		public function toCheckpoint():void
+		{
+			_player.x = 32 * _player.checkpointX;
+			_player.y = 32 * _player.checkpointY;
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -80,6 +91,8 @@ package com.trdevt.gameState
 			super.update();
 			
 			FlxG.collide(_player, _tileMapCollision);
+			if (_player.x > FlxG.width || _player.x < 0 || _player.y > FlxG.height || _player.y < 0)
+				_player.signalHeroHasDied.dispatch();
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -148,13 +161,13 @@ package com.trdevt.gameState
 		private function drawWhip(whipDest:FlxPoint):void 
 		{
 			trace("in PlayState, got signal to draw whip ending at: " + whipDest.x + ", " + whipDest.y);			
-			if (_player.isHeroOnGround())
-			{
-				return;
-			}
+			//if (_player.isHeroOnGround())
+			//{
+				//return;
+			//}
 			//hero is in the air at this point
-			
-			_whipCanvas.drawLine(_player.x, _player.y, whipDest.x, whipDest.y, FlxG.RED);
+			_whipCanvas.fill(0x00000000);
+			_whipCanvas.drawLine(_player.x + (_player.width * 0.5), _player.y + (_player.height * 0.5), whipDest.x, whipDest.y, FlxG.RED);
 			
 			
 		}

@@ -1,0 +1,85 @@
+﻿Merge branch 'master' of https://github.com/theKristi/GameDev_spring14
+
+Conflicts:
+	TombRacer/bin/TombRacer.swf
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch and 'origin/master' have diverged,
+# and have 1 and 1 different commit each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#   (use "git commit" to conclude merge)
+#
+# Changes to be committed:
+#
+#	modified:   .gitignore
+#	modified:   TombRacer/bin/TombRacer.swf
+#	modified:   TombRacer/src/flash/classes/com/trdevt/gameState/PlayState.as
+#	modified:   TombRacer/src/flash/classes/com/trdevt/sprites/Hero.as
+#	new file:   TombRacer/src/flash/classes/com/trdevt/sprites/HeroStates.as
+#	new file:   TombRacer/src/flash/classes/com/trdevt/sprites/Whip.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/DeluxeSignal.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/IOnceSignal.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/IPrioritySignal.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/ISignal.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/ISlot.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/MonoSignal.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/OnceSignal.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/PrioritySignal.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/Promise.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/Signal.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/Slot.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/SlotList.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/events/GenericEvent.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/events/IBubbleEventHandler.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/events/IEvent.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/INativeDispatcher.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/NativeMappedSignal.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/NativeRelaySignal.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/NativeSignal.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/base/SignalBitmap.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/base/SignalMovieClip.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/base/SignalShape.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/base/SignalSocket.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/base/SignalSprite.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/base/SignalTextField.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/base/SignalTimer.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/base/SignalURLLoader.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/base/SignalXMLSocket.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/sets/DisplayObjectSignalSet.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/sets/EventDispatcherSignalSet.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/sets/FileReferenceListSignalSet.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/sets/FileReferenceSignalSet.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/sets/InteractiveObjectSignalSet.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/sets/LoaderInfoSignalSet.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/sets/MicrophoneSignalSet.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/sets/NativeSignalSet.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/sets/NetConnectionSignalSet.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/sets/NetStreamSignalSet.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/sets/SharedObjectSignalSet.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/sets/SocketSignalSet.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/sets/SoundChannelSignalSet.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/sets/SoundSignalSet.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/sets/StageSignalSet.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/sets/TextFieldSignalSet.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/sets/TimerSignalSet.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/sets/URLLoaderSignalSet.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/sets/URLStreamSignalSet.as
+#	new file:   TombRacer/src/flash/classes/org/osflash/signals/natives/sets/XMLSocketSignalSet.as
+#
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   TombRacer/bin/TombRacer.swf
+#
+

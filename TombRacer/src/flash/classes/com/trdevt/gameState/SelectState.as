@@ -1,5 +1,6 @@
 package com.trdevt.gameState 
 {
+	import com.trdevt.Assets
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
 	import flash.net.URLLoader;
@@ -23,15 +24,15 @@ package com.trdevt.gameState
 		 */
 		public var loader:URLLoader;
 		
-		[Embed(source = '/background.png')] private var bgPNG:Class;
+		
 		
 		private var _ftHeader:FlxSprite;
-		[Embed(source = '/LevelSelectScreen/LevelSelectHeader.png')] private var headerPNG:Class;
+		
 		
 		private var _fbLevel:FlxButton;
-		[Embed(source = '/LevelSelectScreen/LevelUnlocked_notplayed_sheet.png')] private var levelPNG:Class;
+		
 		private var _fbBack:FlxButton;
-		[Embed(source = '/buttonGraphicPH.png')] private var backPNG:Class;
+		
 		private var _fsDev1:FlxSprite;
 		//[Embed(source = '/dev1.png')] private var dev1PNG:Class;
 		private var _fsDev2:FlxSprite;
@@ -48,14 +49,14 @@ package com.trdevt.gameState
 		
 		override public function create():void 
 		{
-			var fsMenuBackground:FlxSprite = new FlxSprite(0, 0, bgPNG);
+			var fsMenuBackground:FlxSprite = new FlxSprite(0, 0, Assets.bgPNG);
 			_ftHeader = new FlxSprite(288,3);
-			_ftHeader.loadGraphic(headerPNG);
+			_ftHeader.loadGraphic(Assets.levelheaderPNG);
 			
-			_fbBack = new FlxButton(.9 * FlxG.width, .9 * FlxG.height, "Back", _onBack);
-			
+			_fbBack = new FlxButton(.85 * FlxG.width, .83 * FlxG.height, "Back", _onBack);
+			_fbBack.loadGraphic(Assets.backPNG, true, false, 176, 108);
 			_fbLevel = new FlxButton(186, 166,"" ,goToLevel);
-			_fbLevel.loadGraphic(levelPNG, true, false, 163,195);
+			_fbLevel.loadGraphic(Assets.levelPNG, true, false, 163,195);
 			
 			add(fsMenuBackground);
 			add(_ftHeader);

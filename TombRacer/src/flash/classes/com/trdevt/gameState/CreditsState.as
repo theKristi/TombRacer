@@ -1,10 +1,14 @@
 package com.trdevt.gameState 
 {
+	import com.trdevt.Assets;
+	import flash.geom.Rectangle;
 	import org.flixel.FlxButton;
 	import org.flixel.FlxSprite;
 	import org.flixel.FlxState;
 	import org.flixel.FlxText;
 	import org.flixel.FlxG;
+	import org.flixel.plugin.photonstorm.FlxScrollingText;
+	
 	
 	/**
 	 * ...
@@ -12,62 +16,86 @@ package com.trdevt.gameState
 	 */
 	public class CreditsState extends FlxState 
 	{
+		private var _fsHeader:FlxSprite;
 		private var _fsBackground:FlxSprite;
-		[Embed(source="../../../../../images/background.png")] private var bgPNG:Class;
+		public var _fsBackdrop:FlxSprite;
+		public var _fbBack:FlxButton;
+		public var _fsDev1:FlxSprite;
+		public var _fsDev2:FlxSprite;
+		public var _fsDev3:FlxSprite;
+		public var _fsDev4:FlxSprite;
+		public var _fsScroll:FlxSprite;
 		
-		private var _ftTitle:FlxText;
-		//[Embed(source = '/buttonGraphicPH.png')] private var textPNG:Class;
-		private var _fbBack:FlxButton;
-		//[Embed(source = '/buttonGraphicPH.png')] private var backPNG:Class;
-		private var _fsDev1:FlxSprite;
-		[Embed(source="../../../../../images/CreditsScreen/AnthonyDella.png")]private var dev1PNG:Class;
-		private var _fsDev2:FlxSprite;
-		[Embed(source="../../../../../images/CreditsScreen/jakeAR.png")] private var dev2PNG:Class;
-		private var _fsDev3:FlxSprite;
-		[Embed(source="../../../../../images/CreditsScreen/SawyerZock.png")] private var dev3PNG:Class;
-		private var _fsDev4:FlxSprite;
-		//[Embed(source = '/dev4.png')] private var dev4PNG:Class;
-		private var _ftDev1Desc:FlxText;
-		private var _ftDev2Desc:FlxText;
-		private var _ftDev3Desc:FlxText;
-		private var _ftDev4Desc:FlxText;
+		private var credits:Array;
 		
+		private var creditSpeed:int = 2;
+		private var maxy:int = 525;
 		override public function create():void 
 		{
+			credits = new Array();
 			// Create Background
-			_fsBackground = new FlxSprite(0, 0, bgPNG);
+			_fsBackground = new FlxSprite(0, 0, Assets.bgPNG);
 			
-			// Create Title
-			_ftTitle = new FlxText(0, 0, FlxG.width, "Credits", true);
-			_ftTitle.alignment = "center";
+			_fsHeader = new FlxSprite(304, 21,Assets.creditsheaderPNG);
+			
+			
+			// Create Backdrop
+			_fsBackdrop = new FlxSprite(36,184,Assets.backdropPNG);
 			
 			// Create Back Button
-			_fbBack = new FlxButton(.9 * FlxG.width, .9 * FlxG.height, "Back", _onBack);
+			_fbBack = new FlxButton(1018, 635, "", _onBack);
+			_fbBack.loadGraphic(Assets.backPNG, true, false, 176, 108);
+			
+			_fsScroll = new FlxSprite(853, 203, Assets.scrollerOutlinePNG);
+			
+			var credit1:FlxText = new FlxText(855, maxy, 379, "hellooo\nworld",true);
+			credit1.setFormat( "sffedora", 28, 0xffffff, "center");
+			credits.push(credit1);
 			
 			// Create Dev Portraits
-			_fsDev1 = new FlxSprite(25, 200);
-			_fsDev2 = new FlxSprite(_fsDev1.x + 150, _fsDev1.y);
-			_fsDev3 = new FlxSprite(_fsDev2.x + 150, _fsDev1.y);
-			_fsDev4 = new FlxSprite(_fsDev3.x + 150, _fsDev1.y);
+			_fsDev1 = new FlxSprite(52, 241,Assets.dev1PNG);
 			
-			// Create Dev Descriptions
-			_ftDev1Desc = new FlxText(_fsDev1.x, _fsDev1.y + 30, 40, "Dev1");
-			_ftDev2Desc = new FlxText(_fsDev2.x, _fsDev2.y + 30, 40, "Dev2");
-			_ftDev3Desc = new FlxText(_fsDev3.x, _fsDev3.y + 30, 40, "Dev3");
-			_ftDev4Desc = new FlxText(_fsDev4.x, _fsDev4.y + 30, 40, "Dev4");
+			_fsDev2 = new FlxSprite(256, 241,Assets.dev2PNG);
+			
+			_fsDev3 = new FlxSprite(430, 241, Assets.dev3PNG);
+			
+			_fsDev4 = new FlxSprite(630, 241,Assets.dev4PNG);
+			
+			
+			
 			
 			// Add All Objects To State
 			add(_fsBackground);
-			add(_ftTitle);
+			add(_fsBackdrop);
+			add(_fsHeader);
 			add(_fbBack);
 			add(_fsDev1);
 			add(_fsDev2);
 			add(_fsDev3);
 			add(_fsDev4);
-			add(_ftDev1Desc);
-			add(_ftDev2Desc);
-			add(_ftDev3Desc);
-			add(_ftDev4Desc);
+			add(_fsScroll);
+			add(credit1);
+			
+		}
+		/*=====================================================================*/
+		
+		//animate scrolling credits
+		override public function update():void
+		{
+			for (var i:int = 0; i < credits.length; i++ )
+			{
+				var credit:FlxText = FlxText(credits[i]);
+				if (credit.y<=maxy&&credit.y>=203)
+				{
+					credit.y -= creditSpeed;
+				}
+				else
+				{
+					credit.visible = false;
+					credit.y = maxy;
+				}
+			}
+			super.update();
 		}
 		
 		/*=====================================================================*/
