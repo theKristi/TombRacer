@@ -29,18 +29,12 @@ package com.trdevt.gameState
 		private var _ftHeader:FlxSprite;
 		
 		
-		private var _fbLevel:FlxButton;
+		private var _fbLevel1:FlxButton;
+		private var _fbLevel2:FlxButton;
 		
 		private var _fbBack:FlxButton;
 		
-		private var _fsDev1:FlxSprite;
-		//[Embed(source = '/dev1.png')] private var dev1PNG:Class;
-		private var _fsDev2:FlxSprite;
-		//[Embed(source = '/dev2.png')] private var dev2PNG:Class;
-		private var _fsDev3:FlxSprite;
-		//[Embed(source = '/dev3.png')] private var dev3PNG:Class;
-		private var _fsDev4:FlxSprite;
-		//[Embed(source = '/dev4.png')] private var dev4PNG:Class;
+		
 		
 		public function SelectState(xmlTree:XML):void 
 		{
@@ -55,13 +49,16 @@ package com.trdevt.gameState
 			
 			_fbBack = new FlxButton(.85 * FlxG.width, .83 * FlxG.height, "Back", _onBack);
 			_fbBack.loadGraphic(Assets.backPNG, true, false, 176, 108);
-			_fbLevel = new FlxButton(186, 166,"" ,goToLevel);
-			_fbLevel.loadGraphic(Assets.levelPNG, true, false, 163,195);
+			_fbLevel1 = new FlxButton(186, 166,"" ,goToLevel);
+			_fbLevel1.loadGraphic(Assets.levelPNG, true, false, 163,195);
 			
+			_fbLevel2 = new FlxButton(382, 166,"" ,goToLevel);
+			_fbLevel2.loadGraphic(Assets.levelPNG, true, false, 163,195);
 			add(fsMenuBackground);
 			add(_ftHeader);
 			add(_fbBack);
-			add(_fbLevel)
+			add(_fbLevel1);
+			add(_fbLevel2);
 		}
 		
 		/*=====================================================================*/
@@ -100,7 +97,7 @@ package com.trdevt.gameState
 			var xmlTree:XML = new XML(loader.data);
 			
 			//FlxG.switchState(new TestState(xmlTree));
-			FlxG.switchState(new PlayState(xmlTree, 1));
+			FlxG.switchState(new PlayState(xmlTree, 0));
 			
 			loader.removeEventListener(Event.COMPLETE, urlLoadComplete);
 			loader.removeEventListener(IOErrorEvent.IO_ERROR, urlLoadError);
