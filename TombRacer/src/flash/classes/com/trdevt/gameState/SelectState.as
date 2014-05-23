@@ -100,7 +100,7 @@ package com.trdevt.gameState
 			var xmlTree:XML = new XML(loader.data);
 			
 			//FlxG.switchState(new TestState(xmlTree));
-			FlxG.switchState(new PlayState(xmlTree, 1));
+			FlxG.switchState(new PlayState(xmlTree, 0));
 			
 			loader.removeEventListener(Event.COMPLETE, urlLoadComplete);
 			loader.removeEventListener(IOErrorEvent.IO_ERROR, urlLoadError);
