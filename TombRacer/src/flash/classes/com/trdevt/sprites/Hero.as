@@ -3,6 +3,7 @@ package com.trdevt.sprites
 	import org.flixel.FlxObject;
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxSprite;
+	import org.flixel.FlxTilemap;
 	import org.flixel.FlxG;
 	import org.flixel.FlxU;
 	import org.osflash.signals.Signal;
@@ -30,6 +31,9 @@ package com.trdevt.sprites
 		protected var _thetaVelocity:Number = 0;
 		protected var _thetaAcceleration:Number = 0;
 		
+		public var checkpointX:int = 4;
+		public var checkpointY:int = 1;
+		public var cooldown:int = 0;
 		/**
 		 * public signal for when the hero has died
 		 */
@@ -39,6 +43,9 @@ package com.trdevt.sprites
 		 * signal for the playstate that the player wants to whip
 		 */
 		public var signalHeroWhipped:Signal;
+		
+		public var signalHeroCJump:Signal;
+
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
@@ -66,6 +73,7 @@ package com.trdevt.sprites
 			
 			signalHeroHasDied = new Signal();
 			signalHeroWhipped = new Signal(FlxPoint);
+			signalHeroCJump = new Signal();
 			
 			_heroState = HeroStates.HERO_NOT_SWING;
 			
@@ -105,8 +113,8 @@ package com.trdevt.sprites
 			
 			//fireGrapple();
 
-			//canonJump();
-			
+			canonJump();
+			thisIsBullshit();
 			selectAnimation();
 			
 			selectState();
@@ -117,11 +125,14 @@ package com.trdevt.sprites
 		
 		private function canonJump():void 
 		{
-			if (FlxG.mouse.justPressed())
+			if (cooldown < 60)
+				this.maxVelocity.x = 120;
+			if (FlxG.keys.S)
 			{
+				signalHeroCJump.dispatch();
 				var angle = findAngleDegree(new FlxPoint(this.x, this.y), new FlxPoint(FlxG.mouse.x, FlxG.mouse.y));
 				//the x direction doesn't work because of the max velocity
-				velocity.x = - _jumpPower* 5 * Math.cos(angle * Math.PI / 180);
+				velocity.x = - _jumpPower * Math.cos(angle * Math.PI / 180);
 				velocity.y = _jumpPower * Math.sin(angle * Math.PI / 180);
 				//if (this.facing == FlxObject.LEFT)
 				//{
@@ -133,7 +144,10 @@ package com.trdevt.sprites
 					//velocity.x += _jumpPower;
 					//velocity.y -= _jumpPower;
 				//}
+				cooldown = 75;
 			}
+			if (cooldown != 0)
+				cooldown--;
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -243,6 +257,19 @@ package com.trdevt.sprites
 			}
 		}
 		
+		
+		
+		
+		private function thisIsBullshit():void
+		{
+			if ( FlxG.mouse.justPressed() )
+			{
+				var targetPoint:FlxPoint = FlxG.mouse.getWorldPosition();
+				//var playerPos:FlxPoint = new FlxPoint(x, y);
+				signalHeroWhipped.dispatch(targetPoint);
+				
+			}
+		}
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		private function fireGrapple():void 
@@ -323,12 +350,12 @@ package com.trdevt.sprites
 			//this line keeps the hero from continuously accelerating the last direction pressed
 			this.acceleration.x = 0;
 				
-			if(FlxG.keys.A)
+			if(FlxG.keys.A || FlxG.keys.LEFT)
 			{
 				facing = FlxObject.LEFT;
 				acceleration.x -= _constAccel;
 			}
-			else if(FlxG.keys.D)
+			else if(FlxG.keys.D || FlxG.keys.RIGHT)
 			{
 				facing = FlxObject.RIGHT;
 				acceleration.x += _constAccel;
