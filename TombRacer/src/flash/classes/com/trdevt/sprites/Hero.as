@@ -35,6 +35,7 @@ package com.trdevt.sprites
 		public var checkpointX:int = 4;
 		public var checkpointY:int = 1;
 		public var cooldown:int = 0;
+		public var speedPercentage:Number = 1.0;
 		/**
 		 * public signal for when the hero has died
 		 */
@@ -395,12 +396,12 @@ package com.trdevt.sprites
 			if(FlxG.keys.A || FlxG.keys.LEFT)
 			{
 				facing = FlxObject.LEFT;
-				acceleration.x -= _constAccel;
+				acceleration.x -= _constAccel * speedPercentage;
 			}
 			else if(FlxG.keys.D || FlxG.keys.RIGHT)
 			{
 				facing = FlxObject.RIGHT;
-				acceleration.x += _constAccel;
+				acceleration.x += _constAccel * speedPercentage;
 				
 			}
 			if((FlxG.keys.justPressed("W") || FlxG.keys.justPressed("SPACE")) && velocity.y == 0)

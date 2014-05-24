@@ -3,8 +3,10 @@ package com.trdevt.gameState
 	import com.trdevt.sprites.Hero;
 	import com.trdevt.sprites.HeroStates;
 	import org.flixel.FlxG;
+	import org.flixel.FlxObject;
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxSprite;
+	import org.flixel.FlxTileblock;
 	import org.flixel.FlxTilemap;
 	import org.flixel.FlxTimer;
 	/**
@@ -21,6 +23,12 @@ package com.trdevt.gameState
 		protected var _tileMapCollisionFile:Class;
 		protected var _tileSetCollsionFile:Class;
 		protected var _tileMapCollision:FlxTilemap;
+		
+		protected var _tmLavaCollision:FlxTilemap;
+		protected var _tmSpikeCollision:FlxTilemap;
+		protected var _tmSandCollision:FlxTilemap;
+		protected var _tmMossCollision:FlxTilemap;
+		protected var _tmSwitchCollision:FlxTilemap;
 		
 		protected var _tileMapBackgroundFile:Class;
 		protected var _tileSetBackgroundFile:Class;
@@ -62,6 +70,11 @@ package com.trdevt.gameState
 			
 			
 			add(_tileMapCollision);
+			add(_tmLavaCollision);
+			add(_tmMossCollision);
+			add(_tmSandCollision);
+			add(_tmSpikeCollision);
+			add(_tmSwitchCollision);
 			//add(_tileMapBackground);
 			
 			createWhipCanvas();
@@ -95,6 +108,34 @@ package com.trdevt.gameState
 			{
 				_player.stopSwinging();
 			}
+			
+			if (FlxG.collide(_player, _tmLavaCollision))
+			{
+				_player.signalHeroHasDied.dispatch();
+			}
+			
+			if (FlxG.collide(_player, _tmSpikeCollision))
+			{
+				if (_player.isTouching(FlxObject.FLOOR))
+					_player.signalHeroHasDied.dispatch();
+			}
+			
+			if (FlxG.collide(_player, _tmMossCollision))
+			{
+				_player.speedPercentage = .5;
+			}
+			else
+			{
+				_player.speedPercentage = 1.0;
+			}
+			
+			if (FlxG.collide(_player, _tmSandCollision))
+			{
+				
+			}
+			
+			
+			//if (FlxG.collide(_player, _tmSwitchCollision);
 			
 			if (_player.state == HeroStates.HERO_SWING)
 			{
