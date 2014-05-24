@@ -30,6 +30,7 @@ package com.trdevt.sprites
 		protected var _thetaPosition:Number = 0;
 		protected var _thetaVelocity:Number = 0;
 		protected var _thetaAcceleration:Number = 0;
+		protected var _counter:Number = 0;
 		
 		public var checkpointX:int = 4;
 		public var checkpointY:int = 1;
@@ -77,19 +78,13 @@ package com.trdevt.sprites
 			
 			_heroState = HeroStates.HERO_NOT_SWING;
 			
-			//_whip = new FlxSprite(0, 0);
-			//_whip.width = 800;
-			//_whip.height = 600;
-			//
-			////this is bad, remove after testing
-			//FlxG.state.add(_whip);
-			//_whip.drawLine(400, 0, 400, 600, FlxG.RED,10);
-			
-			//this.drag.x = 640;
-			//this.acceleration.y = 800;//Got it just about how fast real gravity is, seems good. -Sawyer
-			//this.maxVelocity.x = 150;//A value of 64 seems to be synched with the distance traveled. -Sawyer
-			//this.maxVelocity.y = 10000000;//A low max velocity makes things floaty i.e. terminal velocity. Considering the
-											////size of our maps terminal velocity should never be reached. -Sawyer
+		}
+		
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		private function traceHeroStats():void 
+		{
+			trace("Hero Stats - pos: " + x + ", " + y + ", width X height: " + width + " X " + height+", velocity x,y: "+velocity.x+", "+velocity.y+", accel x,y: "+acceleration.x+", "+acceleration.y);
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -97,6 +92,8 @@ package com.trdevt.sprites
 		override public function update():void 
 		{
 			super.update();
+			
+			//traceHeroStats();
 			
 			
 			if (_heroState == HeroStates.HERO_NOT_SWING)
@@ -111,13 +108,16 @@ package com.trdevt.sprites
 				//other move func here
 			}
 			
-			//fireGrapple();
+			fireGrapple();
 
 			canonJump();
 			thisIsBullshit();
 			selectAnimation();
 			
 			selectState();
+			
+			if (x > FlxG.width || x < 0 || y > FlxG.height || y < 0)
+				signalHeroHasDied.dispatch();
 			
 		}
 		
@@ -130,7 +130,7 @@ package com.trdevt.sprites
 			if (FlxG.keys.S)
 			{
 				signalHeroCJump.dispatch();
-				var angle = findAngleDegree(new FlxPoint(this.x, this.y), new FlxPoint(FlxG.mouse.x, FlxG.mouse.y));
+				var angle:Number = findAngleDegree(new FlxPoint(this.x, this.y), new FlxPoint(FlxG.mouse.x, FlxG.mouse.y));
 				//the x direction doesn't work because of the max velocity
 				velocity.x = - _jumpPower * Math.cos(angle * Math.PI / 180);
 				velocity.y = _jumpPower * Math.sin(angle * Math.PI / 180);
@@ -202,38 +202,78 @@ package com.trdevt.sprites
 			
 			
 			
-			this.immovable = true;
+			physicsOff();
 			
-			rotate();
+			//the counter acts to keep time
+			//Math.PI/4 makes a good amplitude
+			_thetaPosition = -Math.sin(_counter) *_swingMaxTheta + Math.PI/2;
 			
-			if(FlxG.keys.A)
+			//0.05 is an awesome rate for SHM
+			_counter -= 0.05;
+			
+			this.x = _swingRadius * Math.cos(_thetaPosition) + _swingCenter.x;
+			this.y = _swingRadius * Math.sin(_thetaPosition) + _swingCenter.y;
+			
+			
+			if(FlxG.keys.SPACE)
 			{
+				velocity.y = -_jumpPower;
 				_heroState = HeroStates.HERO_NOT_SWING;
-				this.immovable = false;
+				physicsOn();
 			}
 			
 		}
 		
-		protected function rotate() :void
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		/**
+		 * call this function if you would like the hero to stop swinging. it sets his state and turns his physics on
+		 */
+		public function stopSwinging():void 
 		{
-			 // Calculate gravity per frame
-			 //var g_segment :Number = this.swf.gravity / this.swf.frame_rate;
-			 var g_segment:Number = .00000000001;
-			 var this_angle:Number = findAngleDegree(_swingCenter, new FlxPoint(this.x, this.y));
-
-			 // Calculate current angle in radians for use with sin
-			 var r_angle :Number = this_angle * (Math.PI / 180);
-			 
-			 // Use our equation to get the additional change to velocity (in degrees, not radians)
-			 _thetaVelocity += (g_segment / _swingRadius) * Math.sin(r_angle) * (180 / Math.PI);
-			 this.setAngle(this_angle - _thetaVelocity);
+			_heroState = HeroStates.HERO_NOT_SWING;
+			physicsOn();
 		}
-
-		public function setAngle(n :Number) :void
+		
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		//the following two functions can probably be removed
+		//protected function rotate() :void
+		//{
+			 //// Calculate gravity per frame
+			 ////var g_segment :Number = this.swf.gravity / this.swf.frame_rate;
+			 //var g_segment:Number = .00000000001;
+			 //var this_angle:Number = findAngleDegree(_swingCenter, new FlxPoint(this.x, this.y));
+//
+			 //// Calculate current angle in radians for use with sin
+			 //var r_angle :Number = this_angle * (Math.PI / 180);
+			 //
+			 //// Use our equation to get the additional change to velocity (in degrees, not radians)
+			 //_thetaVelocity += (g_segment / _swingRadius) * Math.sin(r_angle) * (180 / Math.PI);
+			 //this.setAngle(this_angle - _thetaVelocity);
+		//}
+//
+		//public function setAngle(n :Number) :void
+		//{
+			//this.x = _swingRadius * Math.cos(n * Math.PI / 180) + _swingCenter.x;
+			//this.y = _swingRadius * Math.sin(n * Math.PI / 180) + _swingCenter.y;
+			//
+		//}
+		
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		private function physicsOff():void 
 		{
-			this.x = _swingRadius * Math.cos(n * Math.PI / 180) + _swingCenter.x;
-			this.y = _swingRadius * Math.sin(n * Math.PI / 180) + _swingCenter.y;
-			
+			//this.immovable = true;
+			this.moves = false;
+		}
+		
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		private function physicsOn():void 
+		{
+			//this.immovable = false;
+			this.moves = true;
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -259,7 +299,7 @@ package com.trdevt.sprites
 		
 		
 		
-		
+		//best function name ever
 		private function thisIsBullshit():void
 		{
 			if ( FlxG.mouse.justPressed() )
@@ -290,12 +330,13 @@ package com.trdevt.sprites
 				
 				//for testing assume the grapple was valid
 				_swingRadius = FlxU.getDistance(new FlxPoint(this.x, this.y), new FlxPoint(FlxG.mouse.x, FlxG.mouse.y));
-				_swingMaxTheta = -Math.atan2(dy, dx);
+				_swingMaxTheta = Math.atan(dx/dy);
 				_swingCenter = new FlxPoint(FlxG.mouse.x, FlxG.mouse.y);
+				_counter = 1;
 				//change following line latr
-				_thetaPosition =   angleDeg + 180 ;
-				_thetaVelocity = 0;// this.velocity.x * 0.00001;
-				_thetaAcceleration = 0;
+				//_thetaPosition =   angleDeg + 180 ;
+				//_thetaVelocity = 0;// this.velocity.x * 0.00001;
+				//_thetaAcceleration = 0;
 				//_angularAcceleration = _angularVelocity = _angularPosition = 0;
 				
 				trace("angle to swing center is: " + findAngleDegree(_swingCenter,new FlxPoint(this.x, this.y)));
@@ -348,6 +389,7 @@ package com.trdevt.sprites
 		private function moveHero():void 
 		{
 			//this line keeps the hero from continuously accelerating the last direction pressed
+			//in other words, if not pressing a key then stop accelerating in the x direction
 			this.acceleration.x = 0;
 				
 			if(FlxG.keys.A || FlxG.keys.LEFT)
@@ -401,6 +443,13 @@ package com.trdevt.sprites
 		public function isHeroOnGround():Boolean 
 		{
 			return (velocity.y == 0);
+		}
+		
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		public function get state():String 
+		{
+			return _heroState;
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////

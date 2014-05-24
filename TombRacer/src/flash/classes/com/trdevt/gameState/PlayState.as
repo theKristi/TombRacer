@@ -37,6 +37,7 @@ package com.trdevt.gameState
 		protected var _finalScore:Number;
 		
 		protected var _whipCanvas:FlxSprite;
+		protected var _whipCenter:FlxPoint;
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
@@ -90,9 +91,21 @@ package com.trdevt.gameState
 		{
 			super.update();
 			
-			FlxG.collide(_player, _tileMapCollision);
-			if (_player.x > FlxG.width || _player.x < 0 || _player.y > FlxG.height || _player.y < 0)
-				_player.signalHeroHasDied.dispatch();
+			if (FlxG.collide(_player, _tileMapCollision))
+			{
+				_player.stopSwinging();
+			}
+			
+			if (_player.state == HeroStates.HERO_SWING)
+			{
+				updateWhip();
+			}
+			
+			
+			
+			// the following code will go in the player; he knows when he's died in this case
+			//if (_player.x > FlxG.width || _player.x < 0 || _player.y > FlxG.height || _player.y < 0)
+				//_player.signalHeroHasDied.dispatch();
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -167,8 +180,18 @@ package com.trdevt.gameState
 			//}
 			//hero is in the air at this point
 			_whipCanvas.fill(0x00000000);
-			_whipCanvas.drawLine(_player.x + (_player.width * 0.5), _player.y + (_player.height * 0.5), whipDest.x, whipDest.y, FlxG.RED);
+			_whipCanvas.drawLine(_player.x + (_player.width * 0.5), _player.y + (_player.height * 0.5), whipDest.x, whipDest.y,  0xfff4a460); //brown
+			_whipCenter = whipDest;
 			
+			
+		}
+		
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		private function updateWhip():void 
+		{
+			_whipCanvas.fill(0x00000000);
+			_whipCanvas.drawLine(_player.x + (_player.width * 0.5), _player.y + (_player.height * 0.5), _whipCenter.x, _whipCenter.y, 0xfff4a460); //brown
 			
 		}
 		
