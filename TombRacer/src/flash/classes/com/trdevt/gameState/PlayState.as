@@ -2,7 +2,12 @@ package com.trdevt.gameState
 {
 	import com.trdevt.sprites.Hero;
 	import com.trdevt.sprites.HeroStates;
+	import com.trdevt.sprites.obstacles.ArrowObstacle;
+	import com.trdevt.sprites.obstacles.BatObstacle;
+	import com.trdevt.sprites.obstacles.FireballObstacle;
+	import com.trdevt.sprites.obstacles.Obstacle;
 	import org.flixel.FlxG;
+	import org.flixel.FlxGroup;
 	import org.flixel.FlxObject;
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxSprite;
@@ -29,6 +34,10 @@ package com.trdevt.gameState
 		protected var _tmSandCollision:FlxTilemap;
 		protected var _tmMossCollision:FlxTilemap;
 		protected var _tmSwitchCollision:FlxTilemap;
+		
+		protected var _fgBatCollision:FlxGroup;
+		protected var _fgFireballCollision:FlxGroup;
+		protected var _fgArrowCollision:FlxGroup;
 		
 		protected var _tileMapBackgroundFile:Class;
 		protected var _tileSetBackgroundFile:Class;
@@ -76,6 +85,22 @@ package com.trdevt.gameState
 			add(_tmSpikeCollision);
 			add(_tmSwitchCollision);
 			//add(_tileMapBackground);
+			_fgBatCollision = new FlxGroup(20);
+			_fgFireballCollision = new FlxGroup(50);
+			_fgArrowCollision = new FlxGroup(10);
+			
+			//Test Obstacles
+			//_fgBatCollision.add(new BatObstacle(5, 5));
+			//_fgBatCollision.add(new BatObstacle(3, 7));
+			//_fgBatCollision.add(new BatObstacle(7, 9));
+			
+			//_fgArrowCollision.add(new ArrowObstacle(5, 4));
+			
+			//_fgFireballCollision.add(new FireballObstacle(5 , 3));
+			
+			add(_fgBatCollision);
+			add(_fgFireballCollision);
+			add(_fgArrowCollision);
 			
 			createWhipCanvas();
 			
@@ -109,10 +134,7 @@ package com.trdevt.gameState
 				_player.stopSwinging();
 			}
 			
-			if (FlxG.collide(_player, _tmLavaCollision))
-			{
-				_player.signalHeroHasDied.dispatch();
-			}
+			FlxG.collide(_player, _tmLavaCollision, onPlayerCollision)
 			
 			if (FlxG.collide(_player, _tmSpikeCollision))
 			{
@@ -131,11 +153,22 @@ package com.trdevt.gameState
 			
 			if (FlxG.collide(_player, _tmSandCollision))
 			{
-				
+				_player.speedPercentage = .5;
+				_player.acceleration.y = .5
+			}
+			else
+			{
+				_player.speedPercentage = 1.0;
 			}
 			
+			FlxG.overlap(_player, _fgBatCollision, onPlayerCollision);
+			FlxG.collide(_fgBatCollision, _tileMapCollision, onObstacleCollision);
 			
-			//if (FlxG.collide(_player, _tmSwitchCollision);
+			FlxG.overlap(_player, _fgArrowCollision, onArrowCollision);
+			FlxG.collide(_fgArrowCollision, _tileMapCollision, onObstacleCollision);
+			
+			FlxG.overlap(_player, _fgFireballCollision, onFireballCollision);
+			FlxG.collide(_fgFireballCollision, _tileMapCollision, onObstacleCollision);
 			
 			if (_player.state == HeroStates.HERO_SWING)
 			{
@@ -147,6 +180,28 @@ package com.trdevt.gameState
 			// the following code will go in the player; he knows when he's died in this case
 			//if (_player.x > FlxG.width || _player.x < 0 || _player.y > FlxG.height || _player.y < 0)
 				//_player.signalHeroHasDied.dispatch();
+		}
+		
+		public function onPlayerCollision(player:Hero, obstacle:Obstacle):void
+		{
+			player.signalHeroHasDied.dispatch();
+		}
+		
+		public function onObstacleCollision(obstacle:Obstacle, wall:FlxObject):void
+		{
+			obstacle.onCollision();
+		}
+		
+		public function onArrowCollision(arrow:ArrowObstacle, player:Hero):void
+		{
+			arrow.onCollision();
+			player.signalHeroHasDied.dispatch();
+		}
+		
+		public function onFireballCollision(fireball:FireballObstacle, player:Hero):void
+		{
+			fireball.onCollision();
+			player.signalHeroHasDied.dispatch();
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -36,6 +36,7 @@ package com.trdevt.sprites
 		public var checkpointY:int = 1;
 		public var cooldown:int = 0;
 		public var speedPercentage:Number = 1.0;
+		public var fallSpeedPercentage:Number = 1.0;
 		/**
 		 * public signal for when the hero has died
 		 */

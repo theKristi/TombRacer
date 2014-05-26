@@ -13,12 +13,12 @@ package com.trdevt.sprites.obstacles
 		{
 			X *= 32;
 			Y *= 32;
-			super(X, Y, SimpleGraphic);
+			super(null, X, Y, SimpleGraphic);
 			
 		}
 		
 		//==========================================================================
 		
-		public function onPlayerCollision(player:Hero):void {}
+		public function onCollision():void {}
 	}
 }
