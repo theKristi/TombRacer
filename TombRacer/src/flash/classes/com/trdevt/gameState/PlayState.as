@@ -175,12 +175,11 @@ package com.trdevt.gameState
 		
 		private function drawWhip(whipDest:FlxPoint):void 
 		{
+			//check if whip is possible here, if not, tell hero to stop swinging
+			//TODO: check to see if the player can actually swing, and if they can't, drop them like a bad habit
+
 			trace("in PlayState, got signal to draw whip ending at: " + whipDest.x + ", " + whipDest.y);			
-			//if (_player.isHeroOnGround())
-			//{
-				//return;
-			//}
-			//hero is in the air at this point
+
 			_whipCanvas.fill(0x00000000);
 			_whipCanvas.drawLine(_player.x + (_player.width * 0.5), _player.y + (_player.height * 0.5), whipDest.x, whipDest.y,  0xfff4a460); //brown
 			_whipCenter = whipDest;
@@ -199,6 +198,7 @@ package com.trdevt.gameState
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
 	}
 
 }

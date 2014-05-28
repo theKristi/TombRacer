@@ -5,9 +5,9 @@
 			<heroPosition x="4" y="1" />
 		</levelTest>
 	</levels>
-	<hero	drag.x = 			"640"
+	<hero	drag.x = 			"1500"
 			acceleration.y = 	"800"
-			maxVelocity.x =		"150"
+			maxVelocity.x =		"400"
 			maxVelocity.y = 	"1000000"
 			_jumpPower = 		"400"
 			_constAccel = 		"640"
