@@ -68,7 +68,7 @@ package com.trdevt.gameState
 			
 			add(_player);
 			_player.signalHeroWhipped.add(drawWhip);
-			_player.signalHeroHasDied.add(toCheckpoint);
+			//_player.signalHeroHasDied.add(toCheckpoint);
 			_player.signalHeroCJump.add(removeLimit);
 			
 			
@@ -79,11 +79,12 @@ package com.trdevt.gameState
 			_player.maxVelocity.x = 100000;
 		}
 		
-		public function toCheckpoint():void
-		{
-			_player.x = 32 * _player.checkpointX;
-			_player.y = 32 * _player.checkpointY;
-		}
+		//public function toCheckpoint():void
+		//{
+			//
+			////_player.x = 32 * _player.checkpointX;
+			////_player.y = 32 * _player.checkpointY;
+		//}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
@@ -152,6 +153,7 @@ package com.trdevt.gameState
 			
 			
 			
+			
 			//do the loadMaps here to keep from using copious amounts of attributes (tile width and height, etc)
 			//_tileMapCollision.loadMap(new _tileMapCollisionFile(), _tileSetCollsionFile, _collisionTileWidth, _collisionTileHeight);
 			//_tileMapBackground.loadMap(new _tileMapBackgroundFile(), _tileSetBackgroundFile, _backgroundTileWidth, _backgroundTileHeight);
@@ -191,7 +193,8 @@ package com.trdevt.gameState
 		private function updateWhip():void 
 		{
 			_whipCanvas.fill(0x00000000);
-			_whipCanvas.drawLine(_player.x + (_player.width * 0.5), _player.y + (_player.height * 0.5), _whipCenter.x, _whipCenter.y, 0xfff4a460); //brown
+			//_whipCanvas.drawLine(_player.x + (_player.width * 0.5), _player.y + (_player.height * 0.5), _whipCenter.x, _whipCenter.y, 0xfff4a460); //brown
+			_whipCanvas.drawLine(_player.x + (_player.width * 0.5), _player.y, _whipCenter.x, _whipCenter.y, 0xfff4a460); //brown
 			
 		}
 		

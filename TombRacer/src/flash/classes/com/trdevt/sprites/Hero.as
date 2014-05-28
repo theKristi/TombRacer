@@ -1,10 +1,8 @@
 package com.trdevt.sprites 
 {
+	import org.flixel.FlxG;
 	import org.flixel.FlxObject;
 	import org.flixel.FlxPoint;
-	import org.flixel.FlxSprite;
-	import org.flixel.FlxTilemap;
-	import org.flixel.FlxG;
 	import org.flixel.FlxU;
 	import org.osflash.signals.Signal;
 	/**
@@ -22,19 +20,28 @@ package com.trdevt.sprites
 		
 		protected var _heroState:String;
 		
-		protected var _whip:FlxSprite;
+		protected var _lastCheckPoint:FlxPoint;
 		
+		//the following are used for the swinging motions
 		protected var _swingRadius:Number = 0;
 		protected var _swingMaxTheta:Number = 0;
 		protected var _swingCenter:FlxPoint;
 		protected var _thetaPosition:Number = 0;
 		protected var _thetaVelocity:Number = 0;
 		protected var _thetaAcceleration:Number = 0;
+		
+		//following variables are for dashing
+		//i am using the as3 timer because the flixel timer is not meant for use in game states according to the flixel API
+		//HERE add the timer 
+		private var _dashActive:Boolean = false;
+		
+		/**
+		 * the counter variable is used to simulate the passage of time using the equation for pendulum motion
+		 */
 		protected var _counter:Number = 0;
 		
-		public var checkpointX:int = 4;
-		public var checkpointY:int = 1;
 		public var cooldown:int = 0;
+		
 		/**
 		 * public signal for when the hero has died
 		 */
@@ -46,6 +53,8 @@ package com.trdevt.sprites
 		public var signalHeroWhipped:Signal;
 		
 		public var signalHeroCJump:Signal;
+		
+
 
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -58,8 +67,9 @@ package com.trdevt.sprites
 		 */
 		public function Hero(xmlTree:XML,X:Number=0,Y:Number=0,SimpleGraphic:Class=null) 
 		{
-			//super(X, Y);
 			super(xmlTree, X, Y);
+			
+			_lastCheckPoint = new FlxPoint(X, Y);
 			
 			this.spriteSheet = _sheet;
 			this.loadGraphic(_spriteSheet, true, true, 32, 32 + 16);
@@ -67,7 +77,8 @@ package com.trdevt.sprites
 			this.addAnimation("idle", [12, 13], 1, true);
 			this.addAnimation("jumpUp", [14], 1, false);
 			this.addAnimation("jumpDown", [18] , 1 , false);
-			//this.addAnimation("jumping", [14, 18], 2, false);
+			this.addAnimation("death", [20, 21, 22, 23], 5, false);
+			this.addAnimation("swing", [19], 1, false);
 			
 			this.play("idle");
 			this.facing = FlxObject.RIGHT;
@@ -98,27 +109,78 @@ package com.trdevt.sprites
 			
 			if (_heroState == HeroStates.HERO_NOT_SWING)
 			{
-				//trace("moving while not swinging!");
 				moveHero();
 			}
 			else if (_heroState == HeroStates.HERO_SWING)
 			{
-				//trace("moving while swinging!");
 				moveHeroSwing();
-				//other move func here
 			}
 			
 			fireGrapple();
 
-			canonJump();
+			//canonJump();
+			dash();
 			thisIsBullshit();
 			selectAnimation();
 			
-			selectState();
+			checkForHeroDeath();
 			
+			
+		}
+		
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		private function dash():void 
+		{
+			//end the dash after a certain amount of time
+			
+			//only dash while on the ground
+			if (!isHeroOnGround() || _dashActive)
+			{
+				return;
+			}
+			
+			if (FlxG.keys.justPressed("S"))
+			{
+				_dashActive = true;
+			
+				trace("Dash!");
+			}
+				
+				
+			//if (this.facing == FlxObject.LEFT)
+			//{
+				//velocity.x -= _jumpPower;
+				//velocity.y -= _jumpPower;
+			//}
+			//else
+			//{
+				//velocity.x += _jumpPower;
+				//velocity.y -= _jumpPower;
+			//}
+		}
+		
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		private function checkForHeroDeath():void 
+		{
 			if (x > FlxG.width || x < 0 || y > FlxG.height || y < 0)
+			{
 				signalHeroHasDied.dispatch();
 			
+				respawnHero();
+			}
+		}
+		
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		/**
+		 * Forces the hero to respawn at his last checkpoint. If the hero has not seen a checkpoint yet, he will respawn at his original spawn point
+		 */
+		public function respawnHero():void 
+		{
+			this.x = _lastCheckPoint.x;
+			this.y = _lastCheckPoint.y;
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -382,6 +444,12 @@ package com.trdevt.sprites
 			{
 				play("walking");
 			}
+			
+			if (state == HeroStates.HERO_SWING)
+			{
+				//HERE add facing code with if statement for variable
+				play("swing");
+			}
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -450,6 +518,17 @@ package com.trdevt.sprites
 		public function get state():String 
 		{
 			return _heroState;
+		}
+		
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		/**
+		 * updates this hero's respawn to the given point
+		 * @param	newPoint
+		 */
+		public function updateCheckPoint(newPoint:FlxPoint):void 
+		{
+			_lastCheckPoint = newPoint;
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
