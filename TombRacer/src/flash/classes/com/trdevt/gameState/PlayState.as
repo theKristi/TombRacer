@@ -7,6 +7,8 @@ package com.trdevt.gameState
 	import org.flixel.FlxSprite;
 	import org.flixel.FlxTilemap;
 	import org.flixel.FlxTimer;
+	import org.flixel.system.*;
+	import org.flixel.*;
 	/**
 	 * ...
 	 * @author Jake
@@ -141,7 +143,7 @@ package com.trdevt.gameState
 			
 			_tileMapCollision.loadMap(new _tileMapCollisionFile(), _tileSetCollsionFile, _collisionTileWidth, _collisionTileHeight);
 			//_tileMapBackground.loadMap(new _tileMapBackgroundFile(), _tileSetBackgroundFile, _backgroundTileWidth, _backgroundTileHeight);
-			
+			_tileMapCollision.setTileProperties(66, 0, testCollide);
 			
 			var xTile:Number = xmlTree.levels.levelTest.heroPosition.@["x"];
 			var yTile:Number = xmlTree.levels.levelTest.heroPosition.@["y"];
@@ -161,7 +163,10 @@ package com.trdevt.gameState
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
+		private function testCollide(Tile:FlxTile, player:FlxObject):void
+		{
+			player.velocity.y -= 50;
+		}
 		private function createWhipCanvas():void 
 		{
 			_whipCanvas = new FlxSprite(0, 0);
