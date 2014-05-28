@@ -145,6 +145,7 @@ package com.trdevt.sprites
 				_dashActive = true;
 			
 				trace("Dash!");
+				//HERE finish writing dash code : change state back to not dashing
 			}
 				
 				
@@ -447,7 +448,17 @@ package com.trdevt.sprites
 			
 			if (state == HeroStates.HERO_SWING)
 			{
-				//HERE add facing code with if statement for variable
+				//trace("angle pos cos: " + Math.cos(_thetaPosition));
+				var angleDist:Number = _swingMaxTheta - _thetaPosition;
+				//trace("angle pos cos: " + Math.cos(_thetaPosition));
+				if (angleDist <= .01)
+				{
+					trace("apex");
+				}
+				if (x < _swingCenter.x)
+					facing = FlxObject.RIGHT;
+				else
+					facing = FlxObject.LEFT;
 				play("swing");
 			}
 		}

@@ -34,8 +34,7 @@
     <source-path append="true">
       <path-element>C:\Users\Jake\Documents\GitHub\GameDev_spring14\TombRacer\src\flash\classes</path-element>
       <path-element>C:\Users\Jake\Documents\GitHub\GameDev_spring14\TombRacer\src\images</path-element>
-      <path-element>C:\Users\Jake\Documents\GitHub\GameDev_spring14\TombRacer\src\audio</path-element>
-      <path-element>F:\Programs\FlashDevelop\Library\AS3\classes</path-element>
+      <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
   </compiler>
   <file-specs>
