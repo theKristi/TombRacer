@@ -1,6 +1,7 @@
 package com.trdevt.gameState 
 {
 	import com.trdevt.Assets
+	import com.trdevt.util.XMLManager;
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
 	import flash.net.URLLoader;
@@ -70,39 +71,9 @@ package com.trdevt.gameState
 		private function goToLevel(eLevelnum:uint=0):void
 		{
 			//FlxG.switchState(new TestState())
-			//Following code is just for testing the test state. Load up xml and pass it in
-			loader = new URLLoader();
-			//loader.addEventListener(Event.COMPLETE, urlLoadComplete(loader));
-			loader.addEventListener(Event.COMPLETE, urlLoadComplete);
-			loader.addEventListener(IOErrorEvent.IO_ERROR, urlLoadError);
-			loader.load(new URLRequest("config.xml"));
+			FlxG.switchState (new PlayState(XMLManager.instance.xmlConfig, eLevelnum));
 		}
-		
-		/**
-		 * this function is for testing and can be removed later on
-		 * @param	event
-		 */
-		private function urlLoadError(event:Event):void 
-		{
-			trace("Oh no!" + event.toString());
-		}
-		
-		/**
-		 * this function is for testing and can be removed later on
-		 * @param	loader
-		 * @param	event
-		 */
-		private function urlLoadComplete(event:Event):void 
-		{
-			var xmlTree:XML = new XML(loader.data);
 			
-			//FlxG.switchState(new TestState(xmlTree));
-			FlxG.switchState(new PlayState(xmlTree, 0));
-			
-			loader.removeEventListener(Event.COMPLETE, urlLoadComplete);
-			loader.removeEventListener(IOErrorEvent.IO_ERROR, urlLoadError);
-		}
-		
 		override protected function parseXML(xmlTree:XML):void 
 		{
 			//do nothing

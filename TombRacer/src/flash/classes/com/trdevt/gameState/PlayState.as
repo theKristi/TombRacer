@@ -2,6 +2,7 @@ package com.trdevt.gameState
 {
 	import com.trdevt.sprites.Hero;
 	import com.trdevt.sprites.HeroStates;
+	import com.trdevt.util.LocalSharedObjectManager;
 	import org.flixel.FlxG;
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxSprite;
@@ -160,6 +161,7 @@ package com.trdevt.gameState
 			//_tileMapCollision.loadMap(new _tileMapCollisionFile(), _tileSetCollsionFile, _collisionTileWidth, _collisionTileHeight);
 			//_tileMapBackground.loadMap(new _tileMapBackgroundFile(), _tileSetBackgroundFile, _backgroundTileWidth, _backgroundTileHeight);
 			
+
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
