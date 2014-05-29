@@ -188,7 +188,7 @@ package com.trdevt.gameState
 			
 			
 			
-			_backgroundTileWidth = 1024;
+			_backgroundTileWidth = 1280;
 			_backgroundTileHeight = 768;
 			
 			_collisionTileWidth = _collisionTileHeight = 32;
@@ -215,9 +215,9 @@ package com.trdevt.gameState
 			_tileMapCollision.setTileProperties(55, FlxObject.CEILING, collideSpike);
 			_tileMapCollision.setTileProperties(63, FlxObject.CEILING, collideSpike);
 			// Moss Collisions
-			_tileMapCollision.setTileProperties(51, FlxObject.CEILING, collideMoss);
-			_tileMapCollision.setTileProperties(52, FlxObject.CEILING, collideMoss);
-			_tileMapCollision.setTileProperties(53, FlxObject.CEILING, collideMoss);
+			_tileMapCollision.setTileProperties(51, FlxObject.ANY, collideMoss);
+			_tileMapCollision.setTileProperties(52, FlxObject.ANY, collideMoss);
+			_tileMapCollision.setTileProperties(53, FlxObject.ANY, collideMoss);
 			// Switch Collisions
 			_tileMapCollision.setTileProperties(48, FlxObject.NONE);
 			_tileMapCollision.setTileProperties(49, FlxObject.NONE);
@@ -232,6 +232,21 @@ package com.trdevt.gameState
 			_tileMapCollision.setTileProperties(48, FlxObject.NONE, collideVictory);
 			_tileMapCollision.setTileProperties(49, FlxObject.NONE, collideVictory);
 			_tileMapCollision.setTileProperties(50, FlxObject.NONE, collideVictory);
+			
+			//halfblock
+			_tileMapCollision.setTileProperties(1, FlxObject.NONE);
+			_tileMapCollision.setTileProperties(3, FlxObject.NONE);
+			_tileMapCollision.setTileProperties(9, FlxObject.NONE);
+			_tileMapCollision.setTileProperties(11, FlxObject.NONE);
+			_tileMapCollision.setTileProperties(16, FlxObject.NONE);
+			_tileMapCollision.setTileProperties(18, FlxObject.NONE);
+			_tileMapCollision.setTileProperties(24, FlxObject.NONE);
+			_tileMapCollision.setTileProperties(26, FlxObject.NONE);
+			_tileMapCollision.setTileProperties(32, FlxObject.NONE);
+			_tileMapCollision.setTileProperties(34, FlxObject.NONE);
+			_tileMapCollision.setTileProperties(40, FlxObject.NONE);
+			_tileMapCollision.setTileProperties(42, FlxObject.NONE);
+			
 			
 			var xTile:Number = xmlTree.levels.levelTest.heroPosition.@["x"];
 			var yTile:Number = xmlTree.levels.levelTest.heroPosition.@["y"];
