@@ -15,6 +15,7 @@ package com.trdevt.gameState
 	import org.flixel.FlxState;
 	import flash.ui.Mouse;
 	import org.flixel.FlxText;
+	import com.trdevt.util.XMLManager;
 	/**
 	 * ...
 	 * @author Kristi Marks
@@ -47,8 +48,8 @@ package com.trdevt.gameState
 		
 		override public function create():void 
 		{
-			_buildScreen(4);
-			
+			_buildScreen(8);
+		
 			
 		}
 		/*=====================================================================*/
@@ -67,17 +68,21 @@ package com.trdevt.gameState
 			add(_ftHeader);
 			add(_fbBack);
 			_levels = new Array();
+			var xCoords = new Array();
 			for (var i:int = 0; i < numberOfLevels; i++ )
 			{
-				var cx:int =(i * 184) + 256; 
+				var cx:int = 0;
 				var button:LevelButton;
 				if (i < numberOfLevels / 2)
 				{
-					button = new LevelButton(cx, 166, "" ,function handler():void { goToLevel(i); }, i);
+					cx = (i * 184) + 256;
+					xCoords.push(cx);
+					button = new LevelButton(cx, 166, "", i);
+					button.onUp=function handler():void { goToLevel(this.goto); }
 				}
 				else 
-		
-					button = new LevelButton(cx, 366, "" ,function handler():void { goToLevel(i); }, i);
+					
+					button = new LevelButton(xCoords[i - numberOfLevels / 2], 366, "" , i, function handler():void { goToLevel(this.goto); trace("level: "+this.goto); } );
 			
 			//trace("i1: " + i);
 			//_fbLevel1.onDown = function ():void { goToLevel(i); }
@@ -98,40 +103,16 @@ package com.trdevt.gameState
 		}
 		private function goToLevel(eLevelnum:uint=0):void
 		{
-			trace("levelNum: " + eLevelnum);
-			//FlxG.switchState(new TestState())
-			//Following code is just for testing the test state. Load up xml and pass it in
-			loader = new URLLoader();
-			//loader.addEventListener(Event.COMPLETE, urlLoadComplete(loader));
-			loader.addEventListener(Event.COMPLETE, function han():void{urlLoadComplete(null,eLevelnum)});
-			loader.addEventListener(IOErrorEvent.IO_ERROR, urlLoadError);
-			loader.load(new URLRequest("config.xml"));
+			trace("going to level:"+ eLevelnum);
+			FlxG.switchState(new PlayState(XMLManager.instance.xmlConfig, eLevelnum));
 		}
 		
 		/**
 		 * this function is for testing and can be removed later on
 		 * @param	event
 		 */
-		private function urlLoadError(event:Event):void 
-		{
-			trace("Oh no!" + event.toString());
-		}
 		
-		/**
-		 * this function is for testing and can be removed later on
-		 * @param	loader
-		 * @param	event
-		 */
-		private function urlLoadComplete(event:Event, level:int):void 
-		{
-			var xmlTree:XML = new XML(loader.data);
-			
-			//FlxG.switchState(new TestState(xmlTree));
-			FlxG.switchState(new PlayState(xmlTree, level));
-			
-			loader.removeEventListener(Event.COMPLETE, urlLoadComplete);
-			loader.removeEventListener(IOErrorEvent.IO_ERROR, urlLoadError);
-		}
+
 		
 		override protected function parseXML(xmlTree:XML):void 
 		{

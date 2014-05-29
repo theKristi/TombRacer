@@ -9,12 +9,14 @@ package com.trdevt.Buttons
 	public class LevelButton extends FlxButton  
 	{
 		public var goto:int;
-		public function LevelButton(x:int, y:int, label:String,handle:Function ,go:int)
+		public function LevelButton(x:int, y:int, label:String,go:int,handle:Function=null)
 		{
 		super(x,y,label,handle);
 		goto = go;
+		//trace(handle);
 		
 		}
+		
 	}
 	
 }
