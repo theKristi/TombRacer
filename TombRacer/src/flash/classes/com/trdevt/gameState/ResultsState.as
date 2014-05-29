@@ -5,6 +5,7 @@ package com.trdevt.gameState
 	import org.flixel.FlxState;
 	import org.flixel.FlxText;
 	import org.flixel.FlxG;
+	import com.trdevt.Assets;
 	
 	/**
 	 * ...
@@ -12,34 +13,51 @@ package com.trdevt.gameState
 	 */
 	public class ResultsState extends FlxState 
 	{
-		[Embed(source = '/background.png')] private var bgPNG:Class;
 		
-		private var _ftTitle:FlxText;
-		[Embed(source = '/buttonGraphicPH.png')] private var textPNG:Class;
-		private var _fbBack:FlxButton;
-		[Embed(source = '/buttonGraphicPH.png')] private var backPNG:Class;
-		private var _fsDev1:FlxSprite;
-		//[Embed(source = '/dev1.png')] private var dev1PNG:Class;
-		private var _fsDev2:FlxSprite;
-		//[Embed(source = '/dev2.png')] private var dev2PNG:Class;
-		private var _fsDev3:FlxSprite;
-		//[Embed(source = '/dev3.png')] private var dev3PNG:Class;
-		private var _fsDev4:FlxSprite;
-		//[Embed(source = '/dev4.png')] private var dev4PNG:Class;
+		private var _resultsInSeconds:Number 
 		
+		private var _levelPlayed:int;
+		
+		public function ResultsState(seconds:Number, LevelPlayed:int):void 
+		{
+			super();
+			_resultsInSeconds = seconds;
+			_levelPlayed = LevelPlayed;
+		}
 		override public function create():void 
 		{
-			_ftTitle = new FlxText(0, 0, FlxG.width, "Test Result Page", true);
-			_ftTitle.alignment = "center";
+			var fsBackground:FlxSprite = new FlxSprite(0, 0, Assets.bgPNG);
+			add(fsBackground);
+			var header:FlxSprite = new FlxSprite(300, 20, Assets.ResultsHeader);
+			var backCurtain:FlxSprite = new FlxSprite(30, 184, Assets.ResultsBack);
+			var LevelSelect:FlxButton = new FlxButton(161, 643, "", function handler():void { FlxG.switchState(new SelectState(new XML() ))});
+			LevelSelect.loadGraphic(Assets.LevelSelectSmall, true, false, 355, 143);
+			if (_levelPlayed !== 8)
+			{
+			var Next:FlxButton = new FlxButton(775, 643, "",_gotoNext);
+				Next.loadGraphic(Assets.NextLevelButton, true, false, 314, 143);
+				add(Next);
+			}
+				var fastest:FlxText = new FlxText(35, 200, 600,"Fastest Time: "+_resultsInSeconds.toString(),true);
+			fastest.setFormat( "sffedora", 55, 0xffffff, "center");
+				
 			
-			_fbBack = new FlxButton(.9 * FlxG.width, .9 * FlxG.height, "LevelSelect", _onBack);
+			add(header);
+			add(backCurtain);
+			add(LevelSelect);
 			
-			add(_ftTitle);
-			add(_fbBack);
+			add(fastest);
+			
+			
 		}
 		
 		/*=====================================================================*/
-		
+		private function _gotoNext():void
+		{
+			trace("going to"+ _levelPlayed++);
+			SelectState.goToLevel(_levelPlayed++);
+			
+		}	
 		private function _onBack():void
 		{
 			//FlxG.switchState(new SelectState());
