@@ -68,7 +68,7 @@ package com.trdevt.gameState
 			add(_ftHeader);
 			add(_fbBack);
 			_levels = new Array();
-			var xCoords = new Array();
+			var xCoords:Array = new Array();
 			for (var i:int = 0; i < numberOfLevels; i++ )
 			{
 				var cx:int = 0;
@@ -90,6 +90,7 @@ package com.trdevt.gameState
 			button.loadGraphic(Assets.levelPNG, true, false, 163, 195);
 			_levels.push(button);
 			add(button);
+			getResults(button);
 			}
 			
 			
@@ -101,9 +102,9 @@ package com.trdevt.gameState
 		{
 			FlxG.switchState(new MenuState());
 		}
-		private function goToLevel(eLevelnum:uint=0):void
+		public static function goToLevel(eLevelnum:uint=0):void
 		{
-			trace("going to level:"+ eLevelnum);
+			//trace("going to level:"+ eLevelnum);
 			FlxG.switchState(new PlayState(XMLManager.instance.xmlConfig, eLevelnum));
 		}
 		
@@ -112,11 +113,17 @@ package com.trdevt.gameState
 		 * @param	event
 		 */
 		
-
+/*=====================================================================*/
 		
-		override protected function parseXML(xmlTree:XML):void 
+		
+		private function getResults(eButton:LevelButton):void
 		{
-			//do nothing
+			//look in sharedObject for trophy and time
+			
+			//for now just place greyed trophy at the right place
+			 var trophy:FlxSprite = new FlxSprite(eButton.x + 15, eButton.y + 138, Assets.SmallGrayed);
+			 add(trophy);
+			
 		}
 	}//end class
 

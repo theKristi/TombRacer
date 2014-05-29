@@ -171,6 +171,8 @@ package com.trdevt.gameState
 			}
 			if (FlxG.keys.R)
 				FlxG.switchState(new SelectState(new XML()));
+			if (FlxG.keys.P)
+				FlxG.switchState(new ResultsState(0,_currentLevelNum));
 			
 			
 		}
@@ -221,7 +223,7 @@ package com.trdevt.gameState
 		 */
 		protected function levelComplete():void 
 		{
-FlxG.switchState(new ResultsState());
+FlxG.switchState(new ResultsState(0,_currentLevelNum));
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
