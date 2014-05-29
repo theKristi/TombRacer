@@ -70,7 +70,7 @@ package com.trdevt.gameState
 			for (var i:int = 0; i < numberOfLevels; i++ )
 			{
 				
-			var button:LevelButton = new LevelButton((i * 184) + 256, 166, "" ,function handler():void { goToLevel(i); }, i);
+			var button:LevelButton = new LevelButton((i * 184) + 256, 166, "" ,function handler():void { goToLevel(7); }, i);
 			//trace("i1: " + i);
 			//_fbLevel1.onDown = function ():void { goToLevel(i); }
 			//trace("i2: " + i);
