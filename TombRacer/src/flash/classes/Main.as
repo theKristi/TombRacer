@@ -1,10 +1,10 @@
 ﻿package 
 {
+	import com.trdevt.util.LocalSharedObjectManager;
 	import org.flixel.FlxGame;
 	import org.flixel.FlxG;
 	import com.trdevt.gameState.TitleState;
-	import com.trdevt.Assets;
-	import org.flixel.FlxSound;
+	import com.trdevt.util.XMLManager;
 	/**
 	 * Drives the TombRacer project.
 	 * 
@@ -27,11 +27,9 @@
 			super(1280,768, TitleState,1,60,30,true);
 			FlxG.width = 1280;
 			FlxG.height = 768;
-			//var s:FlxSound	= new FlxSound();
-			//s.loadEmbedded(Assets.bgMusic, true);
-			//FlxG.play = s;
 			
-			
+			XMLManager.instance.init("config.xml");
+			LocalSharedObjectManager.instance.init("LSO");
 		}
 	}
 }
