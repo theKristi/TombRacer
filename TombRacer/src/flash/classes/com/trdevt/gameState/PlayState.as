@@ -6,6 +6,8 @@ package com.trdevt.gameState
 	import com.trdevt.sprites.obstacles.BatObstacle;
 	import com.trdevt.sprites.obstacles.FireballObstacle;
 	import com.trdevt.sprites.obstacles.Obstacle;
+	import com.trdevt.util.LocalSharedObjectManager;
+	import mx.core.FlexSprite;
 	import org.flixel.FlxG;
 	import org.flixel.FlxGroup;
 	import org.flixel.FlxObject;
@@ -15,6 +17,9 @@ package com.trdevt.gameState
 	import org.flixel.FlxTilemap;
 	import org.flixel.FlxTimer;
 	import org.flixel.system.FlxTile;
+	import org.flixel.system.*;
+	import org.flixel.*;
+
 	/**
 	 * ...
 	 * @author Jake
@@ -102,7 +107,7 @@ package com.trdevt.gameState
 			
 			add(_player);
 			_player.signalHeroWhipped.add(drawWhip);
-			_player.signalHeroHasDied.add(toCheckpoint);
+			//_player.signalHeroHasDied.add(toCheckpoint);
 			_player.signalHeroCJump.add(removeLimit);
 			
 			
@@ -113,11 +118,12 @@ package com.trdevt.gameState
 			_player.maxVelocity.x = 100000;
 		}
 		
-		public function toCheckpoint():void
-		{
-			_player.x = 32 * _player.checkpointX;
-			_player.y = 32 * _player.checkpointY;
-		}
+		//public function toCheckpoint():void
+		//{
+			//
+			////_player.x = 32 * _player.checkpointX;
+			////_player.y = 32 * _player.checkpointY;
+		//}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
@@ -164,6 +170,8 @@ package com.trdevt.gameState
 			{
 				updateWhip();
 			}
+			if (FlxG.keys.R)
+				FlxG.switchState(new SelectState(new XML()));
 			
 			
 			
@@ -221,8 +229,7 @@ package com.trdevt.gameState
 		 */
 		protected function levelComplete():void 
 		{
-			//test code below, the results screen may want xml in the future
-			//FlxG.switchState(new ResultsState( new XML("") , _finalScore));
+FlxG.switchState(new ResultsState());
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -276,6 +283,13 @@ package com.trdevt.gameState
 			_tileMapCollision.setTileProperties(64, FlxObject.NONE);
 			_tileMapCollision.setTileProperties(65, FlxObject.ANY, onTorchCollision);
 			
+			_tileMapCollision.setTileProperties(54, 0);
+			_tileMapCollision.setTileProperties(62, 0, collideLava);
+			
+			_tileMapCollision.setTileProperties(48, 0, collideVictory);
+			_tileMapCollision.setTileProperties(49, 0, collideVictory);
+			_tileMapCollision.setTileProperties(50, 0, collideVictory);
+			
 			var xTile:Number = xmlTree.levels.levelTest.heroPosition.@["x"];
 			var yTile:Number = xmlTree.levels.levelTest.heroPosition.@["y"];
 			
@@ -288,9 +302,56 @@ package com.trdevt.gameState
 			//_tileMapCollision.loadMap(new _tileMapCollisionFile(), _tileSetCollsionFile, _collisionTileWidth, _collisionTileHeight);
 			//_tileMapBackground.loadMap(new _tileMapBackgroundFile(), _tileSetBackgroundFile, _backgroundTileWidth, _backgroundTileHeight);
 			
+
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		private function collideTrampoline(Tile:FlxTile, player:FlxObject):void
+		{
+			player.velocity.y -= 50;
+		}
+		
+		private function collideSand(Tile:FlxTile, player:FlxObject):void
+		{
+			if((player as FlxSprite).facing == FlxObject.LEFT && player.velocity.x != 0)
+				player.velocity.x *= 0.8;
+			if((player as FlxSprite).facing == FlxObject.RIGHT && player.velocity.x != 0)
+				player.velocity.x *= 0.8;
+		}
+		
+		private function collideSpike(Tile:FlxTile, player:FlxObject):void
+		{
+			_player.signalHeroHasDied.dispatch();
+			_player.respawnHero();
+		}
+		
+		private function collideLava(Tile:FlxTile, player:FlxObject):void
+		{
+			_player.signalHeroHasDied.dispatch();
+			_player.respawnHero();
+		}
+		
+		private function collideMoss(Tile:FlxTile, player:FlxObject):void
+		{
+			if((player as FlxSprite).facing == FlxObject.LEFT && player.velocity.x != 0)
+				player.velocity.x *= 0.8;
+			if((player as FlxSprite).facing == FlxObject.RIGHT && player.velocity.x != 0)
+				player.velocity.x *= 0.8;
+		}
+		
+		private function collideWaypoint(Tile:FlxTile, player:FlxObject):void
+		{
+			(player as Hero).updateCheckPoint(new FlxPoint(player.x, player.y - 1));
+			_tileMapCollision.setTileByIndex(Tile.mapIndex, 64);
+
+		}
+		
+		private function collideVictory(Tile:FlxTile, player:FlxObject):void
+		{
+			//Do something pretty
+			levelComplete();
+		}
+		
 		
 		private function createWhipCanvas():void 
 		{
@@ -305,12 +366,11 @@ package com.trdevt.gameState
 		
 		private function drawWhip(whipDest:FlxPoint):void 
 		{
+			//check if whip is possible here, if not, tell hero to stop swinging
+			//TODO: check to see if the player can actually swing, and if they can't, drop them like a bad habit
+
 			trace("in PlayState, got signal to draw whip ending at: " + whipDest.x + ", " + whipDest.y);			
-			//if (_player.isHeroOnGround())
-			//{
-				//return;
-			//}
-			//hero is in the air at this point
+
 			_whipCanvas.fill(0x00000000);
 			_whipCanvas.drawLine(_player.x + (_player.width * 0.5), _player.y + (_player.height * 0.5), whipDest.x, whipDest.y,  0xfff4a460); //brown
 			_whipCenter = whipDest;
@@ -323,11 +383,13 @@ package com.trdevt.gameState
 		private function updateWhip():void 
 		{
 			_whipCanvas.fill(0x00000000);
-			_whipCanvas.drawLine(_player.x + (_player.width * 0.5), _player.y + (_player.height * 0.5), _whipCenter.x, _whipCenter.y, 0xfff4a460); //brown
+			//_whipCanvas.drawLine(_player.x + (_player.width * 0.5), _player.y + (_player.height * 0.5), _whipCenter.x, _whipCenter.y, 0xfff4a460); //brown
+			_whipCanvas.drawLine(_player.x + (_player.width * 0.5), _player.y, _whipCenter.x, _whipCenter.y, 0xfff4a460); //brown
 			
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
 	}
 
 }

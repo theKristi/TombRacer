@@ -9,6 +9,7 @@ package com.trdevt.gameState
 	import org.flixel.FlxState;
 	import flash.ui.Mouse;
 	import org.flixel.FlxText;
+	import org.flixel.FlxSound; 
 	/**
 	 * ...
 	 * @author Anthony Della Maggiora
@@ -32,10 +33,12 @@ package com.trdevt.gameState
 			//_ftTitle.alignment = "center"; 
 			
 			_fbLevelSelect = new FlxButton(304, 235, "", _onLevelSelect);
-			_fbLevelSelect.loadGraphic(Assets.levelSelectPNG,true,false,662, 173);
+			_fbLevelSelect.loadGraphic(Assets.levelSelectPNG, true, false, 662, 173);
+			_fbLevelSelect.soundDown = (new FlxSound().loadEmbedded(Assets.buttonClick));
 			
 			_fbCredits = new FlxButton(304,416, "Credits", _onCredits);
-			_fbCredits.loadGraphic(Assets.creditsPNG,true,false,662,173);
+			_fbCredits.loadGraphic(Assets.creditsPNG, true, false, 662, 173);
+			_fbCredits.soundDown = (new FlxSound().loadEmbedded(Assets.buttonClick));
 			//_fbLevelSelect.
 			add(_fsMenuBackground);
 			add(_ftTitle);

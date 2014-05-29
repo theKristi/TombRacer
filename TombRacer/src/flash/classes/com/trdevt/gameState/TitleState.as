@@ -7,8 +7,8 @@ package  com.trdevt.gameState
 	import org.flixel.FlxText;
 	import org.flixel.FlxG;
 	import org.flixel.plugin.photonstorm.FlxScrollingText;
-	import com.treefortress.sound.SoundAS;
-
+	///import com.treefortress.sound.SoundAS;
+	import com.trdevt.Assets;
 	
 	/**
 	 * ...
@@ -17,28 +17,26 @@ package  com.trdevt.gameState
 	public class TitleState extends FlxState  
 	{
 		private var _fsBackground:FlxSprite;
-		[Embed(source = "../../../../../images/background.png")] private var bgPNG:Class;
 		
 		private var _fsPressMsg:FlxSprite;
-		[Embed(source = "../../../../../images/PressAnyKey.png")] private var pressPNG:Class;
 		
 		private var _fsTitle:FlxSprite;
-		[Embed(source = '/MenuScreen/title.png')] private var titlePNG:Class;
+		
 		
 		
 		override public function create():void
 		{
-			_fsBackground = new FlxSprite(0, 0, bgPNG);
-			_fsTitle = new FlxSprite(319, 240,titlePNG);
-			_fsPressMsg = new FlxSprite(230, 405, pressPNG);
+			_fsBackground = new FlxSprite(0, 0, Assets.bgPNG);
+			_fsTitle = new FlxSprite(319, 240,Assets.titlePNG);
+			_fsPressMsg = new FlxSprite(230, 405, Assets.pressPNG);
 			
 		
 			add(_fsBackground);
 			add(_fsTitle);
 			add(_fsPressMsg);
-			SoundAS.loadSound("./Audio/Music.mp3", "music");
+			//SoundAS.loadSound("./Audio/Music.mp3", "music");
 			//SoundAS.playLoop("music");
-			
+			FlxG.playMusic(Assets.bgMusic,.6);
 		}
 		override public function update():void
 		{

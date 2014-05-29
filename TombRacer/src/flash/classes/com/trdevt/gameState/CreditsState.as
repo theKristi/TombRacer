@@ -7,8 +7,8 @@ package com.trdevt.gameState
 	import org.flixel.FlxState;
 	import org.flixel.FlxText;
 	import org.flixel.FlxG;
-	import org.flixel.plugin.photonstorm.FlxScrollingText;
-	
+	//import org.flixel.plugin.photonstorm.FlxScrollingText;
+	import org.flixel.FlxSound;
 	
 	/**
 	 * ...
@@ -45,6 +45,7 @@ package com.trdevt.gameState
 			// Create Back Button
 			_fbBack = new FlxButton(1018, 635, "", _onBack);
 			_fbBack.loadGraphic(Assets.backPNG, true, false, 176, 108);
+			_fbBack.soundDown = (new FlxSound().loadEmbedded(Assets.buttonClick));
 			
 			_fsScroll = new FlxSprite(853, 203, Assets.scrollerOutlinePNG);
 			
