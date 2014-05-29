@@ -200,9 +200,8 @@ package com.trdevt.gameState
 		{
 			_tileMapCollision.setTile(torch.x / 32, torch.y / 32, 64, true);
 			_tileMapCollision.draw();
-			torch.allowCollisions = FlxObject.NONE;
-			_player.checkpointX = torch.x;
-			_player.checkpointY = torch.y;
+			//torch.allowCollisions = FlxObject.NONE;
+			player.updateCheckPoint(new FlxPoint(player.x, player.y - 1));
 		}
 		
 		public function onObstacleCollision(obstacle:Obstacle, object:FlxObject)
