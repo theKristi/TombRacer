@@ -14,6 +14,7 @@ package com.trdevt.gameState
 	import org.flixel.FlxTileblock;
 	import org.flixel.FlxTilemap;
 	import org.flixel.FlxTimer;
+	import org.flixel.system.FlxTile;
 	/**
 	 * ...
 	 * @author Jake
@@ -28,12 +29,6 @@ package com.trdevt.gameState
 		protected var _tileMapCollisionFile:Class;
 		protected var _tileSetCollsionFile:Class;
 		protected var _tileMapCollision:FlxTilemap;
-		
-		protected var _tmLavaCollision:FlxTilemap;
-		protected var _tmSpikeCollision:FlxTilemap;
-		protected var _tmSandCollision:FlxTilemap;
-		protected var _tmMossCollision:FlxTilemap;
-		protected var _tmSwitchCollision:FlxTilemap;
 		
 		protected var _fgBatCollision:FlxGroup;
 		protected var _fgFireballCollision:FlxGroup;
@@ -50,6 +45,14 @@ package com.trdevt.gameState
 		protected var _backgroundTileHeight:Number;
 		
 		protected var _player:Hero;
+		protected var constAccel:Number;
+		protected var _playerMaxSpeedy:Number;
+		
+		protected var _respawnX:Number;
+		protected var _respawnY:Number;
+		
+		protected var _touchingMoss:Boolean = false;
+		protected var _touchingSand:Boolean = false;
 		
 		protected var _finalScore:Number;
 		
@@ -75,15 +78,8 @@ package com.trdevt.gameState
 			
 			FlxG.bgColor =  0xff0069b4; //hot pink default bg color
 			
-			
-			
-			
 			add(_tileMapCollision);
-			add(_tmLavaCollision);
-			add(_tmMossCollision);
-			add(_tmSandCollision);
-			add(_tmSpikeCollision);
-			add(_tmSwitchCollision);
+
 			//add(_tileMapBackground);
 			_fgBatCollision = new FlxGroup(20);
 			_fgFireballCollision = new FlxGroup(50);
@@ -127,6 +123,8 @@ package com.trdevt.gameState
 		
 		override public function update():void 
 		{
+			_touchingMoss = false;
+			_touchingSand = false;
 			super.update();
 			
 			if (FlxG.collide(_player, _tileMapCollision))
@@ -134,41 +132,33 @@ package com.trdevt.gameState
 				_player.stopSwinging();
 			}
 			
-			FlxG.collide(_player, _tmLavaCollision, onPlayerCollision)
-			
-			if (FlxG.collide(_player, _tmSpikeCollision))
+			if (_touchingMoss)
 			{
-				if (_player.isTouching(FlxObject.FLOOR))
-					_player.signalHeroHasDied.dispatch();
-			}
-			
-			if (FlxG.collide(_player, _tmMossCollision))
-			{
-				_player.speedPercentage = .5;
-			}
-			else
-			{
-				_player.speedPercentage = 1.0;
-			}
-			
-			if (FlxG.collide(_player, _tmSandCollision))
-			{
-				_player.speedPercentage = .5;
-				_player.acceleration.y = .5
+				_player.touchingMoss = true;
+				if (_touchingSand)
+				{
+					_player.touchingSand = true;;
+				}
+				else
+				{
+					_player.touchingSand = false;
+				}
 			}
 			else
 			{
-				_player.speedPercentage = 1.0;
+				_player.touchingMoss = false;
 			}
 			
-			FlxG.overlap(_player, _fgBatCollision, onPlayerCollision);
-			FlxG.collide(_fgBatCollision, _tileMapCollision, onObstacleCollision);
 			
-			FlxG.overlap(_player, _fgArrowCollision, onArrowCollision);
-			FlxG.collide(_fgArrowCollision, _tileMapCollision, onObstacleCollision);
 			
-			FlxG.overlap(_player, _fgFireballCollision, onFireballCollision);
-			FlxG.collide(_fgFireballCollision, _tileMapCollision, onObstacleCollision);
+			//FlxG.overlap(_player, _fgBatCollision, onPlayerCollision);
+			//FlxG.collide(_fgBatCollision, _tileMapCollision, onObstacleCollision);
+			
+			//FlxG.overlap(_player, _fgArrowCollision, onArrowCollision);
+			//FlxG.collide(_fgArrowCollision, _tileMapCollision, onObstacleCollision);
+			
+			//FlxG.overlap(_player, _fgFireballCollision, onFireballCollision);
+			//FlxG.collide(_fgFireballCollision, _tileMapCollision, onObstacleCollision);
 			
 			if (_player.state == HeroStates.HERO_SWING)
 			{
@@ -182,12 +172,32 @@ package com.trdevt.gameState
 				//_player.signalHeroHasDied.dispatch();
 		}
 		
-		public function onPlayerCollision(player:Hero, obstacle:Obstacle):void
+		public function onPlayerCollision(tile:FlxTile, player:Hero):void
 		{
 			player.signalHeroHasDied.dispatch();
 		}
 		
-		public function onObstacleCollision(obstacle:Obstacle, wall:FlxObject):void
+		public function onMossCollision(tile:FlxTile, player:Hero):void
+		{
+			_touchingMoss = true;
+		}
+		
+		public function onSandCollision(tile:FlxTile, player:Hero):void
+		{
+			_touchingSand = true;
+			_touchingMoss = true;
+		}
+		
+		public function onTorchCollision(torch:FlxTile, player:Hero):void
+		{
+			_tileMapCollision.setTile(torch.x / 32, torch.y / 32, 64, true);
+			_tileMapCollision.draw();
+			torch.allowCollisions = FlxObject.NONE;
+			_player.checkpointX = torch.x;
+			_player.checkpointY = torch.y;
+		}
+		
+		public function onObstacleCollision(obstacle:Obstacle, object:FlxObject)
 		{
 			obstacle.onCollision();
 		}
@@ -229,14 +239,42 @@ package com.trdevt.gameState
 			_tileSetCollsionFile = l.getSet(_currentLevelNum, 0);
 			
 			_tileMapCollision = new FlxTilemap();
+
 			//_tileMapBackground = new FlxTilemap();
 			
 			//change this
 			_backgroundTileHeight = _backgroundTileWidth = _collisionTileWidth = _collisionTileHeight = 32;
 			
 			_tileMapCollision.loadMap(new _tileMapCollisionFile(), _tileSetCollsionFile, _collisionTileWidth, _collisionTileHeight);
-			//_tileMapBackground.loadMap(new _tileMapBackgroundFile(), _tileSetBackgroundFile, _backgroundTileWidth, _backgroundTileHeight);
-			
+			// Lava Collisions
+			_tileMapCollision.setTileProperties(62, FlxObject.ANY, onPlayerCollision);
+			_tileMapCollision.setTileProperties(54, FlxObject.ANY, onPlayerCollision);
+			// Spike Collisions
+			_tileMapCollision.setTileProperties(7, FlxObject.FLOOR, onPlayerCollision); // One of the spikes
+			_tileMapCollision.setTileProperties(15, FlxObject.FLOOR, onPlayerCollision);
+			_tileMapCollision.setTileProperties(22, FlxObject.FLOOR, onPlayerCollision);
+			_tileMapCollision.setTileProperties(23, FlxObject.CEILING, onPlayerCollision);
+			_tileMapCollision.setTileProperties(30, FlxObject.FLOOR, onPlayerCollision);
+			_tileMapCollision.setTileProperties(31, FlxObject.FLOOR, onPlayerCollision);
+			_tileMapCollision.setTileProperties(38, FlxObject.CEILING, onPlayerCollision);
+			_tileMapCollision.setTileProperties(39, FlxObject.FLOOR, onPlayerCollision);
+			_tileMapCollision.setTileProperties(46, FlxObject.CEILING, onPlayerCollision);
+			_tileMapCollision.setTileProperties(47, FlxObject.FLOOR, onPlayerCollision);
+			_tileMapCollision.setTileProperties(55, FlxObject.CEILING, onPlayerCollision);
+			_tileMapCollision.setTileProperties(63, FlxObject.CEILING, onPlayerCollision);
+			// Moss Collisions
+			_tileMapCollision.setTileProperties(51, FlxObject.CEILING, onMossCollision);
+			_tileMapCollision.setTileProperties(52, FlxObject.CEILING, onMossCollision);
+			_tileMapCollision.setTileProperties(53, FlxObject.CEILING, onMossCollision);
+			// Switch Collisions
+			_tileMapCollision.setTileProperties(48, FlxObject.CEILING, onSandCollision);
+			_tileMapCollision.setTileProperties(49, FlxObject.CEILING, onSandCollision);
+			_tileMapCollision.setTileProperties(50, FlxObject.CEILING, onSandCollision);
+			// Sand Collisions
+			_tileMapCollision.setTileProperties(8, FlxObject.ANY, onPlayerCollision);
+			// Torch Collisions
+			_tileMapCollision.setTileProperties(64, FlxObject.NONE);
+			_tileMapCollision.setTileProperties(65, FlxObject.ANY, onTorchCollision);
 			
 			var xTile:Number = xmlTree.levels.levelTest.heroPosition.@["x"];
 			var yTile:Number = xmlTree.levels.levelTest.heroPosition.@["y"];
@@ -245,8 +283,6 @@ package com.trdevt.gameState
 
 			
 			_player = new Hero(heroXmlTree, _collisionTileWidth * xTile, _collisionTileHeight * yTile);
-			
-			
 			
 			//do the loadMaps here to keep from using copious amounts of attributes (tile width and height, etc)
 			//_tileMapCollision.loadMap(new _tileMapCollisionFile(), _tileSetCollsionFile, _collisionTileWidth, _collisionTileHeight);
