@@ -30,6 +30,8 @@ package com.trdevt
 		
 		[Embed(source = '/MenuScreen/title.png')] public static var titlePNG:Class;
 		
+		[Embed(source="../../../../images/PressAnyKey.png")] public static var pressPNG:Class;
+		
 		[Embed(source = '/MenuScreen/LevelSelectButton_sheet3.png')] public static var levelSelectPNG:Class;
 		
 		[Embed(source = '/MenuScreen/CreditsButton_sheet.png')] public static var creditsPNG:Class;
@@ -37,6 +39,11 @@ package com.trdevt
 		[Embed(source = '/LevelSelectScreen/LevelSelectHeader.png')] public static var levelheaderPNG:Class;
 		
 		[Embed(source = '/LevelSelectScreen/LevelUnlocked_notplayed_sheet.png')] public static var levelPNG:Class;
-	}
 	
+		[Embed(source = "../../../../sounds/menuBGM2.mp3")] public static var bgMusic:Class;
+		
+		[Embed(source = '../../../../sounds/buttonClick1.mp3')] public static var buttonClick:Class;
+		
+		
+	}
 }

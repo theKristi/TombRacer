@@ -100,6 +100,8 @@ package com.trdevt.gameState
 			{
 				updateWhip();
 			}
+			if (FlxG.keys.R)
+				FlxG.switchState(new SelectState(new XML()));
 			
 			
 			
