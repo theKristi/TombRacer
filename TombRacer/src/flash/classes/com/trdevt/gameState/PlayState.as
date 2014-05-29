@@ -25,7 +25,13 @@ package com.trdevt.gameState
 	 * @author Jake
 	 */
 	public class PlayState extends AbstractState
-	{
+	{	//spikeDeath.mp3
+		[Embed(source = "../../../../../sounds/deaths/lavaDeath.mp3")] private var _lavaDeathSound:Class;
+		[Embed(source = "../../../../../sounds/deaths/lavaDeath.mp3")] private var _sandSound:Class;
+		[Embed(source = "../../../../../sounds/deaths/lavaDeath.mp3")] private var _mossSound:Class;
+		[Embed(source = "../../../../../sounds/deaths/spikeDeath.mp3")] private var _spikeSound:Class;
+		//		[Embed(source = '../../../../../images/SpriteSheets/IndieWalkSheet.png')] private static var _sheet:Class;
+
 		
 		protected var _timer:FlxTimer;
 		protected var _currentLevelNum:Number;
@@ -271,6 +277,8 @@ package com.trdevt.gameState
 		{
 			(player as Hero).velocity.y -= 50;
 			
+			
+			
 		}
 		
 		private function collideSand(Tile:FlxTile, player:FlxObject):void
@@ -279,17 +287,21 @@ package com.trdevt.gameState
 				player.velocity.x *= 0.8;
 			if((player as FlxSprite).facing == FlxObject.RIGHT && player.velocity.x != 0)
 				player.velocity.x *= 0.8;
+			
+			//FlxG.play(_sandSound);
 		}
 		
 		
 		private function collideSpike(Tile:FlxTile, player:FlxObject):void
 		{
 			_player.respawnHero();
+			FlxG.play(_spikeSound);
 		}
 		
 		private function collideLava(Tile:FlxTile, player:FlxObject):void
 		{
 			_player.respawnHero();
+			FlxG.play(_lavaDeathSound);
 		}
 		
 		private function collideMoss(Tile:FlxTile, player:FlxObject):void
@@ -298,6 +310,8 @@ package com.trdevt.gameState
 				player.velocity.x *= 0.8;
 			if((player as FlxSprite).facing == FlxObject.RIGHT && player.velocity.x != 0)
 				player.velocity.x *= 0.8;
+				
+			//FlxG.play(_mossSound);
 		}
 		
 		private function collideWaypoint(Tile:FlxTile, player:FlxObject):void
