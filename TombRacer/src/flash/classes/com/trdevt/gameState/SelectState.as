@@ -69,8 +69,16 @@ package com.trdevt.gameState
 			_levels = new Array();
 			for (var i:int = 0; i < numberOfLevels; i++ )
 			{
-				
-			var button:LevelButton = new LevelButton((i * 184) + 256, 166, "" ,function handler():void { goToLevel(i); }, i);
+				var cx:int =(i * 184) + 256; 
+				var button:LevelButton;
+				if (i < numberOfLevels / 2)
+				{
+					button = new LevelButton(cx, 166, "" ,function handler():void { goToLevel(i); }, i);
+				}
+				else 
+		
+					button = new LevelButton(cx, 366, "" ,function handler():void { goToLevel(i); }, i);
+			
 			//trace("i1: " + i);
 			//_fbLevel1.onDown = function ():void { goToLevel(i); }
 			//trace("i2: " + i);
@@ -88,7 +96,7 @@ package com.trdevt.gameState
 		{
 			FlxG.switchState(new MenuState());
 		}
-		private function goToLevel(eLevelnum:uint=7):void
+		private function goToLevel(eLevelnum:uint=0):void
 		{
 			trace("levelNum: " + eLevelnum);
 			//FlxG.switchState(new TestState())
