@@ -229,7 +229,7 @@ FlxG.switchState(new ResultsState());
 		
 		private function collideWaypoint(Tile:FlxTile, player:FlxObject):void
 		{
-			(player as Hero).updateCheckPoint(new FlxPoint(player.x, player.y - 10));
+			(player as Hero).updateCheckPoint(new FlxPoint(player.x, player.y - 1));
 			_tileMapCollision.setTileByIndex(Tile.mapIndex, 64);
 
 		}
