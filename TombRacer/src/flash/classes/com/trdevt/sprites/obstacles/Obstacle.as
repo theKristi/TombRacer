@@ -11,12 +11,14 @@ package com.trdevt.sprites.obstacles
 		
 		public function Obstacle(X:Number=0, Y:Number=0, SimpleGraphic:Class=null) 
 		{
-			super(X, Y, SimpleGraphic);
+			X *= 32;
+			Y *= 32;
+			super(null, X, Y, SimpleGraphic);
 			
 		}
 		
 		//==========================================================================
 		
-		public function onPlayerCollision(player:Hero):void {}
+		public function onCollision():void {}
 	}
 }

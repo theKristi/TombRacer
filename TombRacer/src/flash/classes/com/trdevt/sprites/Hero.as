@@ -45,7 +45,11 @@ package com.trdevt.sprites
 		protected var _counter:Number = 0;
 		
 		public var cooldown:int = 0;
-		
+		public var speedPercentage:Number = 1.0;
+		public var fallSpeedPercentage:Number = 1.0;
+		public var touchingSand:Boolean = false;
+		public var touchingMoss:Boolean = false;
+
 		/**
 		 * public signal for when the hero has died
 		 */
@@ -433,6 +437,8 @@ package com.trdevt.sprites
 			if(FlxG.keys.A || FlxG.keys.LEFT)
 			{
 				facing = FlxObject.LEFT;
+				if (touchingMoss && velocity.x < -100)
+					velocity.x = -1;
 				acceleration.x -= _constAccel;
 				if (velocity.x > 0)
 				{
@@ -442,11 +448,22 @@ package com.trdevt.sprites
 			else if(FlxG.keys.D || FlxG.keys.RIGHT)
 			{
 				facing = FlxObject.RIGHT;
+				if (touchingMoss && velocity.x > 100)
+					velocity.x = 1;
 				acceleration.x += _constAccel;
 				if (velocity.x < 0)
 				{
 					velocity.x *= 0.8;
 				}
+			}
+			if (touchingSand)
+			{
+				if (velocity.y > 25)
+				{
+					velocity.y = 25;
+				}
+				velocity.y = 25;
+				//acceleration.y = 25;
 			}
 			if((FlxG.keys.justPressed("W") || FlxG.keys.justPressed("SPACE")) && velocity.y == 0)
 			{
