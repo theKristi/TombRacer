@@ -143,6 +143,12 @@ package com.trdevt.gameState
 			if (_player.state == HeroStates.HERO_SWING)
 			{
 				updateWhip();
+
+			}
+			else
+			{
+				_whipCanvas.fill(0x00000000);
+
 			}
 			if (FlxG.keys.R)
 				FlxG.switchState(new SelectState(new XML()));
@@ -202,18 +208,18 @@ package com.trdevt.gameState
 			_tileMapCollision.setTileProperties(62, FlxObject.NONE, collideLava);
 			_tileMapCollision.setTileProperties(54, FlxObject.NONE);
 			// Spike Collisions
-			_tileMapCollision.setTileProperties(7, FlxObject.FLOOR, collideSpike); 
-			_tileMapCollision.setTileProperties(15, FlxObject.FLOOR, collideSpike);
-			_tileMapCollision.setTileProperties(22, FlxObject.FLOOR, collideSpike);
-			_tileMapCollision.setTileProperties(23, FlxObject.CEILING, collideSpike);
-			_tileMapCollision.setTileProperties(30, FlxObject.FLOOR, collideSpike);
-			_tileMapCollision.setTileProperties(31, FlxObject.CEILING, collideSpike);
-			_tileMapCollision.setTileProperties(38, FlxObject.CEILING, collideSpike);
-			_tileMapCollision.setTileProperties(39, FlxObject.FLOOR, collideSpike);
-			_tileMapCollision.setTileProperties(46, FlxObject.CEILING, collideSpike);
-			_tileMapCollision.setTileProperties(47, FlxObject.FLOOR, collideSpike);
-			_tileMapCollision.setTileProperties(55, FlxObject.CEILING, collideSpike);
-			_tileMapCollision.setTileProperties(63, FlxObject.CEILING, collideSpike);
+			_tileMapCollision.setTileProperties(7, FlxObject.ANY, collideSpike); 
+			_tileMapCollision.setTileProperties(15, FlxObject.ANY, collideSpike);
+			_tileMapCollision.setTileProperties(22, FlxObject.ANY, collideSpike);
+			_tileMapCollision.setTileProperties(23, FlxObject.ANY, collideSpike);
+			_tileMapCollision.setTileProperties(30, FlxObject.ANY, collideSpike);
+			_tileMapCollision.setTileProperties(31, FlxObject.ANY, collideSpike);
+			_tileMapCollision.setTileProperties(38, FlxObject.ANY, collideSpike);
+			_tileMapCollision.setTileProperties(39, FlxObject.ANY, collideSpike);
+			_tileMapCollision.setTileProperties(46, FlxObject.ANY, collideSpike);
+			_tileMapCollision.setTileProperties(47, FlxObject.ANY, collideSpike);
+			_tileMapCollision.setTileProperties(55, FlxObject.ANY, collideSpike);
+			_tileMapCollision.setTileProperties(63, FlxObject.ANY, collideSpike);
 			// Moss Collisions
 			_tileMapCollision.setTileProperties(51, FlxObject.ANY, collideMoss);
 			_tileMapCollision.setTileProperties(52, FlxObject.ANY, collideMoss);
@@ -247,6 +253,7 @@ package com.trdevt.gameState
 			_tileMapCollision.setTileProperties(40, FlxObject.NONE);
 			_tileMapCollision.setTileProperties(42, FlxObject.NONE);
 			
+			_tileMapCollision.setTileProperties(66, FlxObject.NONE, collideTrampoline);
 			
 			var xTile:Number = xmlTree.levels.levelTest.heroPosition.@["x"];
 			var yTile:Number = xmlTree.levels.levelTest.heroPosition.@["y"];
@@ -262,7 +269,8 @@ package com.trdevt.gameState
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		private function collideTrampoline(Tile:FlxTile, player:FlxObject):void
 		{
-			player.velocity.y -= 50;
+			(player as Hero).velocity.y -= 50;
+			
 		}
 		
 		private function collideSand(Tile:FlxTile, player:FlxObject):void
@@ -294,7 +302,7 @@ package com.trdevt.gameState
 		
 		private function collideWaypoint(Tile:FlxTile, player:FlxObject):void
 		{
-			(player as Hero).updateCheckPoint(new FlxPoint(player.x, player.y - 1));
+			(player as Hero).updateCheckPoint(new FlxPoint(player.x, player.y - 32));
 			_tileMapCollision.setTileByIndex(Tile.mapIndex, 64);
 
 		}
@@ -324,10 +332,9 @@ package com.trdevt.gameState
 
 			trace("in PlayState, got signal to draw whip ending at: " + whipDest.x + ", " + whipDest.y);			
 
-			_whipCanvas.fill(0x00000000);
+			_whipCanvas.fill(0x00000000);			
 			_whipCanvas.drawLine(_player.x + (_player.width * 0.5), _player.y + (_player.height * 0.5), whipDest.x, whipDest.y,  0xfff4a460); //brown
 			_whipCenter = whipDest;
-			
 			
 		}
 		

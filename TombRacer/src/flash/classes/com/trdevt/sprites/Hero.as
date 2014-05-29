@@ -189,7 +189,6 @@ package com.trdevt.sprites
 		{
 			if (x > FlxG.width || x < 0 || y > FlxG.height || y < 0)
 			{
-				signalHeroHasDied.dispatch();
 			
 				respawnHero();
 			}
@@ -214,6 +213,9 @@ package com.trdevt.sprites
 			this.x = _lastCheckPoint.x;
 			this.y = _lastCheckPoint.y;
 			
+			velocity.x = velocity.y = acceleration.x = 0;
+			
+			signalHeroHasDied.dispatch();
 
 		}
 		
