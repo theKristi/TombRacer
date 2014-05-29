@@ -3,6 +3,7 @@ package com.trdevt.gameState
 	import com.trdevt.sprites.Hero;
 	import com.trdevt.sprites.HeroStates;
 	import com.trdevt.util.LocalSharedObjectManager;
+	import mx.core.FlexSprite;
 	import org.flixel.FlxG;
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxSprite;
@@ -119,8 +120,7 @@ package com.trdevt.gameState
 		 */
 		protected function levelComplete():void 
 		{
-			//test code below, the results screen may want xml in the future
-			//FlxG.switchState(new ResultsState( new XML("") , _finalScore));
+FlxG.switchState(new ResultsState());
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -144,7 +144,35 @@ package com.trdevt.gameState
 			
 			_tileMapCollision.loadMap(new _tileMapCollisionFile(), _tileSetCollsionFile, _collisionTileWidth, _collisionTileHeight);
 			//_tileMapBackground.loadMap(new _tileMapBackgroundFile(), _tileSetBackgroundFile, _backgroundTileWidth, _backgroundTileHeight);
-			_tileMapCollision.setTileProperties(66, 0, testCollide);
+			_tileMapCollision.setTileProperties(66, 0, collideTrampoline);
+			_tileMapCollision.setTileProperties(8, 0x1111, collideSand);
+			
+			_tileMapCollision.setTileProperties(7, 0x0100, collideSpike);
+			_tileMapCollision.setTileProperties(15, 0x0100, collideSpike);
+			_tileMapCollision.setTileProperties(22, 0x0100, collideSpike);
+			_tileMapCollision.setTileProperties(30, 0x0100, collideSpike);
+			_tileMapCollision.setTileProperties(39, 0x0100, collideSpike);
+			_tileMapCollision.setTileProperties(47, 0x0100, collideSpike);
+			_tileMapCollision.setTileProperties(23, 0x1000, collideSpike);
+			_tileMapCollision.setTileProperties(31, 0x1000, collideSpike);
+			_tileMapCollision.setTileProperties(38, 0x1000, collideSpike);
+			_tileMapCollision.setTileProperties(46, 0x1000, collideSpike);
+			_tileMapCollision.setTileProperties(55, 0x1000, collideSpike);
+			_tileMapCollision.setTileProperties(63, 0x1000, collideSpike);
+			
+			_tileMapCollision.setTileProperties(65, 0, collideWaypoint);
+			
+			_tileMapCollision.setTileProperties(51, 0x1111, collideMoss);
+			_tileMapCollision.setTileProperties(52, 0x1111, collideMoss);
+			_tileMapCollision.setTileProperties(53, 0x1111, collideMoss);
+			
+			
+			_tileMapCollision.setTileProperties(54, 0, collideLava);
+			_tileMapCollision.setTileProperties(62, 0, collideLava);
+			
+			_tileMapCollision.setTileProperties(48, 0, collideVictory);
+			_tileMapCollision.setTileProperties(49, 0, collideVictory);
+			_tileMapCollision.setTileProperties(50, 0, collideVictory);
 			
 			var xTile:Number = xmlTree.levels.levelTest.heroPosition.@["x"];
 			var yTile:Number = xmlTree.levels.levelTest.heroPosition.@["y"];
@@ -165,10 +193,50 @@ package com.trdevt.gameState
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		private function testCollide(Tile:FlxTile, player:FlxObject):void
+		private function collideTrampoline(Tile:FlxTile, player:FlxObject):void
 		{
 			player.velocity.y -= 50;
 		}
+		
+		private function collideSand(Tile:FlxTile, player:FlxObject):void
+		{
+			if((player as FlxSprite).facing == FlxObject.LEFT && player.velocity.x != 0)
+				player.velocity.x -= 10;
+			if((player as FlxSprite).facing == FlxObject.RIGHT && player.velocity.x != 0)
+				player.velocity.x += 10;
+		}
+		
+		private function collideSpike(Tile:FlxTile, player:FlxObject):void
+		{
+			player.kill();
+		}
+		
+		private function collideLava(Tile:FlxTile, player:FlxObject):void
+		{
+			player.kill();
+		}
+		
+		private function collideMoss(Tile:FlxTile, player:FlxObject):void
+		{
+			if((player as FlxSprite).facing == FlxObject.LEFT && player.velocity.x != 0)
+				player.velocity.x -= 10;
+			if((player as FlxSprite).facing == FlxObject.RIGHT && player.velocity.x != 0)
+				player.velocity.x += 10;
+		}
+		
+		private function collideWaypoint(Tile:FlxTile, player:FlxObject):void
+		{
+			(player as Hero).updateCheckPoint(new FlxPoint(Tile.x, Tile.y));
+			Tile.index = 64;
+		}
+		
+		private function collideVictory(Tile:FlxTile, player:FlxObject):void
+		{
+			//Do something pretty
+			levelComplete();
+		}
+		
+		
 		private function createWhipCanvas():void 
 		{
 			_whipCanvas = new FlxSprite(0, 0);
