@@ -202,9 +202,9 @@ FlxG.switchState(new ResultsState());
 		private function collideSand(Tile:FlxTile, player:FlxObject):void
 		{
 			if((player as FlxSprite).facing == FlxObject.LEFT && player.velocity.x != 0)
-				player.velocity.x += 10;
+				player.velocity.x *= 0.8;
 			if((player as FlxSprite).facing == FlxObject.RIGHT && player.velocity.x != 0)
-				player.velocity.x -= 10;
+				player.velocity.x *= 0.8;
 		}
 		
 		private function collideSpike(Tile:FlxTile, player:FlxObject):void
@@ -222,9 +222,9 @@ FlxG.switchState(new ResultsState());
 		private function collideMoss(Tile:FlxTile, player:FlxObject):void
 		{
 			if((player as FlxSprite).facing == FlxObject.LEFT && player.velocity.x != 0)
-				player.velocity.x += 10;
+				player.velocity.x *= 0.8;
 			if((player as FlxSprite).facing == FlxObject.RIGHT && player.velocity.x != 0)
-				player.velocity.x -= 10;
+				player.velocity.x *= 0.8;
 		}
 		
 		private function collideWaypoint(Tile:FlxTile, player:FlxObject):void

@@ -198,12 +198,18 @@ package com.trdevt.sprites
 		 */
 		public function respawnHero():void 
 		{
-			physicsOff();
 			trace("Respawning at x:", _lastCheckPoint.x);
 			trace("Respawning at y:", _lastCheckPoint.y);
+			
 			this.x = _lastCheckPoint.x;
 			this.y = _lastCheckPoint.y;
-			physicsOn();
+
+			trace("Actual x:", this.x);
+			trace("Actual y:", this.y);
+
+			this.x = _lastCheckPoint.x;
+			this.y = _lastCheckPoint.y;
+			
 
 		}
 		
