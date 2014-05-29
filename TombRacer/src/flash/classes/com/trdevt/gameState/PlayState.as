@@ -147,27 +147,28 @@ FlxG.switchState(new ResultsState());
 			_tileMapCollision.setTileProperties(66, 0, collideTrampoline);
 			_tileMapCollision.setTileProperties(8, 0x1111, collideSand);
 			
-			_tileMapCollision.setTileProperties(7, 0x0100, collideSpike);
-			_tileMapCollision.setTileProperties(15, 0x0100, collideSpike);
-			_tileMapCollision.setTileProperties(22, 0x0100, collideSpike);
-			_tileMapCollision.setTileProperties(30, 0x0100, collideSpike);
-			_tileMapCollision.setTileProperties(39, 0x0100, collideSpike);
-			_tileMapCollision.setTileProperties(47, 0x0100, collideSpike);
-			_tileMapCollision.setTileProperties(23, 0x1000, collideSpike);
-			_tileMapCollision.setTileProperties(31, 0x1000, collideSpike);
-			_tileMapCollision.setTileProperties(38, 0x1000, collideSpike);
-			_tileMapCollision.setTileProperties(46, 0x1000, collideSpike);
-			_tileMapCollision.setTileProperties(55, 0x1000, collideSpike);
-			_tileMapCollision.setTileProperties(63, 0x1000, collideSpike);
+			_tileMapCollision.setTileProperties(7, 0x1111, collideSpike);
+			_tileMapCollision.setTileProperties(15, 0x1111, collideSpike);
+			_tileMapCollision.setTileProperties(22, 0x1111, collideSpike);
+			_tileMapCollision.setTileProperties(30, 0x1111, collideSpike);
+			_tileMapCollision.setTileProperties(39, 0x1111, collideSpike);
+			_tileMapCollision.setTileProperties(47, 0x1111, collideSpike);
+			_tileMapCollision.setTileProperties(23, 0x1111, collideSpike);
+			_tileMapCollision.setTileProperties(31, 0x1111, collideSpike);
+			_tileMapCollision.setTileProperties(38, 0x1111, collideSpike);
+			_tileMapCollision.setTileProperties(46, 0x1111, collideSpike);
+			_tileMapCollision.setTileProperties(55, 0x1111, collideSpike);
+			_tileMapCollision.setTileProperties(63, 0x1111, collideSpike);
 			
 			_tileMapCollision.setTileProperties(65, 0, collideWaypoint);
+			_tileMapCollision.setTileProperties(64, 0);
 			
 			_tileMapCollision.setTileProperties(51, 0x1111, collideMoss);
 			_tileMapCollision.setTileProperties(52, 0x1111, collideMoss);
 			_tileMapCollision.setTileProperties(53, 0x1111, collideMoss);
 			
 			
-			_tileMapCollision.setTileProperties(54, 0, collideLava);
+			_tileMapCollision.setTileProperties(54, 0);
 			_tileMapCollision.setTileProperties(62, 0, collideLava);
 			
 			_tileMapCollision.setTileProperties(48, 0, collideVictory);
@@ -201,33 +202,36 @@ FlxG.switchState(new ResultsState());
 		private function collideSand(Tile:FlxTile, player:FlxObject):void
 		{
 			if((player as FlxSprite).facing == FlxObject.LEFT && player.velocity.x != 0)
-				player.velocity.x -= 10;
-			if((player as FlxSprite).facing == FlxObject.RIGHT && player.velocity.x != 0)
 				player.velocity.x += 10;
+			if((player as FlxSprite).facing == FlxObject.RIGHT && player.velocity.x != 0)
+				player.velocity.x -= 10;
 		}
 		
 		private function collideSpike(Tile:FlxTile, player:FlxObject):void
 		{
-			player.kill();
+			_player.signalHeroHasDied.dispatch();
+			_player.respawnHero();
 		}
 		
 		private function collideLava(Tile:FlxTile, player:FlxObject):void
 		{
-			player.kill();
+			_player.signalHeroHasDied.dispatch();
+			_player.respawnHero();
 		}
 		
 		private function collideMoss(Tile:FlxTile, player:FlxObject):void
 		{
 			if((player as FlxSprite).facing == FlxObject.LEFT && player.velocity.x != 0)
-				player.velocity.x -= 10;
-			if((player as FlxSprite).facing == FlxObject.RIGHT && player.velocity.x != 0)
 				player.velocity.x += 10;
+			if((player as FlxSprite).facing == FlxObject.RIGHT && player.velocity.x != 0)
+				player.velocity.x -= 10;
 		}
 		
 		private function collideWaypoint(Tile:FlxTile, player:FlxObject):void
 		{
-			(player as Hero).updateCheckPoint(new FlxPoint(Tile.x, Tile.y));
-			Tile.index = 64;
+			(player as Hero).updateCheckPoint(new FlxPoint(player.x, player.y - 10));
+			_tileMapCollision.setTileByIndex(Tile.mapIndex, 64);
+
 		}
 		
 		private function collideVictory(Tile:FlxTile, player:FlxObject):void

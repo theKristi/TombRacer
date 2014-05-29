@@ -68,7 +68,7 @@ package com.trdevt.gameState
 		{
 			FlxG.switchState(new MenuState());
 		}
-		private function goToLevel(eLevelnum:uint=0):void
+		private function goToLevel(eLevelnum:uint=7):void
 		{
 			//FlxG.switchState(new TestState())
 			FlxG.switchState (new PlayState(XMLManager.instance.xmlConfig, eLevelnum));

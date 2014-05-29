@@ -198,8 +198,12 @@ package com.trdevt.sprites
 		 */
 		public function respawnHero():void 
 		{
+			trace("Respawning at x:", _lastCheckPoint.x);
+			trace("Respawning at y:", _lastCheckPoint.y);
 			this.x = _lastCheckPoint.x;
 			this.y = _lastCheckPoint.y;
+			this.velocity.x = 0;
+			this.velocity.y = 0;
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -494,6 +498,8 @@ package com.trdevt.sprites
 		 */
 		public function updateCheckPoint(newPoint:FlxPoint):void 
 		{
+			trace("Updating checkpoint x: ", newPoint.x);
+			trace("Updating checkpoint y: ", newPoint.y);
 			_lastCheckPoint = newPoint;
 		}
 		
