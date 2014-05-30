@@ -1,0 +1,51 @@
+=============================================================
+Tomb Racer Release Notes
+=============================================================
+
+Expected Release:
+	+Functioning grapple mechanic
+	+All art for obstacles
+	+Behaviours for bat, sand, moss, arrow, and fireball
+	+Improve level-obstacle integration
+	+Fix slanted floor problem
+	+Finish level select screen
+	+Finish result screen
+	+Finish credits screen
+
+Actual Release:
+	Controls:
+		A - move left
+		S - dash
+		D - move right
+		W - jump/stop swinging
+		SPACE - jump/stop swinging
+		Mouse Click - swing
+		R - Return to level select
+	Hidden Controls:
+		G - Electric Slide
+		* Arrow keys move hero as well
+		
+	Functioning grapple mechanic:
+		- Allowed to swing from any block within range
+	
+	All art for obstacles
+	
+	Added behaviours for sand, moss:
+		- Dynamic obstacles implemented but not placed in level
+	
+	Fixed slanted floor problem:
+		- Removed collision with sloped blocks.
+		
+	Finished level select screen
+	
+	Finished result screen:
+		- requires time from the play state
+		
+	Finished credits screen
+		
+Next Release:
+	+ All levels done
+	+ All obstacles finalized
+	+ All sounds and art finalized
+	+ All behavior finalized
+	+ Timer finalized

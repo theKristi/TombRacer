@@ -49,7 +49,7 @@ package com.trdevt.gameState
 			
 			_fsScroll = new FlxSprite(853, 203, Assets.scrollerOutlinePNG);
 			
-			var credit1:FlxText = new FlxText(855, maxy, 379, "hellooo\nworld",true);
+			var credit1:FlxText = new FlxText(855, maxy, 379, "Flixel\nNewgrounds\nFlex\nAdobe\nNate",true);
 			credit1.setFormat( "sffedora", 28, 0xffffff, "center");
 			credits.push(credit1);
 			
@@ -92,8 +92,8 @@ package com.trdevt.gameState
 				}
 				else
 				{
-					credit.visible = false;
-					credit.y = maxy;
+					//credit.visible = false;
+					//credit.y = maxy;
 				}
 			}
 			super.update();

@@ -180,7 +180,7 @@ package com.trdevt.gameState
 		 */
 		protected function levelComplete():void 
 		{
-			FlxG.switchState(new ResultsState());
+			FlxG.switchState(new ResultsState(20,_currentLevelNum));
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
