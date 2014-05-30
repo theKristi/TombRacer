@@ -150,6 +150,8 @@ package com.trdevt.gameState
 				_whipCanvas.fill(0x00000000);
 
 			}
+			if (FlxG.keys.O)
+				FlxG.switchState(new ResultsState(0,_currentLevelNum));
 			if (FlxG.keys.R)
 				FlxG.switchState(new SelectState(new XML()));
 			
@@ -174,7 +176,7 @@ package com.trdevt.gameState
 		 */
 		protected function levelComplete():void 
 		{
-			FlxG.switchState(new ResultsState());
+			FlxG.switchState(new ResultsState(0,_currentLevelNum));
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
