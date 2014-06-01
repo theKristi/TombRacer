@@ -60,6 +60,8 @@ package com.trdevt.sprites
 		 */
 		public var signalHeroWhipped:Signal;
 		
+		public var signalHeroStoppedSwinging:Signal;
+		
 		public var signalHeroCJump:Signal;
 		
 
@@ -94,6 +96,7 @@ package com.trdevt.sprites
 			signalHeroHasDied = new Signal();
 			signalHeroWhipped = new Signal(FlxPoint);
 			signalHeroCJump = new Signal();
+			signalHeroStoppedSwinging = new Signal();
 			
 			_heroState = HeroStates.HERO_NOT_SWING;
 			
@@ -259,12 +262,12 @@ package com.trdevt.sprites
 			this.y = _swingRadius * Math.sin(_thetaPosition) + _swingCenter.y;
 			
 			//check to end the swing
-			if(FlxG.keys.SPACE || FlxG.keys.W)
+			//if(FlxG.keys.SPACE || FlxG.keys.W)
+			if(FlxG.keys.justPressed("SPACE") || FlxG.keys.justPressed("W"))
 			{
 				velocity.y = -_jumpPower;
 				velocity.x = _thetaVelocity * _swingRadius * 0.01; //physics! omega * r = v
-				_heroState = HeroStates.HERO_NOT_SWING;
-				physicsOn();
+				stopSwinging();
 			}
 			
 		}
@@ -277,6 +280,7 @@ package com.trdevt.sprites
 		public function stopSwinging():void 
 		{
 			_heroState = HeroStates.HERO_NOT_SWING;
+			signalHeroStoppedSwinging.dispatch();
 			physicsOn();
 		}
 		
