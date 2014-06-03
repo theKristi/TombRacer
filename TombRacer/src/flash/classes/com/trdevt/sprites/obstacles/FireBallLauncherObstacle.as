@@ -14,7 +14,7 @@ package com.trdevt.sprites.obstacles
 		public function FireBallLauncherObstacle(X:Number=0, Y:Number=0, direction:uint = FlxObject.NONE) 
 		{
 			super(X, Y);
-
+			_direction = direction;
 		}
 		
 		public function launchFireball():FireballObstacle

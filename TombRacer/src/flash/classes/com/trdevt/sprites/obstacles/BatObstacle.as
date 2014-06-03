@@ -69,6 +69,7 @@ package com.trdevt.sprites.obstacles
 			{
 				_direction = FlxObject.LEFT;
 			}
+			this.facing = _direction;
 		}
 	}
 
