@@ -29,6 +29,7 @@ package com.trdevt.gameState
 	{
 		
 		protected var _timer:FlxTimer;
+		protected var _ftScore:FlxText;
 		protected var _fireballTimer:FlxTimer;
 		protected var _currentLevelNum:Number;
 		
@@ -61,6 +62,8 @@ package com.trdevt.gameState
 		
 
 		protected var _startTime:Number;
+		protected var _endTime:Number;
+		protected var _stepTime:Number;
 		protected var _finalTime:Number;
 		
 		protected var _whipCanvas:FlxSprite;
@@ -116,7 +119,7 @@ package com.trdevt.gameState
 			_player.signalHeroWhipped.add(drawWhip);
 			_player.signalHeroCJump.add(removeLimit);
 			
-			
+			add(_ftScore);
 			
 		}
 		public function removeLimit():void
@@ -129,18 +132,16 @@ package com.trdevt.gameState
 		{
 
 			super.update();
-			
+
+			_finalTime += FlxG.elapsed;
+			_ftScore.text = FlxU.formatTime(_finalTime);
+
 			if (FlxG.collide(_player, _tileMapCollision))
 			{
 				_player.stopSwinging();
 			}
 			
-			//if (FlxG.collide(_player, _fgBatCollision))
-			//{
-			//	_player.respawnHero();
-			//}
 			FlxG.collide(_fgBatCollision, _tileMapCollision, onBatCollision);
-			
 			
 			if (FlxG.overlap(_player, _fgBatCollision))
 			{
@@ -195,7 +196,7 @@ package com.trdevt.gameState
 		 */
 		protected function levelComplete():void 
 		{
-			FlxG.switchState(new ResultsState(9999, _currentLevelNum));
+			FlxG.switchState(new ResultsState(_finalTime, _currentLevelNum));
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -215,7 +216,7 @@ package com.trdevt.gameState
 			
 			
 			
-			_backgroundTileWidth = 1024;
+			_backgroundTileWidth = 1280;
 			_backgroundTileHeight = 768;
 			
 			_collisionTileWidth = _collisionTileHeight = 32;
@@ -269,7 +270,12 @@ package com.trdevt.gameState
 			_player = new Hero(heroXmlTree, _collisionTileWidth * xTile, _collisionTileHeight * yTile);
 			_fireballTimer = new FlxTimer();
 			_fireballTimer.start(1, 10000, onLaunchFireball);
-
+			
+			_finalTime = 0;
+			_startTime = FlxG.elapsed;
+			//_timer.start(10000, 1);
+			_ftScore = new FlxText(0, 0, 100, FlxU.formatTime(0, true));
+			//add(_ftScore);
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
