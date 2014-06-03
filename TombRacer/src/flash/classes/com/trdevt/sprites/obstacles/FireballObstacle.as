@@ -10,7 +10,7 @@ package com.trdevt.sprites.obstacles
 	public class FireballObstacle extends Obstacle 
 	{
 		
-		[Embed(source="../../../../../../images/SpriteSheets/LavaSheet.png")] private var _tempFireballSheet:Class;
+		[Embed(source="../../../../../../images/SpriteSheets/FireballSprite.png")] private var _tempFireballSheet:Class;
 		private var _speed;
 		private var _direction;
 		public function FireballObstacle(X:Number = 0, Y:Number = 0, direction:uint = FlxObject.NONE ) 
@@ -19,9 +19,10 @@ package com.trdevt.sprites.obstacles
 			this._speed = 5;
 			this._direction = direction;
 			
-			this.loadGraphic(this._spriteSheet, true, false, 32, 32);
+			this.loadGraphic(this._spriteSheet, true, true, 32, 32);
 			this.addAnimation("idle", [1]);
 			this.play("idle");
+			this.facing = _direction;
 		}
 		
 		override public function update():void

@@ -105,10 +105,10 @@ package com.trdevt.gameState
 			//_fgBatCollision.add(new BatObstacle(3, 7, FlxObject.RIGHT));
 			//_fgBatCollision.add(new BatObstacle(7, 9, FlxObject.LEFT));
 			
-			_fgFireballLauncher.add(new FireBallLauncherObstacle(2, 2, FlxObject.DOWN));
+			_fgFireballLauncher.add(new FireBallLauncherObstacle(2, 2, FlxObject.LEFT));
 			//_fgArrowCollision.add(new ArrowObstacle(5, 4));
 			
-			_fgFireballCollision.add(new FireballObstacle(5 , 3, FlxObject.RIGHT));
+			//_fgFireballCollision.add(new FireballObstacle(5 , 3, FlxObject.RIGHT));
 			
 			add(_fgBatCollision);
 			add(_fgFireballCollision);
