@@ -128,13 +128,18 @@ package com.trdevt.gameState
 		private function checkValidSwing(p:FlxPoint):Boolean
 		{
 			//17 is a floor tile on level0
+			var tileNum:uint = _tileMapCollision.getTile(p.x / 32, p.y / 32);
 			// add the other valid swings in here please, just copy paste the block types you want to swing on
-			if (_tileMapCollision.getTile(p.x / 32, p.y / 32) == 17)
+			switch(tileNum)
 			{
-				return true;
+				case 17: return true;
+				case 2: return true;
+				case 41: return true;
+				case 33: return true;
+				case 25: return true;
+				default: return false;
 			}
-
-			return false;
+			
 		}
 		
 		public function removeLimit():void
