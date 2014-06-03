@@ -8,6 +8,10 @@ package com.trdevt.gameState
 	import com.trdevt.sprites.obstacles.FireballObstacle;
 	import com.trdevt.sprites.obstacles.Obstacle;
 	import com.trdevt.util.LocalSharedObjectManager;
+	import flash.events.Event;
+	import flash.events.TimerEvent;
+	import flash.sampler.NewObjectSample;
+	import flash.utils.Timer;
 	import mx.core.FlexSprite;
 	import org.flixel.FlxG;
 	import org.flixel.FlxGroup;
@@ -28,9 +32,8 @@ package com.trdevt.gameState
 	public class PlayState extends AbstractState
 	{
 		
-		protected var _timer:FlxTimer;
 		protected var _ftScore:FlxText;
-		protected var _fireballTimer:FlxTimer;
+		protected var _fireballTimer:Timer;
 		protected var _currentLevelNum:Number;
 		
 		//class files will be loaded from the parse function
@@ -77,7 +80,6 @@ package com.trdevt.gameState
 			
 			super(xmlTree);
 			
-			
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -99,18 +101,19 @@ package com.trdevt.gameState
 			
 			
 			//Test Obstacles
-			_fgBatCollision.add(new BatObstacle(5, 5, FlxObject.UP));
-			_fgBatCollision.add(new BatObstacle(3, 7, FlxObject.RIGHT));
-			_fgBatCollision.add(new BatObstacle(7, 9, FlxObject.LEFT));
+			//_fgBatCollision.add(new BatObstacle(5, 5, FlxObject.UP));
+			//_fgBatCollision.add(new BatObstacle(3, 7, FlxObject.RIGHT));
+			//_fgBatCollision.add(new BatObstacle(7, 9, FlxObject.LEFT));
 			
 			_fgFireballLauncher.add(new FireBallLauncherObstacle(2, 2, FlxObject.DOWN));
 			//_fgArrowCollision.add(new ArrowObstacle(5, 4));
 			
-			//_fgFireballCollision.add(new FireballObstacle(5 , 3));
+			_fgFireballCollision.add(new FireballObstacle(5 , 3, FlxObject.RIGHT));
 			
 			add(_fgBatCollision);
 			add(_fgFireballCollision);
 			add(_fgArrowCollision);
+			add(_fgFireballLauncher);
 			
 			
 			createWhipCanvas();
@@ -152,8 +155,8 @@ package com.trdevt.gameState
 			//FlxG.overlap(_player, _fgArrowCollision, onArrowCollision);
 			//FlxG.collide(_fgArrowCollision, _tileMapCollision, onObstacleCollision);
 			
-			//FlxG.overlap(_player, _fgFireballCollision, onFireballCollision);
-			//FlxG.collide(_fgFireballCollision, _tileMapCollision, onObstacleCollision);
+			FlxG.overlap(_player, _fgFireballCollision, onFireballOverlap);
+			FlxG.collide(_fgFireballCollision, _tileMapCollision, onFireballCollision);
 			
 			if (_player.state == HeroStates.HERO_SWING)
 			{
@@ -165,13 +168,18 @@ package com.trdevt.gameState
 			
 		}
 		
+		public function onFireballOverlap(player:Hero, fireball:FireballObstacle)
+		{
+			fireball.onCollision();
+			_player.respawnHero();
+		}
 		
 		public function onArrowCollision(arrow:ArrowObstacle, player:Hero):void
 		{
 			arrow.onCollision();
 		}
 		
-		public function onFireballCollision(fireball:FireballObstacle, player:Hero):void
+		public function onFireballCollision(fireball:FireballObstacle, map:FlxObject = null):void
 		{
 			fireball.onCollision();
 		}
@@ -181,12 +189,12 @@ package com.trdevt.gameState
 			bat.onCollision();
 		}
 		
-		public function onLaunchFireball(timer:FlxTimer)
+		public function onLaunchFireball(e:Event):void
 		{
-			//for (var launcher:FireBallLauncherObstacle in _fgFireballLauncher)
-			//{
-			//	add(launcher.launchFireball());
-			//}
+			for each (var launcher:FireBallLauncherObstacle in _fgFireballLauncher.members) 
+			{
+				_fgFireballCollision.add(launcher.launchFireball());
+			}
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -261,6 +269,9 @@ package com.trdevt.gameState
 			_tileMapCollision.setTileProperties(49, FlxObject.NONE, collideVictory);
 			_tileMapCollision.setTileProperties(50, FlxObject.NONE, collideVictory);
 			
+			// Add dynamic obstacles
+			
+			
 			var xTile:Number = xmlTree.levels.levelTest.heroPosition.@["x"];
 			var yTile:Number = xmlTree.levels.levelTest.heroPosition.@["y"];
 			
@@ -268,8 +279,9 @@ package com.trdevt.gameState
 
 			
 			_player = new Hero(heroXmlTree, _collisionTileWidth * xTile, _collisionTileHeight * yTile);
-			_fireballTimer = new FlxTimer();
-			_fireballTimer.start(1, 10000, onLaunchFireball);
+			_fireballTimer = new Timer(1000);
+			_fireballTimer.addEventListener(TimerEvent.TIMER, onLaunchFireball);
+			_fireballTimer.start();
 			
 			_finalTime = 0;
 			_startTime = FlxG.elapsed;
