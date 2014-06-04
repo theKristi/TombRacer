@@ -7,8 +7,8 @@ package com.trdevt.sprites.obstacles
 	public class ArrowObstacle extends Obstacle 
 	{
 		[Embed(source = "../../../../../../images/SpriteSheets/ArrowSprite.png")] private var _arrowSprite:Class;
-		private var _speed;
-		private var _direction;
+		private var _speed:Number;
+		private var _direction:Number;
 		public function ArrowObstacle(X:Number=0, Y:Number=0, direction:Number = 1) 
 		{
 			super(X, Y, _arrowSprite);

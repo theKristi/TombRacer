@@ -11,17 +11,26 @@ package com.trdevt.sprites.obstacles
 	{
 		
 		[Embed(source="../../../../../../images/SpriteSheets/FireballSprite.png")] private var _tempFireballSheet:Class;
-		private var _speed;
-		private var _direction;
+		private var _speed:Number;
+		private var _direction:Number;
 		public function FireballObstacle(X:Number = 0, Y:Number = 0, direction:uint = FlxObject.NONE ) 
 		{
 			super(X, Y, _tempFireballSheet);
 			this._speed = 5;
 			this._direction = direction;
 			
-			this.loadGraphic(this._spriteSheet, true, true, 32, 32);
+			this.loadRotatedGraphic(this._spriteSheet, 4, -1, true, true);// , 32, 32);
 			this.addAnimation("idle", [1]);
-			this.play("idle");
+			
+			if (_direction == FlxObject.UP)
+				this.angle = 270;
+			else if (_direction == FlxObject.DOWN)
+				this.angle = 90;
+			else if (_direction == FlxObject.LEFT)
+				this.angle = 180;
+			else
+				this.angle = 0;
+
 			this.facing = _direction;
 		}
 		
