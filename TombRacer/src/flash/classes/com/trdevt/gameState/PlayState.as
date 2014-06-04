@@ -114,10 +114,34 @@ package com.trdevt.gameState
 			add(_player);
 			_player.signalHeroWhipped.add(drawWhip);
 			_player.signalHeroCJump.add(removeLimit);
+			_player.signalHeroStoppedSwinging.add(clearWhipCanvas);
 			
 			
 			
 		}
+		
+		/**
+		 * false for invalid swing, true for valid swing.
+		 * @param	p
+		 * @return
+		 */
+		private function checkValidSwing(p:FlxPoint):Boolean
+		{
+			//17 is a floor tile on level0
+			var tileNum:uint = _tileMapCollision.getTile(p.x / 32, p.y / 32);
+			// add the other valid swings in here please, just copy paste the block types you want to swing on
+			switch(tileNum)
+			{
+				case 17: return true;
+				case 2: return true;
+				case 41: return true;
+				case 33: return true;
+				case 25: return true;
+				default: return false;
+			}
+			
+		}
+		
 		public function removeLimit():void
 		{
 			_player.maxVelocity.x = 100000;
@@ -151,17 +175,18 @@ package com.trdevt.gameState
 				updateWhip();
 
 			}
-			else
-			{
-				_whipCanvas.fill(0x00000000);
-
-			}
+			
 			if (FlxG.keys.O)
 				FlxG.switchState(new ResultsState(0,_currentLevelNum));
 			if (FlxG.keys.R)
 				FlxG.switchState(new SelectState(new XML()));
 			
 			
+		}
+		
+		private function clearWhipCanvas():void 
+		{
+			_whipCanvas.fill(0x00000000);
 		}
 		
 		
@@ -344,7 +369,12 @@ package com.trdevt.gameState
 		private function drawWhip(whipDest:FlxPoint):void 
 		{
 			//check if whip is possible here, if not, tell hero to stop swinging
-			//TODO: check to see if the player can actually swing, and if they can't, drop them like a bad habit
+			if (!checkValidSwing(new FlxPoint(FlxG.mouse.x, FlxG.mouse.y)))
+			{
+				//trace("invalid swing attempted!");
+				_player.stopSwinging();
+				return;
+			}
 
 			trace("in PlayState, got signal to draw whip ending at: " + whipDest.x + ", " + whipDest.y);			
 
