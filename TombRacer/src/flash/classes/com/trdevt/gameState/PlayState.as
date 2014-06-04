@@ -2,6 +2,7 @@ package com.trdevt.gameState
 {
 	import com.trdevt.sprites.Hero;
 	import com.trdevt.sprites.HeroStates;
+	import com.trdevt.sprites.obstacles.ArrowLauncherObstacle;
 	import com.trdevt.sprites.obstacles.ArrowObstacle;
 	import com.trdevt.sprites.obstacles.BatObstacle;
 	import com.trdevt.sprites.obstacles.FireBallLauncherObstacle;
@@ -34,6 +35,7 @@ package com.trdevt.gameState
 		
 		protected var _ftScore:FlxText;
 		protected var _fireballTimer:Timer;
+		protected var _arrowTimer:Timer;
 		protected var _currentLevelNum:Number;
 		
 		//class files will be loaded from the parse function
@@ -45,6 +47,7 @@ package com.trdevt.gameState
 		protected var _fgFireballCollision:FlxGroup;
 		protected var _fgArrowCollision:FlxGroup;
 		protected var _fgFireballLauncher:FlxGroup;
+		protected var _fgArrowLauncher:FlxGroup;
 		
 		protected var _tileMapBackgroundFile:Class;
 		protected var _tileSetBackgroundFile:Class;
@@ -96,9 +99,9 @@ package com.trdevt.gameState
 			
 			_fgBatCollision = new FlxGroup(20);
 			_fgFireballCollision = new FlxGroup(50);
-			_fgArrowCollision = new FlxGroup(10);
-			_fgFireballLauncher = new FlxGroup(50);
-			
+			_fgArrowCollision = new FlxGroup(20);
+			_fgFireballLauncher = new FlxGroup(20);
+			_fgArrowLauncher = new FlxGroup(50);
 			
 			//Test Obstacles
 			//_fgBatCollision.add(new BatObstacle(5, 5, FlxObject.UP));
@@ -110,11 +113,12 @@ package com.trdevt.gameState
 			
 			//_fgFireballCollision.add(new FireballObstacle(5 , 3, FlxObject.RIGHT));
 			
+			_fgArrowLauncher.add(new ArrowLauncherObstacle(2, 2, FlxObject.DOWN));
 			add(_fgBatCollision);
 			add(_fgFireballCollision);
 			add(_fgArrowCollision);
 			add(_fgFireballLauncher);
-			
+			add(_fgArrowLauncher);
 			
 			createWhipCanvas();
 			
@@ -161,7 +165,8 @@ package com.trdevt.gameState
 
 			_finalTime += FlxG.elapsed;
 			_ftScore.text = FlxU.formatTime(_finalTime);
-
+			FlxG.collide(_player, _fgFireballLauncher);
+			FlxG.collide(_player, _fgArrowLauncher);
 			if (FlxG.collide(_player, _tileMapCollision))
 			{
 				_player.stopSwinging();
@@ -175,8 +180,8 @@ package com.trdevt.gameState
 			}
 			FlxG.collide(_fgBatCollision, _tileMapCollision, onBatCollision);
 			
-			//FlxG.overlap(_player, _fgArrowCollision, onArrowCollision);
-			//FlxG.collide(_fgArrowCollision, _tileMapCollision, onObstacleCollision);
+			FlxG.overlap(_player, _fgArrowCollision, onArrowOverlap);
+			FlxG.collide(_fgArrowCollision, _tileMapCollision, onArrowCollision);
 			
 			FlxG.overlap(_player, _fgFireballCollision, onFireballOverlap);
 			FlxG.collide(_fgFireballCollision, _tileMapCollision, onFireballCollision);
@@ -197,14 +202,22 @@ package com.trdevt.gameState
 			_player.respawnHero();
 		}
 		
-		public function onArrowCollision(arrow:ArrowObstacle, player:Hero):void
+		public function onArrowOverlap(player:Hero, arrow:ArrowObstacle)
 		{
 			arrow.onCollision();
+			_player.respawnHero();
+		}
+		
+		public function onArrowCollision(arrow:ArrowObstacle, player:FlxObject = null):void
+		{
+			arrow.onCollision();
+			_fgArrowCollision.remove(arrow);
 		}
 		
 		public function onFireballCollision(fireball:FireballObstacle, map:FlxObject = null):void
 		{
 			fireball.onCollision();
+			_fgArrowCollision.remove(fireball);
 		}
 		
 		public function onBatCollision(bat:BatObstacle, map:FlxObject = null)
@@ -217,6 +230,14 @@ package com.trdevt.gameState
 			for each (var launcher:FireBallLauncherObstacle in _fgFireballLauncher.members) 
 			{
 				_fgFireballCollision.add(launcher.launchFireball());
+			}
+		}
+		
+		public function onLaunchArrow(e:Event):void
+		{
+			for each (var launcher:ArrowLauncherObstacle in _fgArrowLauncher.members)
+			{
+				_fgArrowCollision.add(launcher.launchArrow());
 			}
 		}
 		
@@ -305,6 +326,10 @@ package com.trdevt.gameState
 			_fireballTimer = new Timer(800);
 			_fireballTimer.addEventListener(TimerEvent.TIMER, onLaunchFireball);
 			_fireballTimer.start();
+			
+			_arrowTimer = new Timer(800);
+			_arrowTimer.addEventListener(TimerEvent.TIMER, onLaunchArrow);
+			_arrowTimer.start();
 			
 			_finalTime = 0;
 			_startTime = FlxG.elapsed;
