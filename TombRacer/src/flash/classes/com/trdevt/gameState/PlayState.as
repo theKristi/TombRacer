@@ -125,6 +125,29 @@ package com.trdevt.gameState
 			add(_ftScore);
 			
 		}
+		
+		/**
+		 * false for invalid swing, true for valid swing.
+		 * @param	p
+		 * @return
+		 */
+		private function checkValidSwing(p:FlxPoint):Boolean
+		{
+			//17 is a floor tile on level0
+			var tileNum:uint = _tileMapCollision.getTile(p.x / 32, p.y / 32);
+			// add the other valid swings in here please, just copy paste the block types you want to swing on
+			switch(tileNum)
+			{
+				case 17: return true;
+				case 2: return true;
+				case 41: return true;
+				case 33: return true;
+				case 25: return true;
+				default: return false;
+			}
+			
+		}
+		
 		public function removeLimit():void
 		{
 			_player.maxVelocity.x = 100000;

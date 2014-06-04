@@ -218,6 +218,9 @@ package com.trdevt.sprites
 			
 			velocity.x = velocity.y = acceleration.x = 0;
 			
+			_heroState = HeroStates.HERO_NOT_SWING;
+			signalHeroStoppedSwinging.dispatch();
+			
 			signalHeroHasDied.dispatch();
 
 		}
