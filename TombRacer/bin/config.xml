@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <game>
 	<levels>
-		<level levelnum = "0">
+		<level levelnum = "0" par="90">
 			<heroPosition x="5" y="1" />
 			<fireballObstacles>
 				<fireball x="1" y="1" direction="0x1000"></fireball>
@@ -16,26 +16,26 @@
 				<crushguy x="3" y="5"></crushguy>
 			</crushguyObstacles>
 		</level>
-		<level levelnum = "1">
+		<level levelnum = "1" par="90">
 			<heroPosition x="4" y="1" />
 		</level>
-		<level levelnum = "2">
+		<level levelnum = "2" par="90">
 			<heroPosition x="4" y="1" />
 		</level>
-		<level levelnum = "3">
+		<level levelnum = "3" par="90">
 			<heroPosition x="4" y="1" />
 		</level>
-		<level levelnum = "4">
+		<level levelnum = "4" par="90">
 			<heroPosition x="4" y="1" />
 		</level>
-		<level levelnum = "5">
+		<level levelnum = "5" par="90">
 			<heroPosition x="4" y="1" />
 		</level>
-		<level levelnum = "6">
+		<level levelnum = "6" par="90">
 			<heroPosition x="4" y="1" />
 		</level>
-		<level levelnum = "7">
-			<heroPosition x="4" y="1" />
+		<level levelnum = "7" par="90">
+			<heroPosition x="4" y="1"/>
 		</level>
 		
 	</levels>
