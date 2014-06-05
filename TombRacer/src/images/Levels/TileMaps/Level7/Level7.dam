@@ -2,17 +2,17 @@
 <project>
   <version>3.1.6</version>
   <bgColor>0x000000</bgColor>
-  <viewPos x="34" y="-304"/>
+  <viewPos x="305.84444444444443" y="216.5"/>
   <firstLayersTop>true</firstLayersTop>
   <spriteEntries currentId="1"/>
   <layers>
     <group name="Group1" id="0" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
-      <maplayer name="Map1" id="0" xScroll="1" yScroll="1" x="0" y="0" width="40" height="24" tileset="../../../../../../../../../Desktop/Tiles/TileSet.png" tileWidth="32" tileHeight="32" visible="true" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="32" tileSpacingY="32" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false" selected="true">
+      <maplayer name="Map1" id="0" xScroll="1" yScroll="1" x="0" y="0" width="40" height="24" tileset="../../TileSets/TileSet_Main.png" tileWidth="32" tileHeight="32" visible="true" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="32" tileSpacingY="32" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false" selected="true">
         <row>41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,41,41,41,41,41,41,41,41,41,41,41</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,41,41,41,41,41,41,41,41,41,41</row>
-        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,65,0,0,0,0,0,0,0,0,0,0,0,0,0,0,47,39,47,0,0,40,41,41,41,41</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,65,0,0,0,0,0,0,0,0,0,0,0,0,0,0,39,39,39,0,0,40,41,41,41,41</row>
         <row>41,41,41,41,41,41,0,0,0,0,0,0,0,41,41,41,53,53,53,34,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,41,41,41</row>
         <row>41,41,41,41,41,41,54,54,54,54,54,54,54,41,41,41,41,41,41,41,53,53,34,0,0,0,0,0,0,0,0,0,0,0,0,0,0,41,41,41</row>
         <row>41,41,41,41,41,41,62,62,62,62,62,62,62,41,41,41,41,41,41,41,41,41,41,53,41,34,0,0,0,0,0,0,0,0,0,0,0,0,41,41</row>
@@ -21,16 +21,16 @@
         <row>41,0,0,0,0,0,0,0,40,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,0,0,0,0,0,32,41,41,41,41</row>
         <row>41,0,0,0,0,0,0,0,0,40,41,41,41,41,41,41,42,0,40,41,41,41,41,41,41,42,0,0,0,0,0,0,0,41,41,41,41,41,41,41</row>
         <row>41,0,0,0,0,0,0,0,0,0,41,41,41,41,42,0,0,0,0,40,41,41,41,41,41,0,0,0,0,0,0,0,0,41,41,41,41,41,41,41</row>
-        <row>41,0,0,50,0,0,0,0,0,0,41,41,41,39,0,0,0,0,0,0,41,41,41,41,42,0,0,0,0,0,0,0,0,41,41,41,41,41,41,41</row>
-        <row>41,41,41,41,41,41,0,0,0,0,41,41,41,0,0,0,0,0,0,0,41,41,41,41,34,0,0,0,0,0,0,0,0,41,41,41,41,41,41,41</row>
+        <row>41,0,0,0,0,0,0,0,0,0,41,41,41,39,0,0,0,0,0,0,41,41,41,41,42,0,0,0,0,0,0,0,0,41,41,41,41,41,41,41</row>
+        <row>41,0,0,50,0,0,0,0,0,0,41,41,41,0,0,0,0,0,0,0,41,41,41,41,34,0,0,0,0,0,0,0,0,41,41,41,41,41,41,41</row>
         <row>41,41,41,41,41,41,0,0,0,0,41,41,41,0,0,0,0,0,0,0,0,41,41,41,41,0,0,0,0,0,0,0,0,41,41,41,41,41,41,41</row>
-        <row>41,41,41,41,41,41,0,0,0,0,39,39,41,0,0,0,65,0,0,0,0,39,39,39,0,0,0,0,0,0,0,0,0,41,41,41,41,41,41,41</row>
-        <row>41,41,41,41,41,41,41,0,0,0,0,0,0,0,0,41,41,41,0,0,0,0,0,0,0,0,0,0,0,8,41,0,0,41,41,41,41,41,41,41</row>
+        <row>41,41,41,41,41,41,0,0,0,0,39,41,39,0,0,0,0,0,0,0,0,39,33,39,0,0,0,0,0,0,0,0,0,41,41,41,41,41,41,41</row>
+        <row>41,41,41,41,41,41,41,0,0,0,0,0,0,0,0,0,65,0,0,0,0,0,39,0,0,0,0,0,0,8,41,0,0,41,41,41,41,41,41,41</row>
         <row>41,41,41,41,41,41,41,0,0,0,0,0,0,0,0,41,41,41,0,0,0,0,0,0,0,0,0,0,8,8,41,63,63,41,41,41,41,41,41,41</row>
-        <row>41,41,41,41,41,41,41,41,34,0,0,0,0,0,0,41,41,41,41,0,0,0,0,0,0,0,0,32,8,8,41,41,41,41,41,41,41,41,41,41</row>
-        <row>41,41,41,41,41,41,41,41,41,34,0,0,0,0,0,41,41,41,41,0,0,0,0,0,0,0,32,8,8,8,8,8,8,8,8,41,41,41,41,41</row>
-        <row>41,41,41,41,41,41,41,41,41,41,34,0,0,0,0,41,41,41,41,41,0,0,0,0,0,32,8,8,8,8,8,8,8,8,8,8,41,41,41,41</row>
-        <row>41,41,41,41,41,41,41,41,41,41,41,41,41,63,63,41,41,41,41,41,0,0,0,0,32,8,8,8,8,8,8,8,8,8,8,8,8,8,41,41</row>
+        <row>41,41,41,41,41,41,41,41,0,0,0,0,0,0,0,41,41,41,41,0,0,0,0,0,0,0,0,32,8,8,41,41,41,41,41,41,41,41,41,41</row>
+        <row>41,41,41,41,41,41,41,41,41,0,0,0,0,0,0,41,41,41,41,0,0,0,0,0,0,0,32,8,8,8,8,8,8,8,8,41,41,41,41,41</row>
+        <row>41,41,41,41,41,41,41,41,41,0,0,0,0,0,0,41,41,41,41,41,0,0,0,0,0,32,8,8,8,8,8,8,8,8,8,8,41,41,41,41</row>
+        <row>41,41,41,41,41,41,41,41,41,63,63,63,63,63,63,41,41,41,41,41,0,0,0,0,32,8,8,8,8,8,8,8,8,8,8,8,8,8,41,41</row>
         <row>41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,63,63,63,41,8,8,8,8,8,8,8,8,8,8,8,8,8,41,41</row>
       </maplayer>
     </group>
@@ -53,78 +53,12 @@
       <tile>0</tile>
     </row>
     <specialConnections>
-      <sets>
-        <connections name="Single Inside Corners">
-          <entry green="0x1111111" red="0x10000000"/>
-          <entry green="0x11011111" red="0x100000"/>
-          <entry green="0x11111110" red="0x1"/>
-          <entry green="0x11111011" red="0x100"/>
-        </connections>
-        <connections name="Double Inside Corners">
-          <entry green="0x1011111" red="0x10100000"/>
-          <entry green="0x11011110" red="0x100001"/>
-          <entry green="0x11111010" red="0x101"/>
-          <entry green="0x1111011" red="0x10000100"/>
-        </connections>
-        <connections name="Triple Inside Corners">
-          <entry green="0x1011011" red="0x10100100"/>
-          <entry green="0x1011110" red="0x10100001"/>
-          <entry green="0x11011010" red="0x100101"/>
-          <entry green="0x1111010" red="0x10000101"/>
-        </connections>
-        <connections name="Quad Inside Corners">
-          <entry green="0x1011010" red="0x10100101"/>
-          <entry green="0x0" red="0x0"/>
-          <entry green="0x0" red="0x0"/>
-          <entry green="0x0" red="0x0"/>
-        </connections>
-        <connections name="Double Outside Corners">
-          <entry green="0x10" red="0x1011000"/>
-          <entry green="0x1000" red="0x1010010"/>
-          <entry green="0x1000000" red="0x11010"/>
-          <entry green="0x10000" red="0x1001010"/>
-        </connections>
-        <connections name="Double Outside Edges">
-          <entry green="0x1000010" red="0x11000"/>
-          <entry green="0x11000" red="0x1000010"/>
-          <entry green="0x0" red="0x0"/>
-          <entry green="0x0" red="0x0"/>
-        </connections>
-        <connections name="Opposing Double Inside Corners">
-          <entry green="0x1111110" red="0x10000001"/>
-          <entry green="0x11011011" red="0x100100"/>
-          <entry green="0x0" red="0x0"/>
-          <entry green="0x0" red="0x0"/>
-        </connections>
-      </sets>
-      <rows>
-        <row set="0">
-          <tiles>
-            <id>0</id>
-            <id>0</id>
-            <id>0</id>
-            <id>0</id>
-          </tiles>
-        </row>
-        <row set="0">
-          <tiles>
-            <id>0</id>
-            <id>0</id>
-            <id>0</id>
-            <id>0</id>
-          </tiles>
-        </row>
-      </rows>
+      <sets/>
+      <rows/>
     </specialConnections>
   </tileMatrix>
   <tileMatrixData name="matrix1" rows="3" cols="3" randomizeMiddle="true" ignoreClear="false" ignoreMapEdges="true" allowSpecialTiles="false" tileset="">
     <tiles>0,0,0,0,0,0,0,0,0</tiles>
-    <connections set="0">
-      <tiles>0,0,0,0</tiles>
-    </connections>
-    <connections set="0">
-      <tiles>0,0,0,0</tiles>
-    </connections>
   </tileMatrixData>
   <tileBrushes/>
   <colorSwatches/>
@@ -173,7 +107,7 @@
   </options>
   <exporter name="C:\Program Files (x86)\DAME\lua\Exporters\csvTilemap.lua" spritepos="Top Left" rotatedSpritePos="false" relativePaths="true" useProjectExporterOnly="false">
     <setting name="FileExt">csv</setting>
-    <setting name="CSVDir">C:\Users\Sawyer\Documents\GitHub\GameDev_spring14\TombRacer\src\images\Levels\TileMaps\Level7</setting>
+    <setting name="CSVDir"/>
   </exporter>
   <customPropertyTypes/>
   <guides>

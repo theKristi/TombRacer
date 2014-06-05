@@ -7,6 +7,10 @@ package com.trdevt.gameState
 	 */
 	public class Loader
 	{
+		//singleton code here
+		private var _loader:Loader = null;
+		private static const _instance			:Loader = new Loader( SingletonLock );		
+		
 		public var listSet:Array;
 		public var listMap:Array;
 
@@ -34,8 +38,17 @@ package com.trdevt.gameState
 		[Embed(source = '../../../../../images/Levels/TileMaps/Level7/Platforms.csv', mimeType = 'application/octet-stream')]private static var q:Class;		
 		[Embed(source = '../../../../../images/Levels/TileMaps/Level8/Platforms.csv', mimeType = 'application/octet-stream')]private static var r:Class;		
 
-		public function Loader():void
+		public function Loader($lock:Class) 
 		{
+			if ($lock != SingletonLock)
+				throw new Error("Loader is a singleton and should not be instantiated. Use Loader.instance instead");
+				
+				
+		}
+		
+		public function init():void 
+		{			
+			trace("initializing the Loader!");
 			
 			listSet = new Array(9);
 			listSet[0] = aaa;
@@ -62,6 +75,40 @@ package com.trdevt.gameState
 			
 			
 		}
+
+		public static function get instance():Loader
+		{			
+			return _instance;
+		}
+
+		//public function Loader():void
+		//{
+			//
+			//listSet = new Array(9);
+			//listSet[0] = aaa;
+			//listSet[1] = bbb;
+			//listSet[2] = ccc;
+			//listSet[3] = ddd;
+			//listSet[4] = eee;
+			//listSet[5] = fff;
+			//listSet[6] = ggg;
+			//listSet[7] = hhh;
+			//listSet[8] = iii;
+//
+			//listMap = new Array(9);
+	//
+			//listMap[0] = j;
+			//listMap[1] = k;
+			//listMap[2] = l;
+			//listMap[3] = m;
+			//listMap[4] = n;
+			//listMap[5] = o;
+			//listMap[6] = p;
+			//listMap[7] = q;
+			//listMap[8] = r;
+			//
+			//
+		//}
 
 		/**
 		 * gets the tile set
@@ -104,3 +151,5 @@ package com.trdevt.gameState
 	}
 
 }
+
+class SingletonLock {} // Do nothing, this is just to prevent external instantiation.

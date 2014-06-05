@@ -1,17 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <game>
 	<levels>
-		<level id="1" par="90" />
-		<level id="2" par="90" />
-		<level id="3" par="90" />
-		<level id="4" par="90" />
-		<level id="5" par="90" />
-		<level id="6" par="90" />
-		<level id="7" par="90" />
-		<level id="8" par="90" />
-		<levelTest>
+		<level levelnum = "0">
+			<heroPosition x="5" y="1" />
+			<fireballObstacles>
+				<fireball x="1" y="1" direction="0x1000"></fireball>
+				<fireball x="2" y="1" direction="0x1000"></fireball>
+				<fireball x="3" y="1" direction="0x1000"></fireball>
+				<fireball x="4" y="1" direction="0x1000"></fireball>
+			</fireballObstacles>
+			<arrowtrapObstacles>
+				<arrowtrap x="1" y="2" direction="0x1000"></arrowtrap>
+			</arrowtrapObstacles>
+			<crushguyObstacles>
+				<crushguy x="3" y="5"></crushguy>
+			</crushguyObstacles>
+		</level>
+		<level levelnum = "1">
 			<heroPosition x="4" y="1" />
-		</levelTest>
+		</level>
+		<level levelnum = "2">
+			<heroPosition x="4" y="1" />
+		</level>
+		<level levelnum = "3">
+			<heroPosition x="4" y="1" />
+		</level>
+		<level levelnum = "4">
+			<heroPosition x="4" y="1" />
+		</level>
+		<level levelnum = "5">
+			<heroPosition x="4" y="1" />
+		</level>
+		<level levelnum = "6">
+			<heroPosition x="4" y="1" />
+		</level>
+		<level levelnum = "7">
+			<heroPosition x="4" y="1" />
+		</level>
+		
 	</levels>
 	<hero	drag.x = 			"1500"
 			acceleration.y = 	"800"
@@ -20,7 +46,7 @@
 			_jumpPower = 		"400"
 			_constAccel = 		"640"
 			/>
-	<credits>
+			<credits>
 		<credit text="Made with:" />
 		<credit text="flixel" />
 		<credit text="TweenMax" />
