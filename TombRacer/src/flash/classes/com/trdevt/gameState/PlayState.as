@@ -106,7 +106,7 @@ package com.trdevt.gameState
 			
 			
 			//Test Obstacles
-			_fgBatCollision.add(new BatObstacle(5, 5, FlxObject.UP));
+			//_fgBatCollision.add(new BatObstacle(5, 5, FlxObject.UP));
 			//_fgBatCollision.add(new BatObstacle(3, 7, FlxObject.RIGHT));
 			//_fgBatCollision.add(new BatObstacle(7, 9, FlxObject.LEFT));
 			
@@ -467,6 +467,13 @@ package com.trdevt.gameState
 			{
 				_fgCrushGuyCollision.add(new CrushGuyObstacle(crushGuyXml.crushguy[i].@x, crushGuyXml.crushguy[i].@y));
 			}
+			
+			var batXml:XML = new XML(xmlTree.levels.level[_currentLevelNum].batObstacles);
+			for (i = 0; i < batXml.*.length(); i++)
+			{
+				_fgBatCollision.add(new BatObstacle(batXml.bat[i].@x, batXml.bat[i].@y, batXml.bat[i].@direction));
+			}
+			
 			//trace(fireballXml.fireball[0].@x);
 			_player = new Hero(heroXmlTree, _collisionTileWidth * xTile, _collisionTileHeight * yTile);
 			_fireballTimer = new Timer(800);

@@ -4,32 +4,25 @@
 		<level levelnum = "0">
 			<heroPosition x="7" y="10" />
 			<fireballObstacles>
-				<fireball x="1" y="1" direction="0x1000"></fireball>
-				<fireball x="2" y="1" direction="0x1000"></fireball>
-				<fireball x="3" y="1" direction="0x1000"></fireball>
-				<fireball x="4" y="1" direction="0x1000"></fireball>
 			</fireballObstacles>
 			<arrowtrapObstacles>
-				<arrowtrap x="1" y="2" direction="0x1000"></arrowtrap>
 			</arrowtrapObstacles>
 			<crushguyObstacles>
-				<crushguy x="3" y="5"></crushguy>
 			</crushguyObstacles>
+			<batObstacles>
+			</batObstacles>
 		</level>
 		<level levelnum = "1">
 			<heroPosition x="6" y="1" />
 			<fireballObstacles>
-				<fireball x="1" y="1" direction="0x1000"></fireball>
-				<fireball x="2" y="1" direction="0x1000"></fireball>
-				<fireball x="3" y="1" direction="0x1000"></fireball>
-				<fireball x="4" y="1" direction="0x1000"></fireball>
 			</fireballObstacles>
 			<arrowtrapObstacles>
-				<arrowtrap x="1" y="2" direction="0x1000"></arrowtrap>
 			</arrowtrapObstacles>
 			<crushguyObstacles>
-				<crushguy x="3" y="5"></crushguy>
 			</crushguyObstacles>
+			<batObstacles>
+				<bat x="16" y="4" direction="0x1000"></bat>
+			</batObstacles>
 		</level>
 		<level levelnum = "2">
 			<heroPosition x="4" y="1" />
@@ -45,6 +38,9 @@
 			<crushguyObstacles>
 				<crushguy x="3" y="5"></crushguy>
 			</crushguyObstacles>
+			<batObstacles>
+				<bat x="16" y="4" direction="0x1000"></bat>
+			</batObstacles>
 		</level>
 		<level levelnum = "3">
 			<heroPosition x="4" y="1" />
@@ -60,6 +56,8 @@
 			<crushguyObstacles>
 				<crushguy x="3" y="5"></crushguy>
 			</crushguyObstacles>
+			<batObstacles>
+			</batObstacles>
 		</level>
 		<level levelnum = "4">
 			<heroPosition x="4" y="1" />
@@ -75,6 +73,8 @@
 			<crushguyObstacles>
 				<crushguy x="3" y="5"></crushguy>
 			</crushguyObstacles>
+			<batObstacles>
+			</batObstacles>
 		</level>
 		<level levelnum = "5">
 			<heroPosition x="4" y="1" />
@@ -90,6 +90,8 @@
 			<crushguyObstacles>
 				<crushguy x="3" y="5"></crushguy>
 			</crushguyObstacles>
+			<batObstacles>
+			</batObstacles>
 		</level>
 		<level levelnum = "6">
 			<heroPosition x="4" y="1" />
@@ -105,6 +107,8 @@
 			<crushguyObstacles>
 				<crushguy x="3" y="5"></crushguy>
 			</crushguyObstacles>
+			<batObstacles>
+			</batObstacles>
 		</level>
 		<level levelnum = "7">
 			<heroPosition x="4" y="1" />
@@ -120,6 +124,8 @@
 			<crushguyObstacles>
 				<crushguy x="3" y="5"></crushguy>
 			</crushguyObstacles>
+			<batObstacles>
+			</batObstacles>
 		</level>		
 	</levels>
 	<hero	drag.x = 			"1500"
