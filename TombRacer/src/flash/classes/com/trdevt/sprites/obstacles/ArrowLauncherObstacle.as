@@ -17,6 +17,7 @@ package com.trdevt.sprites.obstacles
 			this.loadGraphic(this._spriteSheet, false, false, 32, 32);
 			this.addAnimation("idle", [1]);
 			this.play("idle");
+			this.immovable = true;
 		}
 		
 		public function launchArrow():ArrowObstacle

@@ -99,15 +99,10 @@ package com.trdevt.gameState
 			add(_tileMapCollision);
 			
 			
-			_fgBatCollision = new FlxGroup(20);
-			_fgFireballCollision = new FlxGroup(50);
-			_fgArrowCollision = new FlxGroup(20);
-			_fgFireballLauncher = new FlxGroup(20);
-			_fgArrowLauncher = new FlxGroup(50);
-			_fgCrushGuyCollision = new FlxGroup(20);
+			
 			
 			//Test Obstacles
-			//_fgBatCollision.add(new BatObstacle(5, 5, FlxObject.UP));
+			_fgBatCollision.add(new BatObstacle(5, 5, FlxObject.UP));
 			//_fgBatCollision.add(new BatObstacle(3, 7, FlxObject.RIGHT));
 			//_fgBatCollision.add(new BatObstacle(7, 9, FlxObject.LEFT));
 			
@@ -118,7 +113,7 @@ package com.trdevt.gameState
 			
 			//_fgArrowLauncher.add(new ArrowLauncherObstacle(2, 2, FlxObject.DOWN));
 			
-			_fgCrushGuyCollision.add(new CrushGuyObstacle(2, 3));
+			//_fgCrushGuyCollision.add(new CrushGuyObstacle(2, 3));
 			add(_fgBatCollision);
 			add(_fgFireballCollision);
 			add(_fgArrowCollision);
@@ -217,14 +212,18 @@ package com.trdevt.gameState
 		
 		public function onFireballOverlap(player:Hero, fireball:FireballObstacle)
 		{
+			_fgFireballCollision.remove(fireball);
 			fireball.onCollision();
 			_player.respawnHero();
+			
 		}
 		
 		public function onArrowOverlap(player:Hero, arrow:ArrowObstacle)
 		{
+			_fgArrowCollision.remove(arrow);
 			arrow.onCollision();
 			_player.respawnHero();
+			
 		}
 		
 		public function onArrowCollision(arrow:ArrowObstacle, player:FlxObject = null):void
@@ -236,7 +235,7 @@ package com.trdevt.gameState
 		public function onFireballCollision(fireball:FireballObstacle, map:FlxObject = null):void
 		{
 			fireball.onCollision();
-			_fgArrowCollision.remove(fireball);
+			_fgFireballCollision.remove(fireball);
 		}
 		
 		public function onBatCollision(bat:BatObstacle, map:FlxObject = null)
@@ -276,6 +275,13 @@ package com.trdevt.gameState
 		{
 			_tileMapCollision = new FlxTilemap();
 			_tileMapBackground = new FlxTilemap();
+			
+			_fgBatCollision = new FlxGroup(20);
+			_fgFireballCollision = new FlxGroup(50);
+			_fgArrowCollision = new FlxGroup(20);
+			_fgFireballLauncher = new FlxGroup(20);
+			_fgArrowLauncher = new FlxGroup(50);
+			_fgCrushGuyCollision = new FlxGroup(20);
 
 			var l:Loader = new Loader();
 
@@ -333,14 +339,32 @@ package com.trdevt.gameState
 			_tileMapCollision.setTileProperties(50, FlxObject.NONE, collideVictory);
 			
 			// Add dynamic obstacles
-			
-			
-			var xTile:Number = xmlTree.levels.levelTest.heroPosition.@["x"];
-			var yTile:Number = xmlTree.levels.levelTest.heroPosition.@["y"];
+			//FlxObject.DOWN	0x1000
+			//FlxObject.UP		0x0100
+			//FlxObject.RIGHT	0x0010
+			//FlxObject.LEFT 	0x0001
+			var xTile:Number = xmlTree.levels.level[_currentLevelNum].heroPosition.@["x"];
+			var yTile:Number = xmlTree.levels.level[_currentLevelNum].heroPosition.@["y"];
 			
 			var heroXmlTree:XML = new XML(xmlTree.hero.toXMLString());
-
+			var fireballXml:XML = new XML(xmlTree.levels.level[_currentLevelNum].fireballObstacles);
+			for (var i:int = 0; i < fireballXml.*.length(); i++)
+			{
+				_fgFireballLauncher.add(new FireBallLauncherObstacle(fireballXml.fireball[i].@x, fireballXml.fireball[i].@y, fireballXml.fireball[i].@direction));
+			}
 			
+			var arrowtrapXml:XML = new XML(xmlTree.levels.level[_currentLevelNum].arrowtrapObstacles);
+			for (var i:int = 0; i < arrowtrapXml.*.length(); i++)
+			{
+				_fgArrowLauncher.add(new ArrowLauncherObstacle(arrowtrapXml.arrowtrap[i].@x, arrowtrapXml.arrowtrap[i].@y, arrowtrapXml.arrowtrap[i].@direction));
+			}
+			
+			var crushGuyXml:XML = new XML(xmlTree.levels.level[_currentLevelNum].crushguyObstacles);
+			for (var i:int = 0; i < crushGuyXml.*.length(); i++)
+			{
+				_fgCrushGuyCollision.add(new CrushGuyObstacle(crushGuyXml.crushguy[i].@x, crushGuyXml.crushguy[i].@y));
+			}
+			//trace(fireballXml.fireball[0].@x);
 			_player = new Hero(heroXmlTree, _collisionTileWidth * xTile, _collisionTileHeight * yTile);
 			_fireballTimer = new Timer(800);
 			_fireballTimer.addEventListener(TimerEvent.TIMER, onLaunchFireball);
