@@ -222,9 +222,9 @@ package com.trdevt.gameState
 				updateWhip();
 			}
 			if (FlxG.keys.R)
-				FlxG.switchState(new SelectState(new XML()));
+				toLevelSelect();
 			if (FlxG.keys.O)
-				FlxG.switchState(new ResultsState(0,_currentLevelNum));
+				toResultsScreen();
 
 			
 			
@@ -315,13 +315,40 @@ package com.trdevt.gameState
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		/**
-		 * this function handles when the level is completed
+		 * this function handles when the level is completed. this is the ONLY PLACE switch state can be called.
 		 */
 		protected function levelComplete():void 
 		{
+			cleanUpLevel();
 			FlxG.switchState(new ResultsState(_finalTime, _currentLevelNum));
 		}
 		
+		private function toLevelSelect():void 
+		{
+			cleanUpLevel();
+			FlxG.switchState(new SelectState(new XML()));
+		}
+		
+		private function toResultsScreen():void 
+		{
+			levelComplete();
+		}
+		
+		private function cleanUpLevel():void 
+		{
+			//trace("cleaning up level!");
+			for each (var sprite:CrushGuyObstacle in _fgCrushGuyCollision) 
+			{
+				//trace("test");
+				sprite.die();
+			}
+			
+			_fireballTimer.removeEventListener(TimerEvent.TIMER, onLaunchFireball);
+			_fireballTimer.stop();
+			
+			_arrowTimer.removeEventListener(TimerEvent.TIMER, onLaunchArrow);
+			_arrowTimer.stop();
+		}		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		override protected function parseXML(xmlTree:XML):void 
@@ -430,13 +457,13 @@ package com.trdevt.gameState
 			}
 			
 			var arrowtrapXml:XML = new XML(xmlTree.levels.level[_currentLevelNum].arrowtrapObstacles);
-			for (var i:int = 0; i < arrowtrapXml.*.length(); i++)
+			for (i = 0; i < arrowtrapXml.*.length(); i++)
 			{
 				_fgArrowLauncher.add(new ArrowLauncherObstacle(arrowtrapXml.arrowtrap[i].@x, arrowtrapXml.arrowtrap[i].@y, arrowtrapXml.arrowtrap[i].@direction));
 			}
 			
 			var crushGuyXml:XML = new XML(xmlTree.levels.level[_currentLevelNum].crushguyObstacles);
-			for (var i:int = 0; i < crushGuyXml.*.length(); i++)
+			for (i = 0; i < crushGuyXml.*.length(); i++)
 			{
 				_fgCrushGuyCollision.add(new CrushGuyObstacle(crushGuyXml.crushguy[i].@x, crushGuyXml.crushguy[i].@y));
 			}
@@ -477,7 +504,7 @@ package com.trdevt.gameState
 		
 		private function collideHalfRight(Tile:FlxTile, player:FlxObject):void
 		{
-			trace(FlxU.getClassName(_player));
+			//trace(FlxU.getClassName(_player));
 			if (FlxU.getClassName(player) == "com.trdevt.sprites.Hero" && (player as Hero).jumping == false)
 			{
 			if (  player.x >= ((Tile.mapIndex % 40) * 32) && player.x <= ((Tile.mapIndex % 40) * 32 + 32))
@@ -598,7 +625,7 @@ package com.trdevt.gameState
 				return;
 			}
 
-			trace("in PlayState, got signal to draw whip ending at: " + whipDest.x + ", " + whipDest.y);			
+			//trace("in PlayState, got signal to draw whip ending at: " + whipDest.x + ", " + whipDest.y);			
 
 			_whipCanvas.fill(0x00000000);
 			_whipCanvas.drawLine(_player.x + (_player.width * 0.5), _player.y + (_player.height * 0.5), whipDest.x, whipDest.y,  0xfff4a460); //brown

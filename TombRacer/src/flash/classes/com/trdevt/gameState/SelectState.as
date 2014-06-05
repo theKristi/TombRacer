@@ -121,7 +121,7 @@ package com.trdevt.gameState
 		
 		private function locked(i:int):Boolean
 		{
-			var res = false;
+			var res:Boolean = false;
 			if (i!=0&&LocalSharedObjectManager.instance.getValue("Level" + (i - 1) + "fastestTime") == "undefined")
 				res = true;
 			return res;
@@ -138,10 +138,17 @@ package com.trdevt.gameState
 			
 			
 			//for now just place greyed trophy at the right place
-			 var trophy:FlxSprite = new FlxSprite(eButton.x + 15, eButton.y + 138, Assets.SmallGrayed);
+			 trophy = new FlxSprite(eButton.x + 15, eButton.y + 138, Assets.SmallGrayed);
 			 add(trophy);
 			
 		}
+		
+		
+		override protected function parseXML(xmlTree:XML):void 
+		{
+			//stub, gets rid of warning
+		}
+		
 	}//end class
 
 }

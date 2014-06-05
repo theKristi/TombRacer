@@ -34,7 +34,7 @@ package com.trdevt.gameState
 		private var x:int = 855;
 		private var maxy:int = 525;
 		private var miny:int = 203;
-		private var creditWidth = 379;
+		private var creditWidth:Number = 379;
 		override public function create():void 
 		{
 			credits = new Array();
@@ -137,7 +137,7 @@ package com.trdevt.gameState
 		{		
 			FlxG.switchState(new MenuState());
 		}
-		private function parseXML()
+		private function parseXML():void
 		{
 			 var xmlcredits:XMLList = XMLManager.instance.xmlConfig.credits.credit;
 			 var len:int = xmlcredits.length();

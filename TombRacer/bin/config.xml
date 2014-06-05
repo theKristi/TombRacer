@@ -18,30 +18,113 @@
 		</level>
 		<level levelnum = "1">
 			<heroPosition x="4" y="1" />
+			<fireballObstacles>
+				<fireball x="1" y="1" direction="0x1000"></fireball>
+				<fireball x="2" y="1" direction="0x1000"></fireball>
+				<fireball x="3" y="1" direction="0x1000"></fireball>
+				<fireball x="4" y="1" direction="0x1000"></fireball>
+			</fireballObstacles>
+			<arrowtrapObstacles>
+				<arrowtrap x="1" y="2" direction="0x1000"></arrowtrap>
+			</arrowtrapObstacles>
+			<crushguyObstacles>
+				<crushguy x="3" y="5"></crushguy>
+			</crushguyObstacles>
 		</level>
 		<level levelnum = "2">
 			<heroPosition x="4" y="1" />
+			<fireballObstacles>
+				<fireball x="1" y="1" direction="0x1000"></fireball>
+				<fireball x="2" y="1" direction="0x1000"></fireball>
+				<fireball x="3" y="1" direction="0x1000"></fireball>
+				<fireball x="4" y="1" direction="0x1000"></fireball>
+			</fireballObstacles>
+			<arrowtrapObstacles>
+				<arrowtrap x="1" y="2" direction="0x1000"></arrowtrap>
+			</arrowtrapObstacles>
+			<crushguyObstacles>
+				<crushguy x="3" y="5"></crushguy>
+			</crushguyObstacles>
 		</level>
 		<level levelnum = "3">
 			<heroPosition x="4" y="1" />
+			<fireballObstacles>
+				<fireball x="1" y="1" direction="0x1000"></fireball>
+				<fireball x="2" y="1" direction="0x1000"></fireball>
+				<fireball x="3" y="1" direction="0x1000"></fireball>
+				<fireball x="4" y="1" direction="0x1000"></fireball>
+			</fireballObstacles>
+			<arrowtrapObstacles>
+				<arrowtrap x="1" y="2" direction="0x1000"></arrowtrap>
+			</arrowtrapObstacles>
+			<crushguyObstacles>
+				<crushguy x="3" y="5"></crushguy>
+			</crushguyObstacles>
 		</level>
 		<level levelnum = "4">
 			<heroPosition x="4" y="1" />
+			<fireballObstacles>
+				<fireball x="1" y="1" direction="0x1000"></fireball>
+				<fireball x="2" y="1" direction="0x1000"></fireball>
+				<fireball x="3" y="1" direction="0x1000"></fireball>
+				<fireball x="4" y="1" direction="0x1000"></fireball>
+			</fireballObstacles>
+			<arrowtrapObstacles>
+				<arrowtrap x="1" y="2" direction="0x1000"></arrowtrap>
+			</arrowtrapObstacles>
+			<crushguyObstacles>
+				<crushguy x="3" y="5"></crushguy>
+			</crushguyObstacles>
 		</level>
 		<level levelnum = "5">
 			<heroPosition x="4" y="1" />
+			<fireballObstacles>
+				<fireball x="1" y="1" direction="0x1000"></fireball>
+				<fireball x="2" y="1" direction="0x1000"></fireball>
+				<fireball x="3" y="1" direction="0x1000"></fireball>
+				<fireball x="4" y="1" direction="0x1000"></fireball>
+			</fireballObstacles>
+			<arrowtrapObstacles>
+				<arrowtrap x="1" y="2" direction="0x1000"></arrowtrap>
+			</arrowtrapObstacles>
+			<crushguyObstacles>
+				<crushguy x="3" y="5"></crushguy>
+			</crushguyObstacles>
 		</level>
 		<level levelnum = "6">
 			<heroPosition x="4" y="1" />
+			<fireballObstacles>
+				<fireball x="1" y="1" direction="0x1000"></fireball>
+				<fireball x="2" y="1" direction="0x1000"></fireball>
+				<fireball x="3" y="1" direction="0x1000"></fireball>
+				<fireball x="4" y="1" direction="0x1000"></fireball>
+			</fireballObstacles>
+			<arrowtrapObstacles>
+				<arrowtrap x="1" y="2" direction="0x1000"></arrowtrap>
+			</arrowtrapObstacles>
+			<crushguyObstacles>
+				<crushguy x="3" y="5"></crushguy>
+			</crushguyObstacles>
 		</level>
 		<level levelnum = "7">
 			<heroPosition x="4" y="1" />
-		</level>
-		
+			<fireballObstacles>
+				<fireball x="1" y="1" direction="0x1000"></fireball>
+				<fireball x="2" y="1" direction="0x1000"></fireball>
+				<fireball x="3" y="1" direction="0x1000"></fireball>
+				<fireball x="4" y="1" direction="0x1000"></fireball>
+			</fireballObstacles>
+			<arrowtrapObstacles>
+				<arrowtrap x="1" y="2" direction="0x1000"></arrowtrap>
+			</arrowtrapObstacles>
+			<crushguyObstacles>
+				<crushguy x="3" y="5"></crushguy>
+			</crushguyObstacles>
+		</level>		
 	</levels>
 	<hero	drag.x = 			"1500"
 			acceleration.y = 	"800"
-			maxVelocity.x =		"400"
+			maxVelocity.x =		"300"
 			maxVelocity.y = 	"1000000"
 			_jumpPower = 		"400"
 			_constAccel = 		"640"

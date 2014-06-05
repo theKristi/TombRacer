@@ -58,8 +58,26 @@ package com.trdevt.sprites.obstacles
 			}
 		}
 		
+		/**
+		 * stops all timers and such
+		 */
+		public function die():void
+		{
+			trace("killing crush guy!");
+			_crushTimer.removeEventListener(TimerEvent.TIMER, _onReady);
+
+			_warningTimer.removeEventListener(TimerEvent.TIMER, _onCrush);
+			
+			_warningTimer.stop();
+			_crushTimer.stop();
+		}
+		
 		private function _onReady(e:Event):void
 		{
+			if (this == null || _warningTimer == null || _crushTimer == null)
+			{
+				return;
+			}
 			this.play("ready");
 			_warningTimer.start();
 			_crushTimer.stop();
