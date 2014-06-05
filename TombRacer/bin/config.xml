@@ -29,23 +29,22 @@
 			<fireballObstacles>
 			</fireballObstacles>
 			<arrowtrapObstacles>
-				<arrowtrap x="26" y="17" direction="0x1000"></arrowtrap>
 			</arrowtrapObstacles>
 			<crushguyObstacles>
+				<crushguy x="33" y="10"></crushguy>
 			</crushguyObstacles>
 			<batObstacles>
-				<bat x="32" y="12" direction="0x0010"></bat>
 			</batObstacles>
 		</level>
 		<level levelnum = "3">
-			<heroPosition x="6" y="1" />
+			<heroPosition x="2" y="20" />
 			<fireballObstacles>
-				<fireball x="20" y="6" direction="0x0010"></fireball>
+				<fireball x="24" y="20" direction="0x0010"></fireball>
 			</fireballObstacles>
 			<arrowtrapObstacles>
 			</arrowtrapObstacles>
 			<crushguyObstacles>
-				<crushguy x="14" y="15"></crushguy>
+				<crushguy x="3" y="7"></crushguy>
 			</crushguyObstacles>
 			<batObstacles>
 				<bat x="6" y="12" direction="0x0010"></bat>
@@ -54,10 +53,14 @@
 		<level levelnum = "4">
 			<heroPosition x="6" y="1" />
 			<fireballObstacles>
-				<fireball x="36" y="22" direction="0x0100"></fireball>
 			</fireballObstacles>
 			<arrowtrapObstacles>
-				<arrowtrap x="1" y="10" direction="0x1000"></arrowtrap>
+				<arrowtrap x="10" y="0" direction="0x1000" speed="3"></arrowtrap>
+				<arrowtrap x="14" y="1" direction="0x1000" speed="4"></arrowtrap>
+				<arrowtrap x="17" y="0" direction="0x1000" speed="5"></arrowtrap>
+				<arrowtrap x="20" y="1" direction="0x1000" speed="3"></arrowtrap>
+				<arrowtrap x="24" y="0" direction="0x1000" speed="7"></arrowtrap>
+				<arrowtrap x="27" y="1" direction="0x1000" speed="10"></arrowtrap>
 			</arrowtrapObstacles>
 			<crushguyObstacles>
 				<crushguy x="13" y="1"></crushguy>
@@ -70,29 +73,46 @@
 		<level levelnum = "5">
 			<heroPosition x="6" y="1" />
 			<fireballObstacles>
+				<fireball x="12" y="0" direction="0x1000"></fireball>
+				<fireball x="20" y="0" direction="0x1000"></fireball>
+				<fireball x="30" y="0" direction="0x1000"></fireball>
+				<fireball x="39" y="5" direction="0x0001"></fireball>
 			</fireballObstacles>
 			<arrowtrapObstacles>
-				<arrowtrap x="1" y="2" direction="0x0010"></arrowtrap>
 			</arrowtrapObstacles>
 			<crushguyObstacles>
-				<crushguy x="3" y="5"></crushguy>
+				<crushguy x="15" y="2"></crushguy>
+				<crushguy x="27" y="2"></crushguy>
 			</crushguyObstacles>
 			<batObstacles>
 			</batObstacles>
 		</level>
 		<level levelnum = "6">
-			<heroPosition x="4" y="1" />
+			<heroPosition x="3" y="8" />
 			<fireballObstacles>
 			</fireballObstacles>
 			<arrowtrapObstacles>
+				<arrowtrap x="23" y="14" direction="0x0001" speed="4"></arrowtrap>
+				<arrowtrap x="23" y="12" direction="0x0001" speed="4"></arrowtrap>
+				<arrowtrap x="0" y="15" direction="0x0010" speed="7"></arrowtrap>
 			</arrowtrapObstacles>
 			<crushguyObstacles>
-				<crushguy x="6" y="6"></crushguy>
-				<crushguy x="8" y="6"></crushguy>
-				<crushguy x="10" y="6"></crushguy>
-				<crushguy x="12" y="6"></crushguy>
-				<crushguy x="8" y="11"></crushguy>
-				<crushguy x="12" y="11"></crushguy>
+				<crushguy x="5" y="6"></crushguy>
+				<crushguy x="7" y="5"></crushguy>
+				<crushguy x="9" y="4"></crushguy>
+				<crushguy x="11" y="3"></crushguy>
+				<crushguy x="13" y="2"></crushguy>
+				<crushguy x="15" y="1"></crushguy>
+				
+				<crushguy x="5" y="17"></crushguy>
+				<crushguy x="8" y="17"></crushguy>
+				<crushguy x="12" y="17"></crushguy>
+				<crushguy x="15" y="17"></crushguy>
+				
+				
+				<crushguy x="27" y="1"></crushguy>
+				<crushguy x="31" y="1"></crushguy>
+				
 			</crushguyObstacles>
 			<batObstacles>
 			</batObstacles>
@@ -106,7 +126,7 @@
 				<fireball x="4" y="1" direction="0x1000"></fireball>
 			</fireballObstacles>
 			<arrowtrapObstacles>
-				<arrowtrap x="1" y="2" direction="0x1000"></arrowtrap>
+				<arrowtrap x="1" y="2" direction="0x1000" speed="1"></arrowtrap>
 			</arrowtrapObstacles>
 			<crushguyObstacles>
 				<crushguy x="3" y="5"></crushguy>

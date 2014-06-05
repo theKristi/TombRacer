@@ -137,10 +137,10 @@ package com.trdevt.gameState
 			add(_ftScore);
 			
 			emitterSpike  = new FlxEmitter(0, 0)
-			for(var i:int = 0; i < 20; i++)
+			for(var i:int = 0; i < 2000; i++)
 			{
 				var particle:FlxParticle = new FlxParticle();
-				particle.makeGraphic(1, 1, FlxG.RED);
+				particle.makeGraphic(3, 3, FlxG.RED);
 				particle.exists = false;
 				emitterSpike.add(particle);
 			}
@@ -460,7 +460,7 @@ package com.trdevt.gameState
 			var arrowtrapXml:XML = new XML(xmlTree.levels.level[_currentLevelNum].arrowtrapObstacles);
 			for (i = 0; i < arrowtrapXml.*.length(); i++)
 			{
-				_fgArrowLauncher.add(new ArrowLauncherObstacle(arrowtrapXml.arrowtrap[i].@x, arrowtrapXml.arrowtrap[i].@y, arrowtrapXml.arrowtrap[i].@direction));
+				_fgArrowLauncher.add(new ArrowLauncherObstacle(arrowtrapXml.arrowtrap[i].@x, arrowtrapXml.arrowtrap[i].@y, arrowtrapXml.arrowtrap[i].@direction, arrowtrapXml.arrowtrap[i].@speed));
 			}
 			
 			var crushGuyXml:XML = new XML(xmlTree.levels.level[_currentLevelNum].crushguyObstacles);
@@ -481,7 +481,7 @@ package com.trdevt.gameState
 			_fireballTimer.addEventListener(TimerEvent.TIMER, onLaunchFireball);
 			_fireballTimer.start();
 			
-			_arrowTimer = new Timer(800);
+			_arrowTimer = new Timer(1600);
 			_arrowTimer.addEventListener(TimerEvent.TIMER, onLaunchArrow);
 			_arrowTimer.start();
 			

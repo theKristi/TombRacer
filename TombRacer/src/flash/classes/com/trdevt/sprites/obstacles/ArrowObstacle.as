@@ -10,11 +10,11 @@ package com.trdevt.sprites.obstacles
 		[Embed(source = "../../../../../../images/SpriteSheets/ArrowSprite.png")] private var _arrowSprite:Class;
 		private var _speed:Number;
 		private var _direction:uint;
-		public function ArrowObstacle(X:Number=0, Y:Number=0, direction:uint = FlxObject.NONE) 
+		public function ArrowObstacle(X:Number=0, Y:Number=0, direction:uint = FlxObject.NONE, speed:Number = 7) 
 		{
 			super(X, Y, _arrowSprite);
 			
-			this._speed = 7;
+			this._speed = speed;
 			this._direction = direction;
 			
 			this.loadRotatedGraphic(this._spriteSheet, 4, -1, true, true);// , 32, 32);
