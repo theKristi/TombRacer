@@ -2,7 +2,7 @@
 <game>
 	<levels>
 		<level levelnum = "0">
-			<heroPosition x="5" y="1" />
+			<heroPosition x="7" y="10" />
 			<fireballObstacles>
 				<fireball x="1" y="1" direction="0x1000"></fireball>
 				<fireball x="2" y="1" direction="0x1000"></fireball>
@@ -17,7 +17,7 @@
 			</crushguyObstacles>
 		</level>
 		<level levelnum = "1">
-			<heroPosition x="4" y="1" />
+			<heroPosition x="6" y="1" />
 			<fireballObstacles>
 				<fireball x="1" y="1" direction="0x1000"></fireball>
 				<fireball x="2" y="1" direction="0x1000"></fireball>
