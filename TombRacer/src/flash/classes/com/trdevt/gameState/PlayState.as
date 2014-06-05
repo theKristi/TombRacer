@@ -20,6 +20,9 @@ package com.trdevt.gameState
 	import org.flixel.FlxTilemap;
 	import org.flixel.system.*;
 	import org.flixel.system.FlxTile;
+	import org.flixel.FlxEmitter;
+	import org.flixel.FlxParticle;
+	
 
 	/**
 	 * ...
@@ -76,6 +79,8 @@ package com.trdevt.gameState
 		protected var _whipCanvas:FlxSprite;
 		protected var _whipCenter:FlxPoint;
 		
+		public var emitterSpike:FlxEmitter;
+		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		public function PlayState(xmlTree:XML, levelNum:Number) 
@@ -130,6 +135,20 @@ package com.trdevt.gameState
 			
 			add(_ftScore);
 			
+			emitterSpike  = new FlxEmitter(0, 0)
+			for(var i:int = 0; i < 20; i++)
+			{
+				var particle:FlxParticle = new FlxParticle();
+				particle.makeGraphic(1, 1, FlxG.RED);
+				particle.exists = false;
+				emitterSpike.add(particle);
+			}
+ 
+			add(emitterSpike);
+			emitterSpike.bounce = 1;
+			emitterSpike.gravity = 200;
+			emitterSpike.lifespan = 60;
+			
 		}
 		
 		/**
@@ -178,7 +197,14 @@ package com.trdevt.gameState
 			
 			if (FlxG.overlap(_player, _fgBatCollision))
 			{
+				emitterSpike.x = _player.x;
+				emitterSpike.y = _player.y;
+				for (var i:int = 0; i < 20; i++)
+				{
+					emitterSpike.emitParticle();
+				}
 				_player.respawnHero();
+
 			}
 			FlxG.collide(_fgBatCollision, _tileMapCollision, onBatCollision);
 			
@@ -211,6 +237,12 @@ package com.trdevt.gameState
 		
 		public function onCrushGuyOverlap(player:Hero, guy:CrushGuyObstacle):void
 		{
+			emitterSpike.x = _player.x;
+				emitterSpike.y = _player.y;
+				for (var i:int = 0; i < 20; i++)
+				{
+					emitterSpike.emitParticle();
+				}
 			_player.respawnHero();
 		}
 		
@@ -221,6 +253,12 @@ package com.trdevt.gameState
 		
 		public function onFireballOverlap(player:Hero, fireball:FireballObstacle):void
 		{
+			emitterSpike.x = _player.x;
+				emitterSpike.y = _player.y;
+				for (var i:int = 0; i < 20; i++)
+				{
+					emitterSpike.emitParticle();
+				}
 			_fgFireballCollision.remove(fireball);
 			fireball.onCollision();
 			_player.respawnHero();
@@ -229,6 +267,12 @@ package com.trdevt.gameState
 		
 		public function onArrowOverlap(player:Hero, arrow:ArrowObstacle):void
 		{
+			emitterSpike.x = _player.x;
+				emitterSpike.y = _player.y;
+				for (var i:int = 0; i < 20; i++)
+				{
+					emitterSpike.emitParticle();
+				}
 			_fgArrowCollision.remove(arrow);
 			arrow.onCollision();
 			_player.respawnHero();
@@ -475,6 +519,12 @@ package com.trdevt.gameState
 		{
 			if (FlxU.getClassName(player) == "com.trdevt.sprites.Hero")
 			{
+				emitterSpike.x = _player.x;
+				emitterSpike.y = _player.y;
+				for (var i:int = 0; i < 20; i++)
+				{
+					emitterSpike.emitParticle();
+				}
 			_player.respawnHero();
 			FlxG.play(_spikeSound);
 			}
@@ -484,6 +534,12 @@ package com.trdevt.gameState
 		{
 			if (FlxU.getClassName(player) == "com.trdevt.sprites.Hero")
 			{
+				emitterSpike.x = _player.x;
+				emitterSpike.y = _player.y;
+				for (var i:int = 0; i < 20; i++)
+				{
+					emitterSpike.emitParticle();
+				}
 			_player.respawnHero();
 			FlxG.play(_lavaDeathSound);
 			}
