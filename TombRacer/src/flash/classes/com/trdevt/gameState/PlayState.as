@@ -164,11 +164,17 @@ package com.trdevt.gameState
 			// add the other valid swings in here please, just copy paste the block types you want to swing on
 			switch(tileNum)
 			{
-				case 17: return true;
+				
 				case 2: return true;
-				case 41: return true;
-				case 33: return true;
+				case 10: return true;
+				case 17: return true;
 				case 25: return true;
+				case 33: return true;
+				case 41: return true;
+				case 51: return true;
+				case 52: return true;
+				case 53: return true;
+				
 				default: return false;
 			}
 			

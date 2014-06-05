@@ -119,18 +119,18 @@
 		<level levelnum = "7">
 			<heroPosition x="4" y="1" />
 			<fireballObstacles>
-				<fireball x="1" y="1" direction="0x1000"></fireball>
-				<fireball x="2" y="1" direction="0x1000"></fireball>
-				<fireball x="3" y="1" direction="0x1000"></fireball>
-				<fireball x="4" y="1" direction="0x1000"></fireball>
 			</fireballObstacles>
 			<arrowtrapObstacles>
-				<arrowtrap x="1" y="2" direction="0x1000" speed="1"></arrowtrap>
+				<arrowtrap x="0" y="12" direction="0x0010" speed="16"></arrowtrap>
 			</arrowtrapObstacles>
 			<crushguyObstacles>
-				<crushguy x="3" y="5"></crushguy>
+				<crushguy x="30" y="5"></crushguy>
+				<crushguy x="4" y="9"></crushguy>
 			</crushguyObstacles>
 			<batObstacles>
+				<bat x="4" y="12" direction="0x0010"></bat>
+				<bat x="7" y="11" direction="0x0100"></bat>
+				<bat x="6" y="10" direction="0x0001"></bat>
 			</batObstacles>
 		</level>		
 	</levels>
