@@ -312,26 +312,26 @@ package com.trdevt.gameState
 			_tileMapBackground.loadMap(new _tileMapBackgroundFile(), _tileSetBackgroundFile, _backgroundTileWidth, _backgroundTileHeight);
 			
 			
-			// Lava Collisions
+		// Lava Collisions
 			_tileMapCollision.setTileProperties(62, FlxObject.NONE, collideLava);
 			_tileMapCollision.setTileProperties(54, FlxObject.NONE);
 			// Spike Collisions
-			_tileMapCollision.setTileProperties(7, FlxObject.FLOOR, collideSpike); 
-			_tileMapCollision.setTileProperties(15, FlxObject.FLOOR, collideSpike);
-			_tileMapCollision.setTileProperties(22, FlxObject.FLOOR, collideSpike);
-			_tileMapCollision.setTileProperties(23, FlxObject.CEILING, collideSpike);
-			_tileMapCollision.setTileProperties(30, FlxObject.FLOOR, collideSpike);
-			_tileMapCollision.setTileProperties(31, FlxObject.CEILING, collideSpike);
-			_tileMapCollision.setTileProperties(38, FlxObject.CEILING, collideSpike);
-			_tileMapCollision.setTileProperties(39, FlxObject.FLOOR, collideSpike);
-			_tileMapCollision.setTileProperties(46, FlxObject.CEILING, collideSpike);
-			_tileMapCollision.setTileProperties(47, FlxObject.FLOOR, collideSpike);
-			_tileMapCollision.setTileProperties(55, FlxObject.CEILING, collideSpike);
-			_tileMapCollision.setTileProperties(63, FlxObject.CEILING, collideSpike);
+			_tileMapCollision.setTileProperties(7, FlxObject.ANY, collideSpike); 
+			_tileMapCollision.setTileProperties(15, FlxObject.ANY, collideSpike);
+			_tileMapCollision.setTileProperties(22, FlxObject.ANY, collideSpike);
+			_tileMapCollision.setTileProperties(23, FlxObject.ANY, collideSpike);
+			_tileMapCollision.setTileProperties(30, FlxObject.ANY, collideSpike);
+			_tileMapCollision.setTileProperties(31, FlxObject.ANY, collideSpike);
+			_tileMapCollision.setTileProperties(38, FlxObject.ANY, collideSpike);
+			_tileMapCollision.setTileProperties(39, FlxObject.ANY, collideSpike);
+			_tileMapCollision.setTileProperties(46, FlxObject.ANY, collideSpike);
+			_tileMapCollision.setTileProperties(47, FlxObject.ANY, collideSpike);
+			_tileMapCollision.setTileProperties(55, FlxObject.ANY, collideSpike);
+			_tileMapCollision.setTileProperties(63, FlxObject.ANY, collideSpike);
 			// Moss Collisions
-			_tileMapCollision.setTileProperties(51, FlxObject.CEILING, collideMoss);
-			_tileMapCollision.setTileProperties(52, FlxObject.CEILING, collideMoss);
-			_tileMapCollision.setTileProperties(53, FlxObject.CEILING, collideMoss);
+			_tileMapCollision.setTileProperties(51, FlxObject.ANY, collideMoss);
+			_tileMapCollision.setTileProperties(52, FlxObject.ANY, collideMoss);
+			_tileMapCollision.setTileProperties(53, FlxObject.ANY, collideMoss);
 			// Switch Collisions
 			_tileMapCollision.setTileProperties(48, FlxObject.NONE);
 			_tileMapCollision.setTileProperties(49, FlxObject.NONE);
@@ -346,6 +346,29 @@ package com.trdevt.gameState
 			_tileMapCollision.setTileProperties(48, FlxObject.NONE, collideVictory);
 			_tileMapCollision.setTileProperties(49, FlxObject.NONE, collideVictory);
 			_tileMapCollision.setTileProperties(50, FlxObject.NONE, collideVictory);
+			
+			//halfblock
+			_tileMapCollision.setTileProperties(1, FlxObject.NONE, collideHalfLeft);
+			_tileMapCollision.setTileProperties(3, FlxObject.NONE, collideHalfRight);
+			
+			_tileMapCollision.setTileProperties(9, FlxObject.NONE);
+			_tileMapCollision.setTileProperties(11, FlxObject.NONE);
+			
+			
+			_tileMapCollision.setTileProperties(16, FlxObject.NONE, collideHalfLeft);
+			_tileMapCollision.setTileProperties(18, FlxObject.NONE, collideHalfRight);
+			
+			_tileMapCollision.setTileProperties(24, FlxObject.NONE);
+			_tileMapCollision.setTileProperties(26, FlxObject.NONE);
+			
+			
+			_tileMapCollision.setTileProperties(32, FlxObject.NONE, collideHalfLeft);
+			_tileMapCollision.setTileProperties(34, FlxObject.NONE, collideHalfRight);
+			
+			_tileMapCollision.setTileProperties(40, FlxObject.NONE);
+			_tileMapCollision.setTileProperties(42, FlxObject.NONE);
+			
+			_tileMapCollision.setTileProperties(66, FlxObject.NONE, collideTrampoline);
 			
 			// Add dynamic obstacles
 			//FlxObject.DOWN	0x1000
@@ -390,52 +413,111 @@ package com.trdevt.gameState
 			//add(_ftScore);
 		}
 		
+		private function collideHalfLeft(Tile:FlxTile, player:FlxObject):void
+		{
+			if (FlxU.getClassName(player) == "com.trdevt.sprites.Hero" && (player as Hero).jumping == false)
+			{
+			if (  player.x >= ((Tile.mapIndex % 40) * 32 - 32) && player.x <= ((Tile.mapIndex % 40) * 32))
+			{
+				var muchSlope:int = Math.floor(player.x ) % 32;
+				if (muchSlope == 0)
+					{
+						if ( player.x >= ((Tile.mapIndex % 40) * 32))
+							muchSlope = 32;	
+					}
+				(player as Hero).velocity.y = -6.4;
+				player.y = ((Math.floor(Tile.mapIndex / 40)) * 32) - (muchSlope) - 16;
+			}
+			}
+		}
+		
+		private function collideHalfRight(Tile:FlxTile, player:FlxObject):void
+		{
+			trace(FlxU.getClassName(_player));
+			if (FlxU.getClassName(player) == "com.trdevt.sprites.Hero" && (player as Hero).jumping == false)
+			{
+			if (  player.x >= ((Tile.mapIndex % 40) * 32) && player.x <= ((Tile.mapIndex % 40) * 32 + 32))
+			{
+				var muchSlope:int = 32 - Math.floor(player.x ) % 32;
+				if (muchSlope == 0)
+					{
+						if ( player.x <= ((Tile.mapIndex % 40) * 32))
+							muchSlope = 32;	
+					}
+				(player as Hero).velocity.y = -6.4;
+				player.y = ((Math.floor(Tile.mapIndex / 40)) * 32) - (muchSlope) - 16;
+			}
+			}
+			
+		}
+		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		private function collideTrampoline(Tile:FlxTile, player:FlxObject):void
 		{
-			player.velocity.y -= 50;
+			if(FlxU.getClassName(player) == "com.trdevt.sprites.Hero")
+				player.velocity.y -= 50;
 		}
 		
 		private function collideSand(Tile:FlxTile, player:FlxObject):void
 		{
+			if (FlxU.getClassName(player) == "com.trdevt.sprites.Hero")
+			{
 			if((player as FlxSprite).facing == FlxObject.LEFT && player.velocity.x != 0)
 				player.velocity.x *= 0.8;
 			if((player as FlxSprite).facing == FlxObject.RIGHT && player.velocity.x != 0)
 				player.velocity.x *= 0.8;
+				
+			}
 		}
 		
 		
 		private function collideSpike(Tile:FlxTile, player:FlxObject):void
 		{
+			if (FlxU.getClassName(player) == "com.trdevt.sprites.Hero")
+			{
 			_player.respawnHero();
 			FlxG.play(_spikeSound);
+			}
 		}
 		
 		private function collideLava(Tile:FlxTile, player:FlxObject):void
 		{
+			if (FlxU.getClassName(player) == "com.trdevt.sprites.Hero")
+			{
 			_player.respawnHero();
 			FlxG.play(_lavaDeathSound);
+			}
 		}
 		
 		private function collideMoss(Tile:FlxTile, player:FlxObject):void
 		{
+			if(FlxU.getClassName(player) == "com.trdevt.sprites.Hero")
+			{
 			if((player as FlxSprite).facing == FlxObject.LEFT && player.velocity.x != 0)
 				player.velocity.x *= 0.8;
 			if((player as FlxSprite).facing == FlxObject.RIGHT && player.velocity.x != 0)
 				player.velocity.x *= 0.8;
+			}
+		
 		}
 		
 		private function collideWaypoint(Tile:FlxTile, player:FlxObject):void
 		{
+			if (FlxU.getClassName(player) == "com.trdevt.sprites.Hero")
+			{
 			(player as Hero).updateCheckPoint(new FlxPoint(player.x, player.y - 1));
 			_tileMapCollision.setTileByIndex(Tile.mapIndex, 64);
+			}
 
 		}
 		
 		private function collideVictory(Tile:FlxTile, player:FlxObject):void
 		{
+			if (FlxU.getClassName(player) == "com.trdevt.sprites.Hero")
+			{
 			//Do something pretty
 			levelComplete();
+			}
 		}
 		
 		

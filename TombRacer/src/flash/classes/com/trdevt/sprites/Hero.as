@@ -47,8 +47,6 @@ package com.trdevt.sprites
 		public var cooldown:int = 0;
 		public var speedPercentage:Number = 1.0;
 		public var fallSpeedPercentage:Number = 1.0;
-		public var touchingSand:Boolean = false;
-		public var touchingMoss:Boolean = false;
 
 		/**
 		 * public signal for when the hero has died
@@ -63,7 +61,8 @@ package com.trdevt.sprites
 		public var signalHeroStoppedSwinging:Signal;
 		
 		public var signalHeroCJump:Signal;
-		
+		public var lastSlope:int;
+		public var jumping:Boolean;
 
 
 
@@ -99,6 +98,8 @@ package com.trdevt.sprites
 			signalHeroStoppedSwinging = new Signal();
 			
 			_heroState = HeroStates.HERO_NOT_SWING;
+			this.lastSlope = 0;
+			this.jumping = false;
 			
 		}
 		
@@ -106,7 +107,7 @@ package com.trdevt.sprites
 		
 		private function traceHeroStats():void 
 		{
-			trace("Hero Stats - pos: " + x + ", " + y + ", width X height: " + width + " X " + height+", velocity x,y: "+velocity.x+", "+velocity.y+", accel x,y: "+acceleration.x+", "+acceleration.y);
+			//trace("Hero Stats - pos: " + x + ", " + y + ", width X height: " + width + " X " + height+", velocity x,y: "+velocity.x+", "+velocity.y+", accel x,y: "+acceleration.x+", "+acceleration.y);
 		}
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -115,7 +116,7 @@ package com.trdevt.sprites
 		{
 			super.update();
 			
-			//traceHeroStats();
+			////traceHeroStats();
 			
 			
 			if (_heroState == HeroStates.HERO_NOT_SWING)
@@ -143,7 +144,7 @@ package com.trdevt.sprites
 		
 		private function stopDashing(event:Event=null):void 
 		{
-			trace("No dash!");
+			//trace("No dash!");
 			_dashActive = false;
 			
 			_dashTimer.removeEventListener(TimerEvent.TIMER, stopDashing);
@@ -166,7 +167,7 @@ package com.trdevt.sprites
 			{
 				_dashActive = true;
 			
-				trace("Dash!");
+				//trace("Dash!");
 				
 				if (facing == FlxObject.LEFT)
 				{
@@ -204,14 +205,14 @@ package com.trdevt.sprites
 		 */
 		public function respawnHero():void 
 		{
-			trace("Respawning at x:", _lastCheckPoint.x);
-			trace("Respawning at y:", _lastCheckPoint.y);
+			//trace("Respawning at x:", _lastCheckPoint.x);
+			//trace("Respawning at y:", _lastCheckPoint.y);
 			
 			this.x = _lastCheckPoint.x;
 			this.y = _lastCheckPoint.y;
 
-			trace("Actual x:", this.x);
-			trace("Actual y:", this.y);
+			//trace("Actual x:", this.x);
+			//trace("Actual y:", this.y);
 
 			this.x = _lastCheckPoint.x;
 			this.y = _lastCheckPoint.y;
@@ -340,7 +341,7 @@ package com.trdevt.sprites
 				var dy:Number = FlxG.mouse.y - this.y;
 				var angleDeg:Number = Math.atan2(dy, dx) * 180 / Math.PI;
 				
-				//trace("angle to mouse is: " + angleDeg);
+				////trace("angle to mouse is: " + angleDeg);
 				
 				
 				
@@ -360,7 +361,7 @@ package com.trdevt.sprites
 				
 				
 
-				trace("angle to swing center is: " + findAngleDegree(_swingCenter,new FlxPoint(this.x, this.y)));
+				//trace("angle to swing center is: " + findAngleDegree(_swingCenter,new FlxPoint(this.x, this.y)));
 				
 				_heroState = HeroStates.HERO_SWING;
 				signalHeroWhipped.dispatch(new FlxPoint(FlxG.mouse.x, FlxG.mouse.y));
@@ -422,11 +423,11 @@ package com.trdevt.sprites
 			
 			if (state == HeroStates.HERO_SWING)
 			{
-				//trace("angle pos cos: " + Math.cos(_thetaPosition));
+				////trace("angle pos cos: " + Math.cos(_thetaPosition));
 				//var angleDist:Number = _swingMaxTheta - _thetaPosition + Math.PI;
-				//trace("angle pos cos: " + Math.cos(_thetaPosition));
-				//trace("thetaPos: "+_thetaPosition+", tangential velocity " + Math.sqrt(2*_swingRadius * (1 - Math.cos(_thetaPosition - Math.PI/2))));
-				//trace("angle vel: " + _thetaVelocity);
+				////trace("angle pos cos: " + Math.cos(_thetaPosition));
+				////trace("thetaPos: "+_thetaPosition+", tangential velocity " + Math.sqrt(2*_swingRadius * (1 - Math.cos(_thetaPosition - Math.PI/2))));
+				////trace("angle vel: " + _thetaVelocity);
 				if (_thetaVelocity > 0)
 					facing = FlxObject.RIGHT;
 				else
@@ -441,13 +442,15 @@ package com.trdevt.sprites
 		{
 			//this line keeps the hero from continuously accelerating the last direction pressed
 			//in other words, if not pressing a key then stop accelerating in the x direction
+			if(velocity.y == 0)
+			{
+				this.jumping = false;
+			}
 			this.acceleration.x = 0;
 				
 			if(FlxG.keys.A || FlxG.keys.LEFT)
 			{
 				facing = FlxObject.LEFT;
-				if (touchingMoss && velocity.x < -100)
-					velocity.x = -1;
 				acceleration.x -= _constAccel;
 				if (velocity.x > 0)
 				{
@@ -457,25 +460,17 @@ package com.trdevt.sprites
 			else if(FlxG.keys.D || FlxG.keys.RIGHT)
 			{
 				facing = FlxObject.RIGHT;
-				if (touchingMoss && velocity.x > 100)
-					velocity.x = 1;
 				acceleration.x += _constAccel;
 				if (velocity.x < 0)
 				{
 					velocity.x *= 0.8;
 				}
 			}
-			if (touchingSand)
+			
+			if((FlxG.keys.justPressed("W") || FlxG.keys.justPressed("SPACE") || FlxG.keys.justPressed("UP")) && (velocity.y == 0 || velocity.y == -6.4))
 			{
-				if (velocity.y > 25)
-				{
-					velocity.y = 25;
-				}
-				velocity.y = 25;
-				//acceleration.y = 25;
-			}
-			if((FlxG.keys.justPressed("W") || FlxG.keys.justPressed("SPACE")) && velocity.y == 0)
-			{
+				this.jumping = true;
+				//trace(velocity.y);
 				//Through testing I have determined that velocity increases by 12.8 every frame
 				//Coincidentally, this is the vertical resolution divided by framerate. -Sawyer
 				//Jump height is determined by a relationship between this value and acceleration.
@@ -531,8 +526,8 @@ package com.trdevt.sprites
 		 */
 		public function updateCheckPoint(newPoint:FlxPoint):void 
 		{
-			trace("Updating checkpoint x: ", newPoint.x);
-			trace("Updating checkpoint y: ", newPoint.y);
+			//trace("Updating checkpoint x: ", newPoint.x);
+			//trace("Updating checkpoint y: ", newPoint.y);
 			_lastCheckPoint = newPoint;
 		}
 		
