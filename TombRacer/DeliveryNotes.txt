@@ -54,3 +54,11 @@ Known Bugs:
 	- on rare occasion the hero will respawn inside of the wall and become stuck
 	- player clips through a sloped block for one frame when landing on it
 	
+Play the game at:
+
+http://www.newgrounds.com/portal/view/640528
+
+or
+
+http://jlongworth.github.io
+	
