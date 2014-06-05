@@ -71,7 +71,7 @@ package com.trdevt.util
 		/**
 		 * get value from LSO with passed in key
 		 */
-		public function geValue(key:String):String
+		public function getValue(key:String):String
 		{
 			if (!_soLocal)
 			{

@@ -16,6 +16,7 @@ package com.trdevt.gameState
 	import flash.ui.Mouse;
 	import org.flixel.FlxText;
 	import com.trdevt.util.XMLManager;
+	import com.trdevt.util.LocalSharedObjectManager;
 	/**
 	 * ...
 	 * @author Kristi Marks
@@ -48,7 +49,8 @@ package com.trdevt.gameState
 		
 		override public function create():void 
 		{
-			_buildScreen(8);
+			var xmlLevels:XMLList = XMLManager.instance.xmlConfig.levels.level;
+			_buildScreen(xmlLevels.length());
 		
 			
 		}
@@ -81,16 +83,25 @@ package com.trdevt.gameState
 					button.onUp=function handler():void { goToLevel(this.goto); }
 				}
 				else 
-					
-					button = new LevelButton(xCoords[i - numberOfLevels / 2], 366, "" , i, function handler():void { goToLevel(this.goto); trace("level: "+this.goto); } );
+					button = new LevelButton(xCoords[i - numberOfLevels / 2], 366, "" , i, function handler():void { goToLevel(this.goto); } );
 			
-			//trace("i1: " + i);
-			//_fbLevel1.onDown = function ():void { goToLevel(i); }
-			//trace("i2: " + i);
-			button.loadGraphic(Assets.levelPNG, true, false, 163, 195);
-			_levels.push(button);
-			add(button);
-			getResults(button);
+				if (!locked(i))
+				{
+					button.loadGraphic(Assets.levelPNG, true, false, 163, 195);
+					_levels.push(button);
+					add(button);
+					//add levelbg
+					var buttonbg:FlxSprite = new FlxSprite(button.x + 10, button.y + 10, Assets.levelGraphics[i]);
+					add(buttonbg);
+					getResults(button, i);
+				
+				}
+				else 
+				{
+					button.loadGraphic(Assets.levelLockedPNG, false, false, 163, 195);
+					_levels.push(button);
+					add(button);
+				}
 			}
 			
 			
@@ -108,17 +119,23 @@ package com.trdevt.gameState
 			FlxG.switchState(new PlayState(XMLManager.instance.xmlConfig, eLevelnum));
 		}
 		
-		/**
-		 * this function is for testing and can be removed later on
-		 * @param	event
-		 */
+		private function locked(i:int):Boolean
+		{
+			var res = false;
+			if (i!=0&&LocalSharedObjectManager.instance.getValue("Level" + (i - 1) + "fastestTime") == "undefined")
+				res = true;
+			return res;
+			
+		}
 		
 /*=====================================================================*/
-		
-		
-		private function getResults(eButton:LevelButton):void
+		private function getResults(eButton:LevelButton, eLevel:int):void
 		{
+			var trophy:FlxSprite;
+			var time:int;
 			//look in sharedObject for trophy and time
+			
+			
 			
 			//for now just place greyed trophy at the right place
 			 var trophy:FlxSprite = new FlxSprite(eButton.x + 15, eButton.y + 138, Assets.SmallGrayed);

@@ -43,6 +43,7 @@ package com.trdevt
 		[Embed(source = '/LevelSelectScreen/LevelSelectHeader.png')] public static var levelheaderPNG:Class;
 		
 		[Embed(source = '/LevelSelectScreen/LevelUnlocked_notplayed_sheet.png')] public static var levelPNG:Class;
+		[Embed(source = "../../../../images/LevelSelectScreen/LevelLocked.png")] public static var levelLockedPNG:Class;
 		
 		//smallTrophies 
 		[Embed(source = "../../../../images/LevelSelectScreen/BronzeTrophy.png")]public static var SmallBronze:Class; 
@@ -50,6 +51,16 @@ package com.trdevt
 		[Embed(source = "../../../../images/LevelSelectScreen/GoldTrophy.png")]public static var SmallGold:Class; 
 		[Embed(source = "../../../../images/LevelSelectScreen/GrayedTrophy.png")]public static var SmallGrayed:Class; 
 		
+		
+		[Embed(source = "../../../../images/LevelSelectScreen/Level1.png")]private static var level1:Class;
+		[Embed(source = "../../../../images/LevelSelectScreen/Level2.png")]private static var level2:Class;
+		[Embed(source = "../../../../images/LevelSelectScreen/Level3.png")]private static var level3:Class;
+		[Embed(source = "../../../../images/LevelSelectScreen/Level4.png")]private static var level4:Class;
+		[Embed(source = "../../../../images/LevelSelectScreen/Level5.png")]private static var level5:Class;
+		[Embed(source = "../../../../images/LevelSelectScreen/Level6.png")]private static var level6:Class;
+		[Embed(source = "../../../../images/LevelSelectScreen/Level7.png")]private static var level7:Class;
+		[Embed(source = "../../../../images/LevelSelectScreen/Level8.png")]private static var level8:Class;
+		public static var levelGraphics:Array = new Array(level1, level2, level3, level4, level5, level6, level7, level8);
 	/**********************************************Sounds************************************************************************************/
 		
 		[Embed(source = "../../../../sounds/menuBGM2.mp3")] public static var bgMusic:Class;
@@ -64,5 +75,9 @@ package com.trdevt
 		[Embed(source = "../../../../images/ResultsScreen/NextLevelButtonSheet.png")] public static var NextLevelButton:Class;
 		
 		[Embed(source = "../../../../images/ResultsScreen/ResultsHeader.png")] public static var ResultsHeader:Class;
+		
+		[Embed(source = "../../../../images/ResultsScreen/BronzeTrophy.png")] public static var BronzeTrophy:Class;
+		[Embed(source = "../../../../images/ResultsScreen/SilverTrophy.png")] public static var SilverTrophy:Class;
+		[Embed(source = "../../../../images/ResultsScreen/GoldTrophy.png")] public static var GoldTrophy:Class;
 	}
 }

@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <game>
 	<levels>
+		<level id="1" par="90" />
+		<level id="2" par="90" />
+		<level id="3" par="90" />
+		<level id="4" par="90" />
+		<level id="5" par="90" />
+		<level id="6" par="90" />
+		<level id="7" par="90" />
+		<level id="8" par="90" />
 		<levelTest>
 			<heroPosition x="4" y="1" />
 		</levelTest>
@@ -12,5 +20,19 @@
 			_jumpPower = 		"400"
 			_constAccel = 		"640"
 			/>
-			
+	<credits>
+		<credit text="Made with:" />
+		<credit text="flixel" />
+		<credit text="TweenMax" />
+		<credit text="Sounds:" />
+		<credit text="Background Music:" />
+		<credit text="File Name: 164618_indiana_jones_mix.mp3" />
+		<credit text="Artist:Nova64" />
+		<credit text="Source:http://www.newgrounds.com/audio/listen/164618" />
+		<credit text="Special Thanks to:" />
+		<credit text="asfxr" />
+		<credit text="Nate Chatellier" />
+		
+		
+	</credits>		
 </game>

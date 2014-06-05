@@ -9,7 +9,10 @@ package com.trdevt.gameState
 	import org.flixel.FlxG;
 	//import org.flixel.plugin.photonstorm.FlxScrollingText;
 	import org.flixel.FlxSound;
-	
+	import com.greensock.TweenMax;
+	import com.greensock.TimelineMax;
+	import com.greensock.easing.Linear;
+	import com.trdevt.util.XMLManager;
 	/**
 	 * ...
 	 * @author Anthony Della Maggiora
@@ -28,8 +31,10 @@ package com.trdevt.gameState
 		
 		private var credits:Array;
 		
-		private var creditSpeed:int = 2;
+		private var x:int = 855;
 		private var maxy:int = 525;
+		private var miny:int = 203;
+		private var creditWidth = 379;
 		override public function create():void 
 		{
 			credits = new Array();
@@ -49,9 +54,8 @@ package com.trdevt.gameState
 			
 			_fsScroll = new FlxSprite(853, 203, Assets.scrollerOutlinePNG);
 			
-			var credit1:FlxText = new FlxText(855, maxy, 379, "Flixel\nNewgrounds\nFlex\nAdobe\nNate",true);
-			credit1.setFormat( "sffedora", 28, 0xffffff, "center");
-			credits.push(credit1);
+			
+			
 			
 			// Create Dev Portraits
 			_fsDev1 = new FlxSprite(52, 241,Assets.dev1PNG);
@@ -62,6 +66,7 @@ package com.trdevt.gameState
 			
 			_fsDev4 = new FlxSprite(630, 241,Assets.dev4PNG);
 			
+			parseXML();
 			
 			
 			
@@ -75,7 +80,9 @@ package com.trdevt.gameState
 			add(_fsDev3);
 			add(_fsDev4);
 			add(_fsScroll);
-			add(credit1);
+			addCredits();
+			moveCredits();
+			//add(credit1);
 			
 		}
 		/*=====================================================================*/
@@ -83,28 +90,63 @@ package com.trdevt.gameState
 		//animate scrolling credits
 		override public function update():void
 		{
+			
+			super.update();
+			
+		}
+		private function moveCredits():void
+		{
+			var timeline:TimelineMax = new TimelineMax( { repeat: -1 } );
 			for (var i:int = 0; i < credits.length; i++ )
 			{
 				var credit:FlxText = FlxText(credits[i]);
-				if (credit.y<=maxy&&credit.y>=203)
-				{
-					credit.y -= creditSpeed;
-				}
-				else
-				{
-					//credit.visible = false;
-					//credit.y = maxy;
-				}
+				timeline.append(TweenMax.to(credit, 2, { y : miny,ease:Linear.easeNone, onComplete:hideCredit, onCompleteParams:[credit], onStart:showCredit, onStartParams:[credit]} ));
+
+			
 			}
-			super.update();
+			//super.update();	
 		}
+		private function showCredit(etext:FlxText):void
+		{
+				etext.visible = true;
+				etext.y = maxy;
+		}
+		private function hideCredit(etext:FlxText):void
+		{
+				etext.visible = false;
+				etext.y = maxy;
+		}
+		/*=====================================================================*/
 		
+		// Switch to menu state when back button is pressed
+		private function addCredits():void
+		{		
+			for (var i:int = 0; i < credits.length; i++ )
+			{
+				//trace("adding credit: " + i);
+				var credit:FlxText = FlxText(credits[i]);
+				credit.visible = false;
+				add(credit);
+				
+			}
+		}
 		/*=====================================================================*/
 		
 		// Switch to menu state when back button is pressed
 		private function _onBack():void
 		{		
 			FlxG.switchState(new MenuState());
+		}
+		private function parseXML()
+		{
+			 var xmlcredits:XMLList = XMLManager.instance.xmlConfig.credits.credit;
+			 var len:int = xmlcredits.length();
+			 for (var i:int = 0; i < len; i++)
+			 {
+					var credit:FlxText = new FlxText(x, maxy, creditWidth, xmlcredits[i].@text, true);
+					credit.setFormat( "sffedora", 28, 0xffffff, "center");
+					credits.push(credit);
+			 }
 		}
 	}//end class
 

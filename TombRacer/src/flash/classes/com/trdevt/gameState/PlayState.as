@@ -177,7 +177,7 @@ package com.trdevt.gameState
 			}
 			
 			if (FlxG.keys.O)
-				FlxG.switchState(new ResultsState(0,_currentLevelNum));
+				FlxG.switchState(new ResultsState(20,_currentLevelNum));
 			if (FlxG.keys.R)
 				FlxG.switchState(new SelectState(new XML()));
 			
