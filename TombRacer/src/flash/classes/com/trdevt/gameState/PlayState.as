@@ -5,6 +5,7 @@ package com.trdevt.gameState
 	import com.trdevt.sprites.obstacles.ArrowLauncherObstacle;
 	import com.trdevt.sprites.obstacles.ArrowObstacle;
 	import com.trdevt.sprites.obstacles.BatObstacle;
+	import com.trdevt.sprites.obstacles.CrushGuyObstacle;
 	import com.trdevt.sprites.obstacles.FireBallLauncherObstacle;
 	import com.trdevt.sprites.obstacles.FireballObstacle;
 	import com.trdevt.sprites.obstacles.Obstacle;
@@ -48,6 +49,7 @@ package com.trdevt.gameState
 		protected var _fgArrowCollision:FlxGroup;
 		protected var _fgFireballLauncher:FlxGroup;
 		protected var _fgArrowLauncher:FlxGroup;
+		protected var _fgCrushGuyCollision:FlxGroup;
 		
 		protected var _tileMapBackgroundFile:Class;
 		protected var _tileSetBackgroundFile:Class;
@@ -102,6 +104,7 @@ package com.trdevt.gameState
 			_fgArrowCollision = new FlxGroup(20);
 			_fgFireballLauncher = new FlxGroup(20);
 			_fgArrowLauncher = new FlxGroup(50);
+			_fgCrushGuyCollision = new FlxGroup(20);
 			
 			//Test Obstacles
 			//_fgBatCollision.add(new BatObstacle(5, 5, FlxObject.UP));
@@ -113,12 +116,15 @@ package com.trdevt.gameState
 			
 			//_fgFireballCollision.add(new FireballObstacle(5 , 3, FlxObject.RIGHT));
 			
-			_fgArrowLauncher.add(new ArrowLauncherObstacle(2, 2, FlxObject.DOWN));
+			//_fgArrowLauncher.add(new ArrowLauncherObstacle(2, 2, FlxObject.DOWN));
+			
+			_fgCrushGuyCollision.add(new CrushGuyObstacle(2, 3));
 			add(_fgBatCollision);
 			add(_fgFireballCollision);
 			add(_fgArrowCollision);
 			add(_fgFireballLauncher);
 			add(_fgArrowLauncher);
+			add(_fgCrushGuyCollision);
 			
 			createWhipCanvas();
 			
@@ -186,6 +192,9 @@ package com.trdevt.gameState
 			FlxG.overlap(_player, _fgFireballCollision, onFireballOverlap);
 			FlxG.collide(_fgFireballCollision, _tileMapCollision, onFireballCollision);
 			
+			FlxG.overlap(_player, _fgCrushGuyCollision, onCrushGuyOverlap);
+			FlxG.collide(_fgCrushGuyCollision, _tileMapCollision, onCrushGuyCollision);
+			
 			if (_player.state == HeroStates.HERO_SWING)
 			{
 				updateWhip();
@@ -194,6 +203,16 @@ package com.trdevt.gameState
 				FlxG.switchState(new SelectState(new XML()));
 			
 			
+		}
+		
+		public function onCrushGuyOverlap(player:Hero, guy:CrushGuyObstacle)
+		{
+			_player.respawnHero();
+		}
+		
+		public function onCrushGuyCollision(guy:CrushGuyObstacle, stuff:FlxObject = null)
+		{
+			guy.onCollision();
 		}
 		
 		public function onFireballOverlap(player:Hero, fireball:FireballObstacle)
