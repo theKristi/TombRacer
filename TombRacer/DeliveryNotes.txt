@@ -41,18 +41,17 @@ Actual Release:
 Known Bugs:
 	- swinging into a slope does not end the swing
 	- player can click on a locked icon and play that level
-	- par times are not loaded or shown in the level select screen
 	- player can't clear the LSO
 	- icons for levels 5 and 6 are broken
-	- par time is always 0:00 on the result screen
 	- some buttons don't play a sound when clicked
 		- level select button on result screen, next level button on result screen, level icons on level select
-	- fastest time is always the same on the result screen and is not loaded from the LSO
 	- occasionally the death sounds will stack (this is a bug with the flixel engine FlxG.Play())
 	- the wrong hero animation will play when the hero is moving on a slope
 	- jumping while respawning can cause the hero to freeze in the jump animation
 	- on rare occasion the hero will respawn inside of the wall and become stuck
 	- player clips through a sloped block for one frame when landing on it
+	- level select icon roll over animation doesn't show correctly when the level icon is locked
+	- saved time truncates off the fractions of a second
 	
 Play the game at:
 
