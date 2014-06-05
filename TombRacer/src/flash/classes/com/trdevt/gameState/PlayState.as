@@ -415,7 +415,7 @@ package com.trdevt.gameState
 		
 		private function collideHalfLeft(Tile:FlxTile, player:FlxObject):void
 		{
-			if ((player as Hero).jumping == false)
+			if (FlxU.getClassName(player) == "com.trdevt.sprites.Hero" && (player as Hero).jumping == false)
 			{
 			if (  player.x >= ((Tile.mapIndex % 40) * 32 - 32) && player.x <= ((Tile.mapIndex % 40) * 32))
 			{
@@ -433,7 +433,8 @@ package com.trdevt.gameState
 		
 		private function collideHalfRight(Tile:FlxTile, player:FlxObject):void
 		{
-			if (FlxU.getClassName(player) == "Hero" && (player as Hero).jumping == false)
+			trace(FlxU.getClassName(_player));
+			if (FlxU.getClassName(player) == "com.trdevt.sprites.Hero" && (player as Hero).jumping == false)
 			{
 			if (  player.x >= ((Tile.mapIndex % 40) * 32) && player.x <= ((Tile.mapIndex % 40) * 32 + 32))
 			{
@@ -453,49 +454,70 @@ package com.trdevt.gameState
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		private function collideTrampoline(Tile:FlxTile, player:FlxObject):void
 		{
-			player.velocity.y -= 50;
+			if(FlxU.getClassName(player) == "com.trdevt.sprites.Hero")
+				player.velocity.y -= 50;
 		}
 		
 		private function collideSand(Tile:FlxTile, player:FlxObject):void
 		{
+			if (FlxU.getClassName(player) == "com.trdevt.sprites.Hero")
+			{
 			if((player as FlxSprite).facing == FlxObject.LEFT && player.velocity.x != 0)
 				player.velocity.x *= 0.8;
 			if((player as FlxSprite).facing == FlxObject.RIGHT && player.velocity.x != 0)
 				player.velocity.x *= 0.8;
+				
+			}
 		}
 		
 		
 		private function collideSpike(Tile:FlxTile, player:FlxObject):void
 		{
+			if (FlxU.getClassName(player) == "com.trdevt.sprites.Hero")
+			{
 			_player.respawnHero();
 			FlxG.play(_spikeSound);
+			}
 		}
 		
 		private function collideLava(Tile:FlxTile, player:FlxObject):void
 		{
+			if (FlxU.getClassName(player) == "com.trdevt.sprites.Hero")
+			{
 			_player.respawnHero();
 			FlxG.play(_lavaDeathSound);
+			}
 		}
 		
 		private function collideMoss(Tile:FlxTile, player:FlxObject):void
 		{
+			if(FlxU.getClassName(player) == "com.trdevt.sprites.Hero")
+			{
 			if((player as FlxSprite).facing == FlxObject.LEFT && player.velocity.x != 0)
 				player.velocity.x *= 0.8;
 			if((player as FlxSprite).facing == FlxObject.RIGHT && player.velocity.x != 0)
 				player.velocity.x *= 0.8;
+			}
+		
 		}
 		
 		private function collideWaypoint(Tile:FlxTile, player:FlxObject):void
 		{
+			if (FlxU.getClassName(player) == "com.trdevt.sprites.Hero")
+			{
 			(player as Hero).updateCheckPoint(new FlxPoint(player.x, player.y - 1));
 			_tileMapCollision.setTileByIndex(Tile.mapIndex, 64);
+			}
 
 		}
 		
 		private function collideVictory(Tile:FlxTile, player:FlxObject):void
 		{
+			if (FlxU.getClassName(player) == "com.trdevt.sprites.Hero")
+			{
 			//Do something pretty
 			levelComplete();
+			}
 		}
 		
 		
