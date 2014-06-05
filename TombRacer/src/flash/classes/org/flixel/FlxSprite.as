@@ -635,6 +635,13 @@ package org.flixel
 			_curIndex = 0;
 			_frameTimer = 0;
 			var i:uint = 0;
+			
+			//jake's code
+			if (_animations == null)
+			{
+				return;
+			}
+			
 			var l:uint = _animations.length;
 			while(i < l)
 			{

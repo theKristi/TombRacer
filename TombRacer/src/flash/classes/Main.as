@@ -12,6 +12,8 @@
 	 * @author Kristi Marks
 	 */
 	[SWF(backgroundColor = "#FFFFFF", width = "1280", height = "768", frameRate = "30")]
+	[Frame(factoryClass = "Preloader")] //Tells Flixel to use the default preloader 
+	
 	public class Main extends FlxGame
 	{
 		

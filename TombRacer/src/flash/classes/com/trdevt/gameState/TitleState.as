@@ -36,7 +36,7 @@ package  com.trdevt.gameState
 			add(_fsPressMsg);
 			//SoundAS.loadSound("./Audio/Music.mp3", "music");
 			//SoundAS.playLoop("music");
-			FlxG.playMusic(Assets.bgMusic,.6);
+			FlxG.playMusic(Assets.bgMusic,.1);
 		}
 		override public function update():void
 		{

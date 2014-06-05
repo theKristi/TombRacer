@@ -19,6 +19,11 @@ package com.trdevt.sprites.obstacles
 		
 		//==========================================================================
 		
-		public function onCollision():void {}
+		public function onCollision():void { }
+		
+		override protected function parseXML(xmlTree:XML):void 
+		{
+			//this isn't doing anything, but it stops the warning from getting spammed
+		}
 	}
 }

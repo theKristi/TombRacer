@@ -20,6 +20,9 @@ package com.trdevt.gameState
 	import org.flixel.FlxTilemap;
 	import org.flixel.system.*;
 	import org.flixel.system.FlxTile;
+	import org.flixel.FlxEmitter;
+	import org.flixel.FlxParticle;
+	
 
 	/**
 	 * ...
@@ -31,6 +34,7 @@ package com.trdevt.gameState
 		[Embed(source = "../../../../../sounds/deaths/lavaDeath.mp3")] private var _sandSound:Class;
 		[Embed(source = "../../../../../sounds/deaths/lavaDeath.mp3")] private var _mossSound:Class;
 		[Embed(source = "../../../../../sounds/deaths/spikeDeath.mp3")] private var _spikeSound:Class;
+		[Embed(source = "../../../../../sounds/torch.mp3")] private var _torchSound:Class;
 
 		
 		protected var _ftScore:FlxText;
@@ -76,6 +80,8 @@ package com.trdevt.gameState
 		protected var _whipCanvas:FlxSprite;
 		protected var _whipCenter:FlxPoint;
 		
+		public var emitterSpike:FlxEmitter;
+		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		public function PlayState(xmlTree:XML, levelNum:Number) 
@@ -101,7 +107,7 @@ package com.trdevt.gameState
 			
 			
 			//Test Obstacles
-			_fgBatCollision.add(new BatObstacle(5, 5, FlxObject.UP));
+			//_fgBatCollision.add(new BatObstacle(5, 5, FlxObject.UP));
 			//_fgBatCollision.add(new BatObstacle(3, 7, FlxObject.RIGHT));
 			//_fgBatCollision.add(new BatObstacle(7, 9, FlxObject.LEFT));
 			
@@ -130,6 +136,20 @@ package com.trdevt.gameState
 			
 			add(_ftScore);
 			
+			emitterSpike  = new FlxEmitter(0, 0)
+			for(var i:int = 0; i < 2000; i++)
+			{
+				var particle:FlxParticle = new FlxParticle();
+				particle.makeGraphic(3, 3, FlxG.RED);
+				particle.exists = false;
+				emitterSpike.add(particle);
+			}
+ 
+			add(emitterSpike);
+			emitterSpike.bounce = 1;
+			emitterSpike.gravity = 200;
+			emitterSpike.lifespan = 60;
+			
 		}
 		
 		/**
@@ -144,11 +164,17 @@ package com.trdevt.gameState
 			// add the other valid swings in here please, just copy paste the block types you want to swing on
 			switch(tileNum)
 			{
-				case 17: return true;
+				
 				case 2: return true;
-				case 41: return true;
-				case 33: return true;
+				case 10: return true;
+				case 17: return true;
 				case 25: return true;
+				case 33: return true;
+				case 41: return true;
+				case 51: return true;
+				case 52: return true;
+				case 53: return true;
+				
 				default: return false;
 			}
 			
@@ -178,7 +204,14 @@ package com.trdevt.gameState
 			
 			if (FlxG.overlap(_player, _fgBatCollision))
 			{
+				emitterSpike.x = _player.x;
+				emitterSpike.y = _player.y;
+				for (var i:int = 0; i < 20; i++)
+				{
+					emitterSpike.emitParticle();
+				}
 				_player.respawnHero();
+
 			}
 			FlxG.collide(_fgBatCollision, _tileMapCollision, onBatCollision);
 			
@@ -196,9 +229,9 @@ package com.trdevt.gameState
 				updateWhip();
 			}
 			if (FlxG.keys.R)
-				FlxG.switchState(new SelectState(new XML()));
+				toLevelSelect();
 			if (FlxG.keys.O)
-				FlxG.switchState(new ResultsState(0,_currentLevelNum));
+				toResultsScreen();
 
 			
 			
@@ -211,6 +244,12 @@ package com.trdevt.gameState
 		
 		public function onCrushGuyOverlap(player:Hero, guy:CrushGuyObstacle):void
 		{
+			emitterSpike.x = _player.x;
+				emitterSpike.y = _player.y;
+				for (var i:int = 0; i < 20; i++)
+				{
+					emitterSpike.emitParticle();
+				}
 			_player.respawnHero();
 		}
 		
@@ -221,6 +260,12 @@ package com.trdevt.gameState
 		
 		public function onFireballOverlap(player:Hero, fireball:FireballObstacle):void
 		{
+			emitterSpike.x = _player.x;
+				emitterSpike.y = _player.y;
+				for (var i:int = 0; i < 20; i++)
+				{
+					emitterSpike.emitParticle();
+				}
 			_fgFireballCollision.remove(fireball);
 			fireball.onCollision();
 			_player.respawnHero();
@@ -229,6 +274,12 @@ package com.trdevt.gameState
 		
 		public function onArrowOverlap(player:Hero, arrow:ArrowObstacle):void
 		{
+			emitterSpike.x = _player.x;
+				emitterSpike.y = _player.y;
+				for (var i:int = 0; i < 20; i++)
+				{
+					emitterSpike.emitParticle();
+				}
 			_fgArrowCollision.remove(arrow);
 			arrow.onCollision();
 			_player.respawnHero();
@@ -271,13 +322,40 @@ package com.trdevt.gameState
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		/**
-		 * this function handles when the level is completed
+		 * this function handles when the level is completed. this is the ONLY PLACE switch state can be called.
 		 */
 		protected function levelComplete():void 
 		{
+			cleanUpLevel();
 			FlxG.switchState(new ResultsState(_finalTime, _currentLevelNum));
 		}
 		
+		private function toLevelSelect():void 
+		{
+			cleanUpLevel();
+			FlxG.switchState(new SelectState(new XML()));
+		}
+		
+		private function toResultsScreen():void 
+		{
+			levelComplete();
+		}
+		
+		private function cleanUpLevel():void 
+		{
+			//trace("cleaning up level!");
+			for each (var sprite:CrushGuyObstacle in _fgCrushGuyCollision) 
+			{
+				//trace("test");
+				sprite.die();
+			}
+			
+			_fireballTimer.removeEventListener(TimerEvent.TIMER, onLaunchFireball);
+			_fireballTimer.stop();
+			
+			_arrowTimer.removeEventListener(TimerEvent.TIMER, onLaunchArrow);
+			_arrowTimer.stop();
+		}		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		override protected function parseXML(xmlTree:XML):void 
@@ -386,23 +464,30 @@ package com.trdevt.gameState
 			}
 			
 			var arrowtrapXml:XML = new XML(xmlTree.levels.level[_currentLevelNum].arrowtrapObstacles);
-			for (var i:int = 0; i < arrowtrapXml.*.length(); i++)
+			for (i = 0; i < arrowtrapXml.*.length(); i++)
 			{
-				_fgArrowLauncher.add(new ArrowLauncherObstacle(arrowtrapXml.arrowtrap[i].@x, arrowtrapXml.arrowtrap[i].@y, arrowtrapXml.arrowtrap[i].@direction));
+				_fgArrowLauncher.add(new ArrowLauncherObstacle(arrowtrapXml.arrowtrap[i].@x, arrowtrapXml.arrowtrap[i].@y, arrowtrapXml.arrowtrap[i].@direction, arrowtrapXml.arrowtrap[i].@speed));
 			}
 			
 			var crushGuyXml:XML = new XML(xmlTree.levels.level[_currentLevelNum].crushguyObstacles);
-			for (var i:int = 0; i < crushGuyXml.*.length(); i++)
+			for (i = 0; i < crushGuyXml.*.length(); i++)
 			{
 				_fgCrushGuyCollision.add(new CrushGuyObstacle(crushGuyXml.crushguy[i].@x, crushGuyXml.crushguy[i].@y));
 			}
+			
+			var batXml:XML = new XML(xmlTree.levels.level[_currentLevelNum].batObstacles);
+			for (i = 0; i < batXml.*.length(); i++)
+			{
+				_fgBatCollision.add(new BatObstacle(batXml.bat[i].@x, batXml.bat[i].@y, batXml.bat[i].@direction));
+			}
+			
 			//trace(fireballXml.fireball[0].@x);
 			_player = new Hero(heroXmlTree, _collisionTileWidth * xTile, _collisionTileHeight * yTile);
 			_fireballTimer = new Timer(800);
 			_fireballTimer.addEventListener(TimerEvent.TIMER, onLaunchFireball);
 			_fireballTimer.start();
 			
-			_arrowTimer = new Timer(800);
+			_arrowTimer = new Timer(1600);
 			_arrowTimer.addEventListener(TimerEvent.TIMER, onLaunchArrow);
 			_arrowTimer.start();
 			
@@ -433,7 +518,7 @@ package com.trdevt.gameState
 		
 		private function collideHalfRight(Tile:FlxTile, player:FlxObject):void
 		{
-			trace(FlxU.getClassName(_player));
+			//trace(FlxU.getClassName(_player));
 			if (FlxU.getClassName(player) == "com.trdevt.sprites.Hero" && (player as Hero).jumping == false)
 			{
 			if (  player.x >= ((Tile.mapIndex % 40) * 32) && player.x <= ((Tile.mapIndex % 40) * 32 + 32))
@@ -475,6 +560,12 @@ package com.trdevt.gameState
 		{
 			if (FlxU.getClassName(player) == "com.trdevt.sprites.Hero")
 			{
+				emitterSpike.x = _player.x;
+				emitterSpike.y = _player.y;
+				for (var i:int = 0; i < 20; i++)
+				{
+					emitterSpike.emitParticle();
+				}
 			_player.respawnHero();
 			FlxG.play(_spikeSound);
 			}
@@ -484,6 +575,12 @@ package com.trdevt.gameState
 		{
 			if (FlxU.getClassName(player) == "com.trdevt.sprites.Hero")
 			{
+				emitterSpike.x = _player.x;
+				emitterSpike.y = _player.y;
+				for (var i:int = 0; i < 20; i++)
+				{
+					emitterSpike.emitParticle();
+				}
 			_player.respawnHero();
 			FlxG.play(_lavaDeathSound);
 			}
@@ -505,6 +602,7 @@ package com.trdevt.gameState
 		{
 			if (FlxU.getClassName(player) == "com.trdevt.sprites.Hero")
 			{
+			FlxG.play(_torchSound);
 			(player as Hero).updateCheckPoint(new FlxPoint(player.x, player.y - 1));
 			_tileMapCollision.setTileByIndex(Tile.mapIndex, 64);
 			}
@@ -516,6 +614,8 @@ package com.trdevt.gameState
 			if (FlxU.getClassName(player) == "com.trdevt.sprites.Hero")
 			{
 			//Do something pretty
+			//FlxG.play(_treasureSound);
+			//FlxG.loadSound(_treasureSound, 1, false, false, true);
 			levelComplete();
 			}
 		}
@@ -542,7 +642,7 @@ package com.trdevt.gameState
 				return;
 			}
 
-			trace("in PlayState, got signal to draw whip ending at: " + whipDest.x + ", " + whipDest.y);			
+			//trace("in PlayState, got signal to draw whip ending at: " + whipDest.x + ", " + whipDest.y);			
 
 			_whipCanvas.fill(0x00000000);
 			_whipCanvas.drawLine(_player.x + (_player.width * 0.5), _player.y + (_player.height * 0.5), whipDest.x, whipDest.y,  0xfff4a460); //brown

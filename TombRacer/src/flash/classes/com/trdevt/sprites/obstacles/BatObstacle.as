@@ -8,7 +8,7 @@ package com.trdevt.sprites.obstacles
 	public class BatObstacle extends Obstacle 
 	{
 		[Embed(source="../../../../../../images/SpriteSheets/bat.png")] private var _tempBatSheet:Class;
-		private var _speed;
+		private var _speed:Number;
 		private var _direction:uint;
 		public function BatObstacle(X:Number=0, Y:Number=0, direction:uint = FlxObject.NONE) 
 		{
