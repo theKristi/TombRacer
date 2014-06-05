@@ -47,7 +47,6 @@
 				<crushguy x="3" y="7"></crushguy>
 			</crushguyObstacles>
 			<batObstacles>
-				<bat x="6" y="12" direction="0x0010"></bat>
 			</batObstacles>
 		</level>
 		<level levelnum = "4">
