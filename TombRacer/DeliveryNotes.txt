@@ -53,4 +53,5 @@ Known Bugs:
 	- jumping while respawning can cause the hero to freeze in the jump animation
 	- on rare occasion the hero will respawn inside of the wall and become stuck
 	- player clips through a sloped block for one frame when landing on it
+	- loading screen does not work when deployed to web server
 	
