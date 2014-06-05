@@ -34,6 +34,7 @@ package com.trdevt.gameState
 		[Embed(source = "../../../../../sounds/deaths/lavaDeath.mp3")] private var _sandSound:Class;
 		[Embed(source = "../../../../../sounds/deaths/lavaDeath.mp3")] private var _mossSound:Class;
 		[Embed(source = "../../../../../sounds/deaths/spikeDeath.mp3")] private var _spikeSound:Class;
+		[Embed(source = "../../../../../sounds/torch.mp3")] private var _torchSound:Class;
 
 		
 		protected var _ftScore:FlxText;
@@ -595,6 +596,7 @@ package com.trdevt.gameState
 		{
 			if (FlxU.getClassName(player) == "com.trdevt.sprites.Hero")
 			{
+			FlxG.play(_torchSound);
 			(player as Hero).updateCheckPoint(new FlxPoint(player.x, player.y - 1));
 			_tileMapCollision.setTileByIndex(Tile.mapIndex, 64);
 			}
@@ -606,6 +608,8 @@ package com.trdevt.gameState
 			if (FlxU.getClassName(player) == "com.trdevt.sprites.Hero")
 			{
 			//Do something pretty
+			//FlxG.play(_treasureSound);
+			//FlxG.loadSound(_treasureSound, 1, false, false, true);
 			levelComplete();
 			}
 		}

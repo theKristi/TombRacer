@@ -17,6 +17,8 @@ package com.trdevt.sprites
 	{
 		
 		[Embed(source = '../../../../../images/SpriteSheets/IndieWalkSheet.png')] private static var _sheet:Class;
+		[Embed(source = "../../../../../sounds/jump/jump.mp3")] private var _jumpSound:Class;
+		[Embed(source = "../../../../../sounds/deaths/WilhelmScream.mp3")] private var _wilhelmScream:Class;
 		
 		protected var _jumpPower:Number;
 		
@@ -223,6 +225,8 @@ package com.trdevt.sprites
 			signalHeroStoppedSwinging.dispatch();
 			
 			signalHeroHasDied.dispatch();
+			
+			FlxG.play(_wilhelmScream,.1);
 
 		}
 		
@@ -478,6 +482,7 @@ package com.trdevt.sprites
 				y -= 1;
 				velocity.y = -_jumpPower;
 				//this.play("jumping", true);
+				FlxG.play(_jumpSound, .2);
 			}
 		}
 		

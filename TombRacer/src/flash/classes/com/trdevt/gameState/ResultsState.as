@@ -16,6 +16,8 @@ package com.trdevt.gameState
 	 */
 	public class ResultsState extends FlxState 
 	{
+		[Embed(source = "../../../../../sounds/treasure.mp3")] private var _treasureSound:Class;
+
 		
 		private var _resultsInSeconds:Number 
 		
@@ -31,7 +33,7 @@ package com.trdevt.gameState
 		{
 			_buildScreen();
 			
-			
+			FlxG.play(_treasureSound);
 		}
 		
 		/*=====================================================================*/
