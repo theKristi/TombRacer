@@ -1,5 +1,6 @@
 ﻿package 
 {
+	import com.trdevt.gameState.Loader;
 	import com.trdevt.util.LocalSharedObjectManager;
 	import org.flixel.FlxGame;
 	import org.flixel.FlxG;
@@ -30,6 +31,7 @@
 			
 			XMLManager.instance.init("config.xml");
 			LocalSharedObjectManager.instance.init("LSO");
+			Loader.instance.init();
 		}
 	}
 }

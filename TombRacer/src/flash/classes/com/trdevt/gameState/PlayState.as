@@ -8,24 +8,18 @@ package com.trdevt.gameState
 	import com.trdevt.sprites.obstacles.CrushGuyObstacle;
 	import com.trdevt.sprites.obstacles.FireBallLauncherObstacle;
 	import com.trdevt.sprites.obstacles.FireballObstacle;
-	import com.trdevt.sprites.obstacles.Obstacle;
-	import com.trdevt.util.LocalSharedObjectManager;
 	import flash.events.Event;
 	import flash.events.TimerEvent;
-	import flash.sampler.NewObjectSample;
 	import flash.utils.Timer;
-	import mx.core.FlexSprite;
+	import org.flixel.*;
 	import org.flixel.FlxG;
 	import org.flixel.FlxGroup;
 	import org.flixel.FlxObject;
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxSprite;
-	import org.flixel.FlxTileblock;
 	import org.flixel.FlxTilemap;
-	import org.flixel.FlxTimer;
-	import org.flixel.system.FlxTile;
 	import org.flixel.system.*;
-	import org.flixel.*;
+	import org.flixel.system.FlxTile;
 
 	/**
 	 * ...
@@ -33,6 +27,11 @@ package com.trdevt.gameState
 	 */
 	public class PlayState extends AbstractState
 	{
+		[Embed(source = "../../../../../sounds/deaths/lavaDeath.mp3")] private var _lavaDeathSound:Class;
+		[Embed(source = "../../../../../sounds/deaths/lavaDeath.mp3")] private var _sandSound:Class;
+		[Embed(source = "../../../../../sounds/deaths/lavaDeath.mp3")] private var _mossSound:Class;
+		[Embed(source = "../../../../../sounds/deaths/spikeDeath.mp3")] private var _spikeSound:Class;
+
 		
 		protected var _ftScore:FlxText;
 		protected var _fireballTimer:Timer;
@@ -126,6 +125,8 @@ package com.trdevt.gameState
 			add(_player);
 			_player.signalHeroWhipped.add(drawWhip);
 			_player.signalHeroCJump.add(removeLimit);
+			_player.signalHeroStoppedSwinging.add(clearWhipCanvas);
+
 			
 			add(_ftScore);
 			
@@ -196,21 +197,29 @@ package com.trdevt.gameState
 			}
 			if (FlxG.keys.R)
 				FlxG.switchState(new SelectState(new XML()));
+			if (FlxG.keys.O)
+				FlxG.switchState(new ResultsState(0,_currentLevelNum));
+
 			
 			
 		}
 		
-		public function onCrushGuyOverlap(player:Hero, guy:CrushGuyObstacle)
+		private function clearWhipCanvas():void 
+		{
+			_whipCanvas.fill(0x00000000);
+		}		
+		
+		public function onCrushGuyOverlap(player:Hero, guy:CrushGuyObstacle):void
 		{
 			_player.respawnHero();
 		}
 		
-		public function onCrushGuyCollision(guy:CrushGuyObstacle, stuff:FlxObject = null)
+		public function onCrushGuyCollision(guy:CrushGuyObstacle, stuff:FlxObject = null):void
 		{
 			guy.onCollision();
 		}
 		
-		public function onFireballOverlap(player:Hero, fireball:FireballObstacle)
+		public function onFireballOverlap(player:Hero, fireball:FireballObstacle):void
 		{
 			_fgFireballCollision.remove(fireball);
 			fireball.onCollision();
@@ -218,7 +227,7 @@ package com.trdevt.gameState
 			
 		}
 		
-		public function onArrowOverlap(player:Hero, arrow:ArrowObstacle)
+		public function onArrowOverlap(player:Hero, arrow:ArrowObstacle):void
 		{
 			_fgArrowCollision.remove(arrow);
 			arrow.onCollision();
@@ -238,7 +247,7 @@ package com.trdevt.gameState
 			_fgFireballCollision.remove(fireball);
 		}
 		
-		public function onBatCollision(bat:BatObstacle, map:FlxObject = null)
+		public function onBatCollision(bat:BatObstacle, map:FlxObject = null):void
 		{
 			bat.onCollision();
 		}
@@ -283,13 +292,13 @@ package com.trdevt.gameState
 			_fgArrowLauncher = new FlxGroup(50);
 			_fgCrushGuyCollision = new FlxGroup(20);
 
-			var l:Loader = new Loader();
+			//var l:Loader = new Loader();
 
-			_tileMapCollisionFile = l.getMap(_currentLevelNum, 0);
-			_tileSetCollsionFile = l.getSet(_currentLevelNum, 0);
+			_tileMapCollisionFile = Loader.instance.getMap(_currentLevelNum, 0);
+			_tileSetCollsionFile = Loader.instance.getSet(_currentLevelNum, 0);
 			
-			_tileSetBackgroundFile = l.getSet(_currentLevelNum, 1);
-			_tileMapBackgroundFile = l.getMap(_currentLevelNum, 1);
+			_tileSetBackgroundFile = Loader.instance.getSet(_currentLevelNum, 1);
+			_tileMapBackgroundFile = Loader.instance.getMap(_currentLevelNum, 1);
 			
 			
 			
@@ -399,11 +408,13 @@ package com.trdevt.gameState
 		private function collideSpike(Tile:FlxTile, player:FlxObject):void
 		{
 			_player.respawnHero();
+			FlxG.play(_spikeSound);
 		}
 		
 		private function collideLava(Tile:FlxTile, player:FlxObject):void
 		{
 			_player.respawnHero();
+			FlxG.play(_lavaDeathSound);
 		}
 		
 		private function collideMoss(Tile:FlxTile, player:FlxObject):void
@@ -442,7 +453,12 @@ package com.trdevt.gameState
 		private function drawWhip(whipDest:FlxPoint):void 
 		{
 			//check if whip is possible here, if not, tell hero to stop swinging
-			//TODO: check to see if the player can actually swing, and if they can't, drop them like a bad habit
+			if (!checkValidSwing(new FlxPoint(FlxG.mouse.x, FlxG.mouse.y)))
+			{
+				//trace("invalid swing attempted!");
+				_player.stopSwinging();
+				return;
+			}
 
 			trace("in PlayState, got signal to draw whip ending at: " + whipDest.x + ", " + whipDest.y);			
 
