@@ -10,6 +10,7 @@ package com.trdevt.gameState
 	import mx.events.FlexEvent;
 	import org.flixel.FlxButton;
 	import org.flixel.FlxG;
+	import org.flixel.FlxU;
 	import org.flixel.FlxSound;
 	import org.flixel.FlxSprite;
 	import org.flixel.FlxState;
@@ -99,6 +100,7 @@ package com.trdevt.gameState
 				else 
 				{
 					button.loadGraphic(Assets.levelLockedPNG, false, false, 163, 195);
+					button.onUp=function handler():void { }
 					_levels.push(button);
 					add(button);
 				}
@@ -126,20 +128,50 @@ package com.trdevt.gameState
 				res = true;
 			return res;
 			
+		}		/*=====================================================================*/
+		private function getTime(eLevel:int):String
+		{
+			var stringFastest:String = LocalSharedObjectManager.instance.getValue("Level" + eLevel + "fastestTime");
+			var seconds:int = int(stringFastest);
+			return FlxU.formatTime(seconds, true);
+		}
+		
+		/*=====================================================================*/
+		private function getTrophy(eLevel:int):Class
+		{
+			 
+			var trophyGraphic:Class;
+			var trophy:FlxSprite;
+			
+			//look in sharedObject for trophy and time
+			var stringTrophy:String = LocalSharedObjectManager.instance.getValue("Level" + eLevel + "trophy");
+			if (stringTrophy != "undefined")
+			{
+				
+				if (stringTrophy == "gold")
+					trophyGraphic = Assets.SmallGold;
+				if (stringTrophy == "silver")
+					trophyGraphic= Assets.SmallSilver;
+				if (stringTrophy == "bronze")
+					trophyGraphic = Assets.SmallBronze;
+			}
+			else
+			{
+				trophyGraphic = Assets.SmallGrayed;
+			}
+			
+			return trophyGraphic;
+			
 		}
 		
 /*=====================================================================*/
 		private function getResults(eButton:LevelButton, eLevel:int):void
-		{
-			var trophy:FlxSprite;
-			var time:int;
-			//look in sharedObject for trophy and time
-			
-			
-			
-			//for now just place greyed trophy at the right place
-			 trophy = new FlxSprite(eButton.x + 15, eButton.y + 138, Assets.SmallGrayed);
+		{  
+		  var trophy:FlxSprite = new FlxSprite(eButton.x + 15, eButton.y + 138, getTrophy(eLevel));
 			 add(trophy);
+		  var fastest:FlxText = new FlxText(eButton.x + 12, eButton.y + 138,eButton.width,getTime(eLevel), true);
+		  fastest.setFormat( "sffedora", 20, 0xffffff, "center");
+		  add(fastest);
 			
 		}
 		
