@@ -25,67 +25,54 @@
 			</batObstacles>
 		</level>
 		<level levelnum = "2">
-			<heroPosition x="4" y="1" />
+			<heroPosition x="2" y="1" />
 			<fireballObstacles>
-				<fireball x="1" y="1" direction="0x1000"></fireball>
-				<fireball x="2" y="1" direction="0x1000"></fireball>
-				<fireball x="3" y="1" direction="0x1000"></fireball>
-				<fireball x="4" y="1" direction="0x1000"></fireball>
 			</fireballObstacles>
 			<arrowtrapObstacles>
-				<arrowtrap x="1" y="2" direction="0x1000"></arrowtrap>
+				<arrowtrap x="26" y="17" direction="0x1000"></arrowtrap>
 			</arrowtrapObstacles>
 			<crushguyObstacles>
-				<crushguy x="3" y="5"></crushguy>
 			</crushguyObstacles>
 			<batObstacles>
-				<bat x="16" y="4" direction="0x1000"></bat>
+				<bat x="32" y="12" direction="0x0010"></bat>
 			</batObstacles>
 		</level>
 		<level levelnum = "3">
-			<heroPosition x="4" y="1" />
+			<heroPosition x="6" y="1" />
 			<fireballObstacles>
-				<fireball x="1" y="1" direction="0x1000"></fireball>
-				<fireball x="2" y="1" direction="0x1000"></fireball>
-				<fireball x="3" y="1" direction="0x1000"></fireball>
-				<fireball x="4" y="1" direction="0x1000"></fireball>
+				<fireball x="20" y="6" direction="0x0010"></fireball>
 			</fireballObstacles>
 			<arrowtrapObstacles>
-				<arrowtrap x="1" y="2" direction="0x1000"></arrowtrap>
 			</arrowtrapObstacles>
 			<crushguyObstacles>
-				<crushguy x="3" y="5"></crushguy>
+				<crushguy x="14" y="15"></crushguy>
 			</crushguyObstacles>
 			<batObstacles>
+				<bat x="6" y="12" direction="0x0010"></bat>
 			</batObstacles>
 		</level>
 		<level levelnum = "4">
-			<heroPosition x="4" y="1" />
+			<heroPosition x="6" y="1" />
 			<fireballObstacles>
-				<fireball x="1" y="1" direction="0x1000"></fireball>
-				<fireball x="2" y="1" direction="0x1000"></fireball>
-				<fireball x="3" y="1" direction="0x1000"></fireball>
-				<fireball x="4" y="1" direction="0x1000"></fireball>
+				<fireball x="36" y="22" direction="0x0100"></fireball>
 			</fireballObstacles>
 			<arrowtrapObstacles>
-				<arrowtrap x="1" y="2" direction="0x1000"></arrowtrap>
+				<arrowtrap x="1" y="10" direction="0x1000"></arrowtrap>
 			</arrowtrapObstacles>
 			<crushguyObstacles>
-				<crushguy x="3" y="5"></crushguy>
+				<crushguy x="13" y="1"></crushguy>
+				<crushguy x="19" y="1"></crushguy>
 			</crushguyObstacles>
 			<batObstacles>
+				<bat x="35" y="7" direction="0x0010"></bat>
 			</batObstacles>
 		</level>
 		<level levelnum = "5">
-			<heroPosition x="4" y="1" />
+			<heroPosition x="6" y="1" />
 			<fireballObstacles>
-				<fireball x="1" y="1" direction="0x1000"></fireball>
-				<fireball x="2" y="1" direction="0x1000"></fireball>
-				<fireball x="3" y="1" direction="0x1000"></fireball>
-				<fireball x="4" y="1" direction="0x1000"></fireball>
 			</fireballObstacles>
 			<arrowtrapObstacles>
-				<arrowtrap x="1" y="2" direction="0x1000"></arrowtrap>
+				<arrowtrap x="1" y="2" direction="0x0010"></arrowtrap>
 			</arrowtrapObstacles>
 			<crushguyObstacles>
 				<crushguy x="3" y="5"></crushguy>
@@ -96,16 +83,16 @@
 		<level levelnum = "6">
 			<heroPosition x="4" y="1" />
 			<fireballObstacles>
-				<fireball x="1" y="1" direction="0x1000"></fireball>
-				<fireball x="2" y="1" direction="0x1000"></fireball>
-				<fireball x="3" y="1" direction="0x1000"></fireball>
-				<fireball x="4" y="1" direction="0x1000"></fireball>
 			</fireballObstacles>
 			<arrowtrapObstacles>
-				<arrowtrap x="1" y="2" direction="0x1000"></arrowtrap>
 			</arrowtrapObstacles>
 			<crushguyObstacles>
-				<crushguy x="3" y="5"></crushguy>
+				<crushguy x="6" y="6"></crushguy>
+				<crushguy x="8" y="6"></crushguy>
+				<crushguy x="10" y="6"></crushguy>
+				<crushguy x="12" y="6"></crushguy>
+				<crushguy x="8" y="11"></crushguy>
+				<crushguy x="12" y="11"></crushguy>
 			</crushguyObstacles>
 			<batObstacles>
 			</batObstacles>
@@ -145,7 +132,7 @@
 		<credit text="Artist:Nova64" />
 		<credit text="Source:http://www.newgrounds.com/audio/listen/164618" />
 		<credit text="Special Thanks to:" />
-		<credit text="asfxr" />
+		<credit text="as3fxr" />
 		<credit text="Nate Chatellier" />
 		
 		
