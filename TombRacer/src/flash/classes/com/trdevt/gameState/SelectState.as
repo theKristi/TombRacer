@@ -67,7 +67,8 @@ package com.trdevt.gameState
 			_fbBack.loadGraphic(Assets.backPNG, true, false, 176, 108);
 			_fbBack.soundDown = (new FlxSound().loadEmbedded(Assets.buttonClick));
 			
-			var clearbutton:FlxButton = new FlxButton(5, .83 * FlxG.height, "clear shared data", clearSharedData);
+			var clearbutton:FlxButton = new FlxButton(5, .83 * FlxG.height, "", clearSharedData);
+			clearbutton.loadGraphic(Assets.clearButton, true, false, 176, 108);
 			add(fsMenuBackground);
 			add(_ftHeader);
 			add(_fbBack);
