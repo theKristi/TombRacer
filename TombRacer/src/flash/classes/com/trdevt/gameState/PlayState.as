@@ -495,6 +495,7 @@ package com.trdevt.gameState
 			_startTime = FlxG.elapsed;
 			//_timer.start(10000, 1);
 			_ftScore = new FlxText(0, 0, 100, FlxU.formatTime(0, true));
+			_ftScore.setFormat( "sffedora", 25, 0xffffff, "center");
 			//add(_ftScore);
 		}
 		

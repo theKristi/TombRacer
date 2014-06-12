@@ -54,11 +54,12 @@ package com.trdevt.gameState
 			}
 			
 				var xmlLevels:XMLList = XMLManager.instance.xmlConfig.levels.level;
-				
-				var Yours:FlxText = new FlxText(300, 550, 600,"Your Time: "+FlxU.formatTime(_resultsInSeconds,true),true);
+			
+				var yourTime:String = FlxU.formatTime(_resultsInSeconds, true);
+				var Yours:FlxText = new FlxText(300, 550, 600,"Your Time: "+yourTime,true);
 				Yours.setFormat( "sffedora", 55, 0xffffff, "center");
 				
-				var partime:int=int(xmlLevels[_levelPlayed].@par);
+				var partime:uint=uint(xmlLevels[_levelPlayed].@par);
 				var par:FlxText = new FlxText(300, 450, 600,"Par Time: "+FlxU.formatTime(partime,true),true);
 				par.setFormat( "sffedora", 55, 0xffffff, "center");
 				
@@ -66,14 +67,14 @@ package com.trdevt.gameState
 				rank.setFormat( "sffedora", 55, 0xffffff, "center");
 				var trophy:FlxSprite = new FlxSprite(570, 200, getTrophyGraphic(partime));
 				
-				var currentFastest:int=getFastestTime();
+				var currentFastest:uint=uint(getFastestTime());
 				if (currentFastest > _resultsInSeconds|| currentFastest==0)
 				{
-					LocalSharedObjectManager.instance.setValue("Level" + _levelPlayed + "fastestTime", _resultsInSeconds.toString());
+					LocalSharedObjectManager.instance.setValue("Level" + _levelPlayed + "fastestTime",yourTime);
 					LocalSharedObjectManager.instance.setValue("Level" + _levelPlayed+"trophy",getTrophy(partime));
 				}
 				
-				var fastest:FlxText = new FlxText(300, 350, 650,"fastest Time: "+FlxU.formatTime(getFastestTime(),true),true);
+				var fastest:FlxText = new FlxText(300, 350, 650,"fastest Time: "+getFastestTime(),true);
 				fastest.setFormat( "sffedora", 55, 0xffffff, "center");
 			
 			add(header);
@@ -108,14 +109,15 @@ package com.trdevt.gameState
 			else return "bronze";
 		}
 		/*=====================================================================*/
-		private function getSavedTrophy():int
+		private function getSavedTrophy():String
 		{
-			return int (LocalSharedObjectManager.instance.getValue("Level" + _levelPlayed+"trophy"));
+			return String (LocalSharedObjectManager.instance.getValue("Level" + _levelPlayed+"trophy"));
 		}
 		/*=====================================================================*/
-		private function getFastestTime():int
+		private function getFastestTime():String
 		{
-			return int (LocalSharedObjectManager.instance.getValue("Level" + _levelPlayed+"fastestTime"));
+			var time: String = LocalSharedObjectManager.instance.getValue("Level" + _levelPlayed + "fastestTime");
+			return time;
 		}
 		/*=====================================================================*/
 		private function _gotoNext():void

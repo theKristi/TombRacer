@@ -51,6 +51,7 @@ package com.trdevt
 		[Embed(source = "../../../../images/LevelSelectScreen/GoldTrophy.png")]public static var SmallGold:Class; 
 		[Embed(source = "../../../../images/LevelSelectScreen/GrayedTrophy.png")]public static var SmallGrayed:Class; 
 		
+		[Embed(source = "../../../../images/LevelSelectScreen/clearButton.png")] public static var clearButton:Class;
 		
 		[Embed(source = "../../../../images/LevelSelectScreen/Level1.png")]private static var level1:Class;
 		[Embed(source = "../../../../images/LevelSelectScreen/Level2.png")]private static var level2:Class;

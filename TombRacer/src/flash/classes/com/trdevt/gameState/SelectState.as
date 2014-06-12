@@ -67,9 +67,11 @@ package com.trdevt.gameState
 			_fbBack.loadGraphic(Assets.backPNG, true, false, 176, 108);
 			_fbBack.soundDown = (new FlxSound().loadEmbedded(Assets.buttonClick));
 			
+			var clearbutton:FlxButton = new FlxButton(5, .83 * FlxG.height, "clear shared data", clearSharedData);
 			add(fsMenuBackground);
 			add(_ftHeader);
 			add(_fbBack);
+			add (clearbutton);
 			_levels = new Array();
 			var xCoords:Array = new Array();
 			for (var i:int = 0; i < numberOfLevels; i++ )
@@ -99,7 +101,7 @@ package com.trdevt.gameState
 				}
 				else 
 				{
-					button.loadGraphic(Assets.levelLockedPNG, false, false, 163, 195);
+					button.loadGraphic(Assets.levelLockedPNG, false, false, 163, 198);
 					button.onUp=function handler():void { }
 					_levels.push(button);
 					add(button);
@@ -107,6 +109,15 @@ package com.trdevt.gameState
 			}
 			
 			
+		}
+		/*=====================================================================*/
+		
+		private function clearSharedData():void
+		{
+			//clear data
+			//switchstate to select state
+			LocalSharedObjectManager.instance.resetSharedOBject();
+			FlxG.switchState(new SelectState(XMLManager.instance.xmlConfig));
 		}
 		
 		/*=====================================================================*/
@@ -124,7 +135,7 @@ package com.trdevt.gameState
 		private function locked(i:int):Boolean
 		{
 			var res:Boolean = false;
-			if (i!=0&&LocalSharedObjectManager.instance.getValue("Level" + (i - 1) + "fastestTime") == "undefined")
+			if (i!=0&&LocalSharedObjectManager.instance.getValue("Level" + (i - 1) + "fastestTime") == "00:00.00")
 				res = true;
 			return res;
 			
@@ -132,8 +143,8 @@ package com.trdevt.gameState
 		private function getTime(eLevel:int):String
 		{
 			var stringFastest:String = LocalSharedObjectManager.instance.getValue("Level" + eLevel + "fastestTime");
-			var seconds:int = int(stringFastest);
-			return FlxU.formatTime(seconds, true);
+		
+			return stringFastest;
 		}
 		
 		/*=====================================================================*/
@@ -145,7 +156,7 @@ package com.trdevt.gameState
 			
 			//look in sharedObject for trophy and time
 			var stringTrophy:String = LocalSharedObjectManager.instance.getValue("Level" + eLevel + "trophy");
-			if (stringTrophy != "undefined")
+			if (stringTrophy != "grayed")
 			{
 				
 				if (stringTrophy == "gold")

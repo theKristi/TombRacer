@@ -32,7 +32,7 @@
 			FlxG.height = 768;
 			
 			XMLManager.instance.init("config.xml");
-			LocalSharedObjectManager.instance.init("LSO");
+			XMLManager.instance.signalLoadCompleted.add(LocalSharedObjectManager.instance.init);
 			Loader.instance.init();
 		}
 	}

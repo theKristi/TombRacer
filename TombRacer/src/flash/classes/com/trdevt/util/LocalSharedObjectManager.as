@@ -42,7 +42,7 @@ package com.trdevt.util
 		 * @param	$sName the name of the local shared object
 		 * @param	$sPath the path to the local shared object, default is null
 		 */
-		public function init($sName:String, $sPath:String=null):void 
+		public function init($sName:String="LSO", $sPath:String=null):void 
 		{
 			//_instanceLSOM = new LocalSharedObjectManager(new SingletonLock());
 			
@@ -62,8 +62,14 @@ package com.trdevt.util
 		 */
 		private function createDefaultLSO():void 
 		{
-			//stub
-			trace("Warning! Calling stubbed function createDefaultLSO in LocalSharedObjectManager!");
+			//get XMLlist of levels
+			var list:XMLList = XMLManager.instance.xmlConfig.levels.level;
+			for (var i:int = 0; i < list.length(); i++)
+			{
+				setValue("Level" + i + "fastestTime", "00:00.00");
+				setValue("Level" + i + "trophy","grayed");
+			}
+			//trace("Warning! Calling stubbed function createDefaultLSO in LocalSharedObjectManager!");
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
@@ -123,7 +129,9 @@ package com.trdevt.util
 		{
 			if (_soLocal.size == 0)
 				return;
-			
+			_soLocal.clear();
+			createDefaultLSO();
+			//init();
 			//stub
 			trace("Warning! Calling stubbed function resetSharedOBject in LocalSharedObjectManager!");
 		}
