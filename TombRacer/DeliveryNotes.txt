@@ -1,0 +1,63 @@
+=============================================================
+Tomb Racer Release Notes - Gold
+=============================================================
+
+Expected Release:
+	+ All levels done
+	+ All obstacles finalized
+	+ All sounds and art finalized
+	+ All behaviour finalized
+	+ Timer finalized
+	
+Actual Release:
+	Controls:
+		A - move left
+		S - dash the direction you are currently facing (2 second cooldown)
+		D - move right
+		W - jump/stop swinging
+		SPACE - jump/stop swinging
+		Mouse Click - swing
+		R - Return to level select
+		
+	Hidden Controls:
+		G - Electric Slide
+		O - EZMode beat the level instantly
+		* Arrow keys move hero as well
+		
+	Functioning grapple mechanic:
+		- Allowed to swing from only platform blocks within range (the range is 4 blocks in any direction above the player's head)
+	
+	All art for all obstacles, static and dynamic
+		
+	Fixed slanted floor problem:
+		- player moves up slanted blocks as expected
+		
+	Finished level select screen:
+		- level icons added along with locked icons
+			
+	Finished credits screen:
+		- credits more polished
+		
+Known Bugs:
+	- swinging into a slope does not end the swing
+	- player can click on a locked icon and play that level
+	- player can't clear the LSO
+	- icons for levels 5 and 6 are broken
+	- some buttons don't play a sound when clicked
+		- level select button on result screen, next level button on result screen, level icons on level select
+	- occasionally the death sounds will stack (this is a bug with the flixel engine FlxG.Play())
+	- the wrong hero animation will play when the hero is moving on a slope
+	- jumping while respawning can cause the hero to freeze in the jump animation
+	- on rare occasion the hero will respawn inside of the wall and become stuck
+	- player clips through a sloped block for one frame when landing on it
+	- level select icon roll over animation doesn't show correctly when the level icon is locked
+	- saved time truncates off the fractions of a second
+	
+Play the game at:
+
+http://www.newgrounds.com/portal/view/640528
+
+or
+
+http://jlongworth.github.io
+	

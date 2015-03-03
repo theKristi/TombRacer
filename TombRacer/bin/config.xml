@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<game>
+	<levels>
+		<level levelnum = "0" par="90">
+			<heroPosition x="7" y="10" />
+			<fireballObstacles>
+			</fireballObstacles>
+			<arrowtrapObstacles>
+			</arrowtrapObstacles>
+			<crushguyObstacles>
+			</crushguyObstacles>
+			<batObstacles>
+			</batObstacles>
+		</level>
+		<level levelnum = "1" par="90">
+			<heroPosition x="6" y="1" />
+			<fireballObstacles>
+			</fireballObstacles>
+			<arrowtrapObstacles>
+			</arrowtrapObstacles>
+			<crushguyObstacles>
+			</crushguyObstacles>
+			<batObstacles>
+				<bat x="16" y="4" direction="0x1000"></bat>
+			</batObstacles>
+		</level>
+		<level levelnum = "2" par="90">
+			<heroPosition x="2" y="1" />
+			<fireballObstacles>
+			</fireballObstacles>
+			<arrowtrapObstacles>
+			</arrowtrapObstacles>
+			<crushguyObstacles>
+				<crushguy x="33" y="10"></crushguy>
+			</crushguyObstacles>
+			<batObstacles>
+			</batObstacles>
+		</level>
+		<level levelnum = "3" par="90">
+			<heroPosition x="2" y="20" />
+			<fireballObstacles>
+				<fireball x="24" y="20" direction="0x0010"></fireball>
+			</fireballObstacles>
+			<arrowtrapObstacles>
+			</arrowtrapObstacles>
+			<crushguyObstacles>
+				<crushguy x="3" y="7"></crushguy>
+			</crushguyObstacles>
+			<batObstacles>
+			</batObstacles>
+		</level>
+		<level levelnum = "4" par="90">
+			<heroPosition x="6" y="1" />
+			<fireballObstacles>
+			</fireballObstacles>
+			<arrowtrapObstacles>
+				<arrowtrap x="10" y="0" direction="0x1000" speed="3"></arrowtrap>
+				<arrowtrap x="14" y="1" direction="0x1000" speed="4"></arrowtrap>
+				<arrowtrap x="17" y="0" direction="0x1000" speed="5"></arrowtrap>
+				<arrowtrap x="20" y="1" direction="0x1000" speed="3"></arrowtrap>
+				<arrowtrap x="24" y="0" direction="0x1000" speed="7"></arrowtrap>
+				<arrowtrap x="27" y="1" direction="0x1000" speed="10"></arrowtrap>
+			</arrowtrapObstacles>
+			<crushguyObstacles>
+			</crushguyObstacles>
+			<batObstacles>
+				<bat x="35" y="7" direction="0x0010"></bat>
+			</batObstacles>
+		</level>
+		<level levelnum = "5"  par="90">
+			<heroPosition x="6" y="1" />
+			<fireballObstacles>
+				<fireball x="12" y="0" direction="0x1000"></fireball>
+				<fireball x="20" y="0" direction="0x1000"></fireball>
+				<fireball x="30" y="0" direction="0x1000"></fireball>
+				<fireball x="39" y="5" direction="0x0001"></fireball>
+			</fireballObstacles>
+			<arrowtrapObstacles>
+			</arrowtrapObstacles>
+			<crushguyObstacles>
+				<crushguy x="15" y="2"></crushguy>
+				<crushguy x="27" y="2"></crushguy>
+			</crushguyObstacles>
+			<batObstacles>
+			</batObstacles>
+		</level>
+		<level levelnum = "6"  par="90">
+			<heroPosition x="3" y="8" />
+			<fireballObstacles>
+			</fireballObstacles>
+			<arrowtrapObstacles>
+				<arrowtrap x="23" y="14" direction="0x0001" speed="4"></arrowtrap>
+				<arrowtrap x="23" y="12" direction="0x0001" speed="4"></arrowtrap>
+				<arrowtrap x="0" y="15" direction="0x0010" speed="7"></arrowtrap>
+			</arrowtrapObstacles>
+			<crushguyObstacles>
+				<crushguy x="5" y="6"></crushguy>
+				<crushguy x="7" y="5"></crushguy>
+				<crushguy x="9" y="4"></crushguy>
+				<crushguy x="11" y="3"></crushguy>
+				<crushguy x="13" y="2"></crushguy>
+				<crushguy x="15" y="1"></crushguy>
+				
+				<crushguy x="5" y="17"></crushguy>
+				<crushguy x="8" y="17"></crushguy>
+				<crushguy x="12" y="17"></crushguy>
+				<crushguy x="15" y="17"></crushguy>
+				
+				
+				<crushguy x="27" y="1"></crushguy>
+				<crushguy x="31" y="1"></crushguy>
+				
+			</crushguyObstacles>
+			<batObstacles>
+			</batObstacles>
+		</level>
+		<level levelnum = "7" par="90">
+			<heroPosition x="4" y="1" />
+			<fireballObstacles>
+			</fireballObstacles>
+			<arrowtrapObstacles>
+				<arrowtrap x="0" y="12" direction="0x0010" speed="16"></arrowtrap>
+			</arrowtrapObstacles>
+			<crushguyObstacles>
+				<crushguy x="30" y="5"></crushguy>
+				<crushguy x="4" y="9"></crushguy>
+			</crushguyObstacles>
+			<batObstacles>
+				<bat x="4" y="12" direction="0x0010"></bat>
+				<bat x="7" y="11" direction="0x0100"></bat>
+				<bat x="6" y="10" direction="0x0001"></bat>
+			</batObstacles>
+		</level>		
+	</levels>
+	<hero	drag.x = 			"1500"
+			acceleration.y = 	"800"
+			maxVelocity.x =		"300"
+			maxVelocity.y = 	"1000000"
+			_jumpPower = 		"400"
+			_constAccel = 		"640"
+			/>
+			<credits>
+		<credit text="Made with:" />
+		<credit text="flixel" />
+		<credit text="TweenMax" />
+		<credit text="Sounds:" />
+		<credit text="Background Music:" />
+		<credit text="File Name: 164618_indiana_jones_mix.mp3" />
+		<credit text="Artist:Nova64" />
+		<credit text="Source:http://www.newgrounds.com/audio/listen/164618" />
+		<credit text="Special Thanks to:" />
+		<credit text="as3fxr" />
+		<credit text="Nate Chatellier" />
+		
+		
+	</credits>		
+</game>
