@@ -11,15 +11,15 @@ package
 			className = "Main";
 			super();
 		}
-		override protected function create():void 
+	/*	override protected function create():void 
 		{
-				addChild(prebgPNG);
+	
 		
 		}
 
 		override protected function update(Percent:Number):void 
 		{
 			//Update the graphics...
-		}
+		}*/
 	}
 }
