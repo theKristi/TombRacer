@@ -4,14 +4,14 @@ package
  
 	public class Preloader extends FlxPreloader
 	{
-		//[Embed(source="../../images/background.png")] private static var prebgPNG:Class;
+		[Embed(source="../../images/background.png")] private static var prebgPNG:Class;
 		
 		public function Preloader():void
 		{
 			className = "Main";
 			super();
 		}
-		/*override protected function create():void 
+		override protected function create():void 
 		{
 				
 		
@@ -20,6 +20,6 @@ package
 		override protected function update(Percent:Number):void 
 		{
 			//Update the graphics...
-		}*/
+		}
 	}
 }
