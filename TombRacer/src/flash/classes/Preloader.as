@@ -4,7 +4,7 @@ package
  
 	public class Preloader extends FlxPreloader
 	{
-		[Embed(source="../../images/background.png")] private static var prebgPNG:Class;
+		//[Embed(source="../../images/background.png")] private static var prebgPNG:Class;
 		
 		public function Preloader():void
 		{
