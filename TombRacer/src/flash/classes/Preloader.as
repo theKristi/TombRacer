@@ -13,7 +13,7 @@ package
 		}
 		override protected function create():void 
 		{
-				
+				addChild(prebgPNG);
 		
 		}
 
