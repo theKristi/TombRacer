@@ -14,6 +14,7 @@ package
 		 * @private
 		 */
 		
+		
 		public function Preloader():void
 		{
 			className = "Main";
@@ -23,6 +24,9 @@ package
 		{
 		_buffer = new Sprite();
 		addChild(_buffer);
+		_width = stage.stageWidth/_buffer.scaleX;
+			_height = stage.stageHeight/_buffer.scaleY;
+			_buffer.addChild(new Bitmap(new BitmapData(_width,_height,false,0x00345e)));
 		_background = new prebgPNG();
 		_buffer.addChild(_background);
 		}
