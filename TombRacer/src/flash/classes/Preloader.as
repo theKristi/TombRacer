@@ -1,6 +1,7 @@
 package
 {
 		import flash.display.Sprite;
+		import flash.geom.Matrix;
         import org.flixel.system.*;
 		import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -34,7 +35,7 @@ package
 		_bar = new Sprite();
 		addChild(_bar);
 		_bar.graphics.lineStyle(3, 0x000000);
-		_bar.graphics.beginGradientFill("linear", new Array(0xf7dc67,0x9f7102, 0xce9f2d, 0xe4ba44, 0xf7dc67, 0x9f7102, 0xce9f2d, 0xe4ba44), new Array(1, 1, 1, 1, 1, 1, 1, 1), new Array(0, 32, 64, 96, 128, 160, 192, 224));
+		_bar.graphics.beginGradientFill("linear", new Array(0xf7dc67,0x9f7102, 0xce9f2d, 0xe4ba44, 0xf7dc67, 0x9f7102, 0xce9f2d, 0xe4ba44), new Array(1, 1, 1, 1, 1, 1, 1, 1), new Array(0, 32, 64, 96, 128, 160, 192, 224),new Matrix(300,20, -90*Math.PI/180));
 		_bar.graphics.drawRoundRect(0, 0, 300, 20, 20);
 		_bar.x = _width / 2 - _bar.width / 2;
 		_bar.y = _height / 2 - _bar.height / 2;
