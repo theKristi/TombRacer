@@ -41,12 +41,12 @@ package
 		_outerBar = new Sprite();
 		addChild(_outerBar);
 		_outerBar.graphics.lineStyle(3, 0x636363);
-		_outerBar.graphics.drawRoundRect(0, 3, 300, 20, 20);
+		_outerBar.graphics.drawRoundRect(0, 0, 300, 20, 20);
 		_outerBar.x = _width / 2 - _outerBar.width / 2;
 		_outerBar.y = _height / 2 - _outerBar.height / 2;
 		
 		_innerBar.graphics.beginGradientFill("linear", new Array(0xf7dc67,0x9f7102, 0xce9f2d, 0xe4ba44, 0xf7dc67, 0x9f7102, 0xce9f2d, 0xe4ba44), new Array(1, 1, 1, 1, 1, 1, 1, 1), new Array(0, 32, 64, 96, 128, 160, 192, 224),mat);
-		_innerBar.graphics.drawRoundRect(0, 0, 0, 20, 20);
+		_innerBar.graphics.drawRoundRect(0, 0, 3, 20, 20);
 		_innerBar.x = _width / 2 - _outerBar.width / 2;
 		_innerBar.y = _height / 2 - _outerBar.height / 2;
 		
