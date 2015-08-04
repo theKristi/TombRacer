@@ -41,7 +41,7 @@ package
 		_outerBar = new Sprite();
 		addChild(_outerBar);
 		_outerBar.graphics.lineStyle(3, 0x636363);
-		_outerBar.graphics.drawRoundRect(0, 0, 300, 20, 20);
+		_outerBar.graphics.drawRoundRect(0, 3, 300, 20, 20);
 		_outerBar.x = _width / 2 - _outerBar.width / 2;
 		_outerBar.y = _height / 2 - _outerBar.height / 2;
 		
