@@ -43,9 +43,8 @@ package
 		_innerBar = new Sprite();
 		addChild(_innerBar);
 		_innerBar.graphics.lineStyle();
-		_innerBar.graphics.drawRoundRect(0, 0, 30, 20, 20);
-		_innerBar.x = (_width / 2 - _innerBar.width / 2)+3;
-		_innerBar.y = (_height / 2 - _innerBar.height / 2)+3;
+		_innerBar.graphics.drawRoundRect(0, 0, 300, 20, 20);
+		
 		
 		var mat:Matrix;
 		mat = new Matrix();
@@ -59,7 +58,7 @@ package
 		override protected function update(Percent:Number):void 
 		{
 			//Update the graphics...
-			_innerBar.scaleX=(Percent * _outerBar.width - 3);
+			//_innerBar.scaleX=(Percent * _outerBar.width - 3);
 		}
 	}
 }
