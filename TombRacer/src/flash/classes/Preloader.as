@@ -46,7 +46,7 @@ package
 		_outerBar.y = _height / 2 - _outerBar.height / 2;
 		
 		_innerBar.graphics.beginGradientFill("linear", new Array(0xf7dc67,0x9f7102, 0xce9f2d, 0xe4ba44, 0xf7dc67, 0x9f7102, 0xce9f2d, 0xe4ba44), new Array(1, 1, 1, 1, 1, 1, 1, 1), new Array(0, 32, 64, 96, 128, 160, 192, 224),mat);
-		_innerBar.graphics.drawRoundRect(0, 0, 3, 20, 20);
+		_innerBar.graphics.drawRoundRect(0, 0, 130, 20, 20);
 		_innerBar.x = _width / 2 - _outerBar.width / 2;
 		_innerBar.y = _height / 2 - _outerBar.height / 2;
 		
@@ -55,7 +55,7 @@ package
 
 		override protected function update(Percent:Number):void 
 		{
-			_innerBar.width = Percent * (_outerBar.width);
+			_innerBar.width = Percent * (_outerBar.width-3);
 		}
 	}
 }
