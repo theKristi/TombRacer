@@ -55,7 +55,7 @@ package
 
 		override protected function update(Percent:Number):void 
 		{
-			_innerBar.scaleX = Percent * (_outerBar.width);
+			_innerBar.width = Percent * (_outerBar.width);
 		}
 	}
 }
