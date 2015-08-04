@@ -13,7 +13,7 @@ package
 		/**
 		 * @private
 		 */
-		
+		protected var _bar:Sprite;
 		
 		public function Preloader():void
 		{
@@ -25,10 +25,17 @@ package
 		_buffer = new Sprite();
 		addChild(_buffer);
 		_width = stage.stageWidth/_buffer.scaleX;
-			_height = stage.stageHeight/_buffer.scaleY;
-			_buffer.addChild(new Bitmap(new BitmapData(_width,_height,false,0x00345e)));
+		_height = stage.stageHeight/_buffer.scaleY;
+		_buffer.addChild(new Bitmap(new BitmapData(_width, _height, false, 0x00345e)));
+		
 		_background = new prebgPNG();
 		_buffer.addChild(_background);
+		
+		_bar = new Sprite();
+		addChild(_bar);
+		_bar.graphics.lineStyle(3, 0x000000);
+		_bar.graphics.beginGradientFill("linear",[0x9f7102, 0xce9f2d, 0xe4ba44, 0xf7dc67, 0x9f7102, 0xce9f2d, 0xe4ba44, 0xf7dc67],[1,1,1,1,1,1,1,1],[6,6,6,6,6,6,6,6])
+		_bar.graphics.drawRoundRect(0, 0, 100, 20, 10);
 		}
 
 		override protected function update(Percent:Number):void 
